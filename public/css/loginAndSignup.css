@@ -1,9 +1,16 @@
 /* Apply styles to the entire page */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
 body {
     background-color: #f4f4f4;
 }
-.form-header {
+.form_header {
     margin-top: 50px;
+    margin-bottom: 30px;
     text-align: center;
 }
 /* Style the login form */
@@ -15,6 +22,43 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.signsignupcontainer {
+    background-color: #fff;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-main{
+    max-width: 350px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+
+
+.form_title1{
+    margin-bottom: 15px;
+}
+
+
+@media screen and (min-width:675px){
+    .signsignupcontainer{
+        padding: 0 40px;
+    }
+    .form-main{
+        margin-top: 110px;
+        margin-bottom: 150px;
+    }
+    .form_title1{
+        font-size: 29px;
+        line-height: 1.43;
+    }
+}
 
 /* Style labels */
 label {
@@ -22,7 +66,10 @@ label {
     margin-bottom: 8px;
     font-weight: bold;
 }
-
+a{
+    background-color: transparent;
+    text-decoration: none;
+}
 /* Style input fields */
 .input-field {
     width: 100%;
@@ -41,7 +88,7 @@ label {
     border-radius: 5px;
     cursor: pointer;
     width: 100%; /* Make the button the same length as the container */
-    margin-top: 10px; /* Add spacing between the button and the inputs */
+    margin-top: 20px; /* Add spacing between the button and the inputs */
 }
 
 .submit-button:hover {
@@ -110,4 +157,12 @@ label {
     padding: 20px;
     border: 1px solid #ccc; /* Optional: Add a border for visual separation */
     margin-top: 50px;
+}
+.form_second{
+    margin-top: 32px;
+    font-size: 9px;
+}
+.link{
+    color: #0056b3;
+    transition: color .2s ease-in-out;
 }
