@@ -1,16 +1,17 @@
 /* Apply styles to the entire page */
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+}
+.form-header {
+    margin-top: 50px;
     text-align: center;
 }
-
 /* Style the login form */
 #login-form {
     background-color: #fff;
     max-width: 300px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -39,8 +40,74 @@ label {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%; /* Make the button the same length as the container */
+    margin-top: 10px; /* Add spacing between the button and the inputs */
 }
 
 .submit-button:hover {
     background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    #login-form {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #login-form {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .input-field {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .submit-button {
+        padding: 8px 12px;
+    }
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+/* Style for form groups to position elements vertically */
+.form-group {
+
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px; /* Add padding on the right side for space */
+}
+
+/* Style for error borders */
+.error {
+    border: 1px solid red;
+}
+.forgetpas {
+    text-decoration: none; /* Remove the default underline */
+    color: #007bff; /* Link color */
+    display: block; /* Block level element */
+    text-align: center; /* Center the text */
+    margin-top: 10px; /* Add spacing between the link and the inputs */
+    font-size: 11px; /* Adjust the font size as needed */
+}
+/* Style for the "New customer? Create your account" link */
+.create {
+    text-decoration: none; /* Remove the default underline */
+    color: #007bff; /* Link color */
+    display: block; /* Block level element */
+    text-align: center; /* Center the text */
+    margin-top: 15px; /* Add spacing between the link and the inputs */
+    font-size: 11px; /* Adjust the font size as needed */
+}
+.containerI {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+    margin-top: 50px;
 }
