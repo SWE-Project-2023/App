@@ -81,7 +81,7 @@ a{
 
 /* Style the submit button */
 .submit-button {
-    background-color: #007bff;
+    background-color: #698ecf;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -92,7 +92,7 @@ a{
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #466caf;
 }
 
 /* Responsive Styles */
@@ -155,7 +155,6 @@ a{
 .containerI {
     text-align: center;
     padding: 20px;
-    border: 1px solid #ccc; /* Optional: Add a border for visual separation */
     margin-top: 50px;
 }
 .form_second{
@@ -165,4 +164,84 @@ a{
 .link{
     color: #0056b3;
     transition: color .2s ease-in-out;
+}
+.footer-block {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.footer-info {
+    color: white    ;
+    height: max-content;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+    background-color: #354259; /* Light background color */
+    padding: 20px; /* Padding for the entire section */
+}
+
+/* Style for copyright section */
+.footer-copyright {
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+/* Style for individual sections within the "footer-info" */
+.footer-section {
+    display: inline-block;
+    width: 30%; /* Adjust the width as needed */
+    margin: 0 10px; /* Adjust spacing between sections */
+    vertical-align: top; /* Align sections vertically */
+}
+@media screen and (max-width: 768px) {
+    .footer-section {
+        margin-top: 5px;
+        width: 45%; /* Adjust section width for smaller screens */
+    }
+
+    .footer-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center; /* Center-align the sections */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .footer-section {
+        margin-top: 5px;
+        width: 100%; /* Stack sections vertically on narrow screens */
+    }
+}
+.explain-footer{
+    text-align: justify;
+}
+.title-footer{
+    font-size: 20px;
+    font-weight: bold;
+}
+.header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Style for the menu icon */
+.menu-icon {
+    font-size: 24px; /* Adjust the size as needed */
+    cursor: pointer;
+}
+
+/* Style for the logo */
+.logo {
+    font-size: 24px; /* Adjust the size as needed */
+}
+
+/* Style for the search icon */
+.search-icon {
+    font-size: 24px; /* Adjust the size as needed */
+    cursor: pointer;
+}
+.sub-header-login{
+    padding: 10px;
 }
