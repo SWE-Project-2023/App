@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
     // Get references to the form and form elements
     const signupForm = document.getElementById("form-main"); // Changed the form ID to class
@@ -41,10 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const lastnameInput = document.getElementById("lastname");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmpassword"); // Added confirm password field
     const firstnameError = document.getElementById("firstname-error");
     const lastnameError = document.getElementById("lastname-error");
     const emailError = document.getElementById("email-error");
     const passwordError = document.getElementById("password-error");
+    const confirmPasswordError = document.getElementById("confirmpassword-error"); // Added confirm password error field
 
     // Add an event listener for the form submission
     signupForm.addEventListener("submit", function (event) {
@@ -55,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const lastnameValue = lastnameInput.value;
         const emailValue = emailInput.value;
         const passwordValue = passwordInput.value;
+        const confirmPasswordValue = confirmPasswordInput.value; // Get confirm password value
 
         // Check if the Firstname is empty
         if (firstnameValue === "") {
@@ -94,6 +96,18 @@ document.addEventListener("DOMContentLoaded", function () {
             passwordInput.classList.remove("error");
             passwordError.textContent = "";
         }
+
+        // Check if the Confirm Password matches the Password
+        if (confirmPasswordValue === "") {
+            confirmPasswordInput.classList.add("error");
+            confirmPasswordError.textContent = "Please confirm your password";
+        } else if (confirmPasswordValue !== passwordValue) {
+            confirmPasswordInput.classList.add("error");
+            confirmPasswordError.textContent = "Passwords do not match";
+        } else {
+            confirmPasswordInput.classList.remove("error");
+            confirmPasswordError.textContent = "";
+        }
     });
 
     // Function to validate email format
@@ -102,3 +116,4 @@ document.addEventListener("DOMContentLoaded", function () {
         return emailPattern.test(email);
     }
 });
+
