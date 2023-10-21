@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+    <%- include("./partials/header.ejs")%>
     <div class="signupcontainer">
     <form action="" method="post" class="form-main" id="form-main">
     <header class="form_header">
@@ -36,11 +37,16 @@
         <input type="password" name="password"  class="input-field" id="password"placeholder="password">
         <span class="error-message" id="password-error"></span>
     </div>
+    <div class="form-input">
+        <!-- <label for="confrimpassword">Confrim Password</label> -->
+        <input type="password" name="confrimpassword"  class="input-field" id="confirmpassword"placeholder="confirm password">
+        <span class="error-message" id="confirmpassword-error"></span>
+    </div>
     <button type="submit" class="submit-button">Create my account </button>
 
     <div class="form_second">
         <p>Already have a account?
-        <a href="/account/login" class="link">Login here</a>
+        <a href="/" class="link">Login here</a>
     </p>
     </div>
     </form>

@@ -2,7 +2,6 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
 }
 body {
@@ -22,13 +21,10 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.signsignupcontainer {
-    background-color: #fff;
+.signupcontainer {
     max-width: 1480px;
     margin: 0 auto;
     padding: 0 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-left: auto;
     margin-right: auto;
 }
@@ -47,7 +43,7 @@ body {
 
 
 @media screen and (min-width:675px){
-    .signsignupcontainer{
+    .signupcontainer{
         padding: 0 40px;
     }
     .form-main{
@@ -77,6 +73,7 @@ a{
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 /* Style the submit button */
@@ -89,11 +86,14 @@ a{
     cursor: pointer;
     width: 100%; /* Make the button the same length as the container */
     margin-top: 20px; /* Add spacing between the button and the inputs */
+    text-align:center;
+    font-size: 16px;
 }
 
 .submit-button:hover {
     background-color: #466caf;
 }
+
 
 /* Responsive Styles */
 @media screen and (max-width: 600px) {
@@ -159,11 +159,14 @@ a{
 }
 .form_second{
     margin-top: 32px;
-    font-size: 9px;
+    font-size: 13px;
 }
 .link{
     color: #0056b3;
     transition: color .2s ease-in-out;
+}
+.link:hover{
+    text-decoration: underline;
 }
 .footer-block {
     text-align: center;
@@ -217,31 +220,4 @@ a{
     font-size: 20px;
     font-weight: bold;
 }
-.header {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
 
-/* Style for the menu icon */
-.menu-icon {
-    font-size: 24px; /* Adjust the size as needed */
-    cursor: pointer;
-}
-
-/* Style for the logo */
-.logo {
-    font-size: 24px; /* Adjust the size as needed */
-}
-
-/* Style for the search icon */
-.search-icon {
-    font-size: 24px; /* Adjust the size as needed */
-    cursor: pointer;
-}
-.sub-header-login{
-    padding: 10px;
-}

@@ -8,19 +8,7 @@
         <link rel="stylesheet" href="/css/loginAndSignup.css">
     </head>
     <body>
-        <header class="header">
-            <div class="menu-icon">
-                <!-- Hamburger menu icon (you can use an SVG or an icon library) -->
-                &#9776;
-            </div>
-            <div class="logo">
-                Your Logo
-            </div>
-            <div class="search-icon">
-                <!-- Search icon (you can use an SVG or an icon library) -->
-                &#128269;
-            </div>
-        </header>
+      <%- include("./partials/header.ejs")%>
         <div class="containerI">
         <div class="form-header">
             <h1>Login to my account</h1>
@@ -39,7 +27,7 @@
             
             <input type="submit" value="Submit" id="submit-button" class="submit-button">
 
-            <a href="/auth/signup" class="create">New customer? Create your account</a>
+            <a href="/signup" class="create">New customer? Create your account</a>
             <a href="/auth/forgetpassword" class="forgetpas">Forget your password?</a>
           
         </form>
