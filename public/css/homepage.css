@@ -1,0 +1,35 @@
+.slideshow {
+	height: 55vh;
+}
+
+.slideshow img {
+	width: 100%;
+	max-height: 100%;
+}
+
+.categories {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	background-color: white;
+	position: absolute;
+	width: 80%;
+	left: 10%; /* to horizontally align div, left: (100 - width) / 2 */
+	top: 70%;
+	height: 15vh;
+}
+
+.cat {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 5%;
+}
+
+.cat p {
+	color: #033B4C;
+	font-size: small;
+}
