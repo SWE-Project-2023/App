@@ -1,65 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
-crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Homepage</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/homepage.css">
 
-    <link rel="stylesheet" href="/css/homepage.css">
-    <title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 </head>
 <body>
-    <%- include("./partials/header.ejs")%>
-    <div class="containerr">
-        <div class="slider-container">
-            <div class="slider">
-                
-                <!-- <div class="slide"><img src="/images/9052.jpg_wh1200.jpg" alt="Image 2"></div> -->
-                <div class="slide"><img src="/images/3_for_2_vits_1_800x.webp" alt="Image 3"></div>
-                <div class="slide"><img src="/images/UP_to_60_off_Early_Gifting_1_800x.webp" alt="Image 4"></div>
-            </div>
-            <div class="slider-btns"></div>
-        </div>
-        <div class="categorysection">
-            <div class="inner_section">
-                <div class="category">
-                    <i class="fa-solid fa-prescription-bottle-medical"></i>
-                    <a href="">Medications</a>
-                </div>
-                <div class="category">
-                    <i class="fa-solid fa-baby-carriage"></i>
-                    <a href="">Mom and Baby</a>
-                </div>
-                <div class="category">
-                    <img src="images/skin-care-48.png" alt="">
-                    <a href="">Skin Care</a>
-                </div>
-                <div class="category">
-                    <img src="/images/small-home-appliances-48 (1).png" alt="">
-                    <a href="">Hair Care</a>
-                </div>
-                <div class="category">
-                    <img src="images/beauty-22-48.png" alt="">
-                    <a href="">Beauty</a>
-                </div>
-                <div class="category">
-                    <i class="fa-solid fa-suitcase-medical"></i>
-                    <a href="">Medical Supplies</a>
-                </div>
+	<%- include('partials/header') %>
 
-            </div>
-        </div>
-        <div class="productcont">
-            <div class="prodtitle">
-                <p>Our Featured Products</p>
-            </div>
-        </div>
-        
-    </div>
-    <script src="/js/homepage.js"></script>
+	<div class="splide">
+		<div class="splide__track">
+		<ul class="splide__list">
+			<li class="splide__slide"><img src="/images/banner1.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner2.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner3.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner4.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner5.png" alt=""></li>
+		</ul>
+	</div>
+		
+		<!-- Add the progress bar element -->
+		<div class="my-slider-progress">
+		  <div class="my-slider-progress-bar"></div>
+		</div>
+	  </div>
+
+	<div class="categories">
+		<a href="#">
+			<div class="cat" id="cat1">
+				<img src="/images/capsule.png" alt="capsule">
+				<p>Medications</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat2">
+				<img src="/images/baby.png" alt="baby">
+				<p>Mom and Baby</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat3">
+				<img src="/images/hand.png" alt="hand">
+				<p>Skin Care</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat4">
+				<img src="/images/hair.png" alt="blow dryer">
+				<p>Hair Care</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat5">
+				<img src="/images/beauty.png" alt="lip stick">
+				<p>Beauty</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat6">
+				<img src="images/supplies.png" alt="first aid kit">
+				<p>Medical Supplies</p>
+			</div>
+		</a>
+	</div>
+
+	<div class="featured-products-container">
+		<h1>Our Feautured Products</h1>
+
+		<div class="featured-products">
+			<a href="">
+				<img src="/images/featured1.png" alt="product">
+				<p>Super Capsule</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured2.png" alt="product">
+				<p>Super Syringe</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured3.png" alt="product">
+				<p>Super Cannula</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured4.png" alt="product">
+				<p>Super Drugs</p>
+			</a>
+		</div>
+	</div>
+
+	<%- include('partials/footer') %>
+
+	 <!-- --------------------- Scripts ---------------------  -->
+
+	<script>
+		var splide = new Splide( '.splide' );
+		var bar = splide.root.querySelector('.my-slider-progress-bar');
+		
+		// Updates the bar width whenever the carousel moves:
+		splide.on( 'mounted move', function () {
+			var end  = splide.Components.Controller.getEnd() + 1;
+			var rate = Math.min( ( splide.index + 1 ) / end, 1 );
+			bar.style.width = String( 100 * rate ) + '%';
+		} );
+		
+		splide.mount();
+	</script>
+
 </body>
 </html>
