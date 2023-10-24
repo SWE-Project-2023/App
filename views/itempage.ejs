@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="/css/itempage.css">
+    <title>Document</title>
+</head>
+<body>
+    <%-include("./partials/header.ejs")%>
+<div class="itemcontanier">
+    <div class="page_header">
+        <nav>
+            <ol class="page-list">
+                <li class="page-tag">
+                    <a href="/" class="tag">Home</a>
+                    <i class='bx bx-chevron-right'></i>
+                <li class="page-tag">
+                    <a href="" class="tag">All products</a>
+                    <i class='bx bx-chevron-right'></i>
+                </li>
+                <li class="page-tag">
+                  <span class="tag">Panadol Advance - 24 Tablets</span>
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+    <div class="productcontanier">
+        <div class="product_wrapper">
+            <div class="product_item_gallery">
+                <div class="card">
+                    <div class="card__section">
+                        <div class="product-gallery">
+                            <div class="gallery_preview">
+                                
+                                <div class="previewproduct">
+                                    <img src="/images/panadol-advance-24-tablets-287033.webp" alt="">
+                               
+                            </div>
+                            </div>
+                            <div class="scroller">
+                                <div class="scroller_inner">
+                                    <div class="products_list">
+                                        <a href="" class="product__item selected"><img src="/images/panadol-advance-24-tablets-287033.webp" alt=""></a>
+                                        <a href="" class="product__item"><img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt=""></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product_item_info">
+                <div class="cardinfo">
+                    <div class="card_section">
+                        <form method="post" action="/cart/add" class="product_form">
+                            <div class="product-title">
+                                <h1>Panadol Advance - 24 Tablets</h1>
+                            </div>
+                            <hr class="card__separator">
+                            <div class="product_info">
+                                <div class="product_price">
+                                    <span class="prod-info">Price:</span>
+                                    <div class="costprod">
+                                        <div class="price">
+                                            <span>EGP 31.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="prodcut-quantity">
+                                    <label class="quantity">Quantity</label>
+                                    <div class="quantity_no">
+                                        <div class="quantity_sector">
+                                            <button type="button" class="quantity_button">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                            <input type="text" class="quantity_value" value="1">
+                                            <button type="button" class="quantity_button">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product_payment">
+                                <button type="submit" class="btn_addtocart">CheckOut</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product_item_descrp">
+                <div class="card">
+                    <button class="card_collapsible_button">
+                        <span class="card__title">PRODUCT INFORMATION</span>
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <div class="details_block"></div>
+                </div>
+            </div>
+            <div class="product_item_delivery">
+                <div class="card">
+                    <button class="card_collapsible_button">
+                        <span class="card__title">Delivery & Returns</span>
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <div class="details_block"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
