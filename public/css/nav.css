@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 a{
     text-decoration: none;
     color: black;
@@ -45,7 +46,7 @@ a{
     font-size: 20px;
     position: relative;
     bottom: 1px;
-    /* color: #6CBD57; */
+    color: #fff;
 }
 
 .inner_navII i:not(:last-child){
