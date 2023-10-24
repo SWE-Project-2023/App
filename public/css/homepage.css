@@ -1,130 +1,80 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
- font-family: 'Roboto', sans-serif;
-}
-a{
-  text-decoration: none;
-  color: black;
-}
-.containerr{
-    max-width: 1480px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
-}
-@media screen and (min-width:641px){
-    .containerr{
-        padding: 0 40ox;
-    }
+.splide img {
+	width: 100%;
+	max-height: 100%;
 }
 
-.slider-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: auto; /* Make the container height flexible */
-  }
+.my-slider-progress {
+	background: #ccc;
+}
   
-  .slider {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slide {
-    width: 100%;
-    flex-shrink: 0;
-  }
-  
-  .slide img {
-    width: 100%;
-  }
-  
-  .slider-btns {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    bottom: 30px;
-    right: 520px;
-  }
-  
-  .slider-btn {
-    display: inline-flex;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin:0 8px;
-    transition:  transform .25s ease;
-    background: none; 
-    border: 3px solid #f9f7f7; 
-  }
-  .slider-btn.active {
-    background: #f9f7f7;
-   
-  }
-  .categorysection{
-    position: relative;
-    background-color: white;
-    width: 100%; /* Adjust the width to fit your design */
-    max-width: 945px; /* Set a maximum width to control the width on larger screens */
-    height: 141px;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    /* Add your 3D effect styles here */
-    justify-content: center;
-    display: flex;
-    /* border: 1px solid red; */
-  }
-
-.categorysection .inner_section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; /* Spread categories evenly */
-   
+.my-slider-progress-bar {
+	background: #3f3f95;
+	height: 5px;
+	transition: width 400ms ease;
+	width: 0;
 }
 
-.category {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text within the category */
-    /* border: 1px solid black; */
-    margin: 0 20px;
-    padding: 40px 10px 10px 10px; /* Add padding for spacing */
+.categories {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto;
+	width: 55%;
+	height: 15vh;
 }
 
-.category i {
-  font-size: 30px;
-    margin-bottom: 16px; 
-    color: rgb(7, 137, 244);
-    
-}
-.category img{
-  position: relative;
-  bottom: 10px;
-}
-.category a{
-  color: black;
+.cat {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
 }
 
-.productcont {
-  background-color: #3F3F95;
-  width: 100%;
-  padding: 35px 230px 10px 230px;
-  height: 282px; /* Change height to auto to accommodate the content */
-  position: relative; /* Add relative positioning for stacking context */
+.cat p {
+	color: #2f6f82;
+	font-size: small;
+	font-weight: bold;
 }
 
-.productcont .prodtitle {
-  color: #f9f7f7;
-  font-size: 25px;
-  border-bottom: 1px solid #807f7f;
-  padding-bottom: 35px;
+.featured-products-container {
+	background-color: #3f3f95;
+	height: 30vh;
 }
 
+.featured-products-container h1 {
+	color: white;
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding: 3% 22.5%;
+}
 
+.featured-products {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	width: 50%;
+	left: 25%;
+	top: 10%;
+}
 
+.featured-products a {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.featured-products a p {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #2f6f82;
+	font-weight: bold;
+	font-size: medium;;
+}
