@@ -19,7 +19,9 @@ img{
     vertical-align: top;
 }
 
-.itemcontanier{
+.itemcontanier,
+.productcontanier,
+.featurecontainer{
     max-width: 1480px;
     margin-left: auto;
     margin-right: auto;
@@ -47,9 +49,12 @@ img{
     background-color: transparent;
     text-decoration: none;
 }
-  span{
+span{
     position: relative;
     top: 2px;
+}
+strong{
+    font-weight: 700;
 }
 .page-tag  i{
     margin-right:2px;
@@ -100,6 +105,7 @@ border-bottom:1px solid #e1e3e4 ;
     top: 0;
     left: 0;
  }
+ 
  .product__item.selected{
     border: 2px solid #3F3F95;
  }
@@ -248,9 +254,48 @@ display: table-row;
     cursor: pointer;
 }
 
+.card_content{
+    padding: 0 20px 20px;
+}
+
+.contextbox .details_block{
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    overflow-y: hidden;
+    transition:  .3s ease-in-out;
+}
+
+.contextbox.active .details_block{
+    height: auto;
+
+}
+
+.content p:not(:last-child){
+margin-bottom: 11px;
+}
+
+.FeaturedProd{
+    margin: 50px 0px;
+}
+.section__header{
+    border-bottom: solid 2px #3F3F95;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    overflow: hidden;
+    font-size: 18px;
+}
+.section__header h2{
+    font-size: 18px;
+}
 
 @media screen and (min-width:765px){
-    .itemcontanier{
+    .itemcontanier,
+    .productcontanier,
+    .featurecontainer{
         padding: 0 40px;
     }
     .page_header{
@@ -299,7 +344,16 @@ display: table-row;
     .product__item{
         width: 72px;
     }
-  
+    .card_content{
+        padding: 0 30px 30px;
+    }
+  .FeaturedProd{
+    padding: 60px 0;
+  }
+  .section__header{
+    overflow: visible;
+    margin-bottom: 20px;
+  }
 }
 
 @media screen and (min-width:1000px){
