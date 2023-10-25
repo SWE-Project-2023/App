@@ -1,4 +1,114 @@
 <%-include("./admin-partials/header.ejs", { title: "Users" })%>
 
 
+<!-- Sample Users -->
+<% users = [
+    {
+        "id": 1,
+        "first_name": "Ahmed",
+        "last_name": "Mohamed",
+        "email": "ahmed.mohamed@example.com",
+        "address": "123 Nile Street, Cairo, Egypt"
+    },
+    {
+        "id": 2,
+        "first_name": "Fatma",
+        "last_name": "Ali",
+        "email": "fatma.ali@example.com",
+        "address": "456 Sphinx Avenue, Giza, Egypt"
+    },
+    {
+        "id": 3,
+        "first_name": "Youssef",
+        "last_name": "Ibrahim",
+        "email": "youssef.ibrahim@example.com",
+        "address": "789 Pharaoh Square, Luxor, Egypt"
+    },
+    {
+        "id": 4,
+        "first_name": "Nour",
+        "last_name": "Hassan",
+        "email": "nour.hassan@example.com",
+        "address": "101 Nile View, Aswan, Egypt"
+    },
+    {
+        "id": 5,
+        "first_name": "Sara",
+        "last_name": "Mahmoud",
+        "email": "sara.mahmoud@example.com",
+        "address": "321 Pyramids Road, Giza, Egypt"
+    },
+    {
+        "id": 6,
+        "first_name": "Khaled",
+        "last_name": "Abdallah",
+        "email": "khaled.abdallah@example.com",
+        "address": "555 Sphinx Street, Giza, Egypt"
+    },
+    {
+        "id": 7,
+        "first_name": "Amira",
+        "last_name": "Rashid",
+        "email": "amira.rashid@example.com",
+        "address": "222 Pharaoh Lane, Luxor, Egypt"
+    },
+    {
+        "id": 8,
+        "first_name": "Omar",
+        "last_name": "Hassan",
+        "email": "omar.hassan@example.com",
+        "address": "888 Nile Avenue, Cairo, Egypt"
+    },
+    {
+        "id": 9,
+        "first_name": "Laila",
+        "last_name": "Mansour",
+        "email": "laila.mansour@example.com",
+        "address": "444 Sphinx Square, Giza, Egypt"
+    },
+    {
+        "id": 10,
+        "first_name": "Maged",
+        "last_name": "Mahmoud",
+        "email": "maged.mahmoud@example.com",
+        "address": "777 Pyramid Street, Giza, Egypt"
+    }
+]
+%>
+
+
+<div class="container">
+  <div class="row">
+    <h1>Users</h1>
+  </div>
+  <div class="table-responsive" style="max-height: 75vh; max-width: 75vw">
+    <table class="table table-bordered">
+      <thead class="sticky-top">
+        <tr>
+          <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+            <td><%= user.id %></td>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.address %></td>
+            <td>
+                <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <%-include("./admin-partials/footer.ejs")%>

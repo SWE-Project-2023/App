@@ -27,7 +27,7 @@ app.get('/itempage', (req, res) => {
 
 
 // Admin pages
-app.get('/admin', (req, res) => res.redirect('/admin/login'));
+app.get('/admin', (req, res) => res.redirect('/admin/dashboard'));
 app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
 app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard.ejs'));
 app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));

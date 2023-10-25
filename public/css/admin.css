@@ -17,6 +17,16 @@ main .container .row h1 {
   }
 }
 
+.active {
+  background-color: #d2c1ff!important;
+  color: #fff!important;
+}
+
 .sidebar {
   height: 100vh;
+}
+
+.subtable {
+    float: right;
+    padding-top: 1rem;
 }
