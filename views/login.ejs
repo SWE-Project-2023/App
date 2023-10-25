@@ -12,12 +12,12 @@
         <div class="containerI">
         <div class="form-header">
             <h1>Login to my account</h1>
-            <p class="sub-header-login">Enter your username and password:</p>
+            <p class="sub-header-login">Enter your email and password:</p>
         </div>
-        <form id="login-form" novalidate>
+        <form id="login-form" action="/auth/login" method="post">
             <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Username" class="input-field" required>
-                <span class="error-message" id="username-error"></span>
+                <input type="text" id="email" name="email" placeholder="Email" class="input-field" required>
+                <span class="error-message" id="email-error"></span>
             </div>
             
             <div class="form-group">
