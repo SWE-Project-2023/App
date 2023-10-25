@@ -10,4 +10,8 @@ router.get('/productlist', function(req, res, next) {
   res.render('productlist');
 });
 
+router.get('/cart',function(req,res,next){
+res.render('cart')
+});
+
 module.exports = router;

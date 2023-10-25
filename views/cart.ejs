@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/cart.css">
+    <title>Document</title>
+</head>
+<body>
+    <%-include("./partials/header.ejs")%>
+    <div class="cartcontainer">
+        <header class="cartheader">
+            <h1>My Bag</h1>
+        </header>
+    </div>
+    <div class="cart-wrapper">
+        <div class="cart-wrapper__inner">
+            <div class="insidewrapper">
+                <div class="icontainer">
+                    <div class="Card">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ITEM</th>
+                                        <th class="table_center">QTY</th>
+                                        <th class="table_right">SUBTOTAL</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="prodductinfo">
+                                                <div class="item_image">
+                                                    <div class="imgcont">
+                                                        <img src="../images/panadol-advance-24-tablets-285579_1024x.webp" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="item_title">
+                                                    <a href="">Panadol Advance - 24 Tablets</a>
+                                                    <div class="item_price">
+                                                        <span class="prices">EGP21.50</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="td_center">
+                                            <div class="Qty_div">
+                                                <div class="quantity_range">
+                                                    <button type="button"  onclick="decrement()" class="quan_button">
+                                                        <i class="fa-solid fa-minus"></i>
+                                                    </button>
+                                                    <input type="text" class="quantityvalue" id="quantity_value" value="1">
+                                                    <button type="button"  onclick="increment()" class="quan_button">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                <a href="" class="delete">
+                                                    <i class='bx bx-trash'></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="td_right">
+                                            <span>EGP 21.50</span>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            
+                </div>
+                <form action="/cart" class="carrtform">
+                    <div class="cart_scroller">
+                        <div class="Card">
+                            <div class="innercard">
+                                <div class="upperpart">
+                                    <div class="innerpart">
+                                        <div class="coupon">
+                                            <input type="text" placeholder="Coupon Code">
+                                            <div class="buttoninput">
+                                                <div class="inputbtn">Apply</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="innerpart">
+                                        <div class="subtotal">
+                                            <span class="toleft">Subtotal</span>
+                                            <span class="toright">EGP 52.50</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="notices"><p>Taxes and shipping calculated at checkout</p></div>
+                                <button type="submit" class="butn">SECURE CHECKOUT</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
