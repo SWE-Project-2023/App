@@ -134,6 +134,7 @@ INSERT INTO `orders` (`order_id`, `item_id`, `user_id`, `order_quantity`, `order
 -- Table structure for table `user`
 --
 
+
 CREATE TABLE `user` (
   `user_Lname` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -239,6 +240,28 @@ ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 COMMIT;
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantity` int(3) NOT NULL,
+  PRIMARY KEY (`cart_id`),
+  KEY `user_id` (`user_id`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE
+);
+
+CREATE TABLE `wishlist` (
+  `wishlist_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  PRIMARY KEY (`wishlist_id`),
+  KEY `user_id` (`user_id`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
