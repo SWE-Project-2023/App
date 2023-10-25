@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const loginController = require('../controllers/loginController.js');
+const signupController = require('../controllers/signupController.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -22,6 +23,8 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', loginController.login);
+
+router.post('/signup', signupController.signup);
 
 router.use((req, res, next) => {
 

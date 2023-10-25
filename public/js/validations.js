@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lastnameInput = document.getElementById("lastname");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirmpassword"); // Added confirm password field
+    const confirmPasswordInput = document.getElementById("confirmPassword"); // Added confirm password field
     const firstnameError = document.getElementById("firstname-error");
     const lastnameError = document.getElementById("lastname-error");
     const emailError = document.getElementById("email-error");
