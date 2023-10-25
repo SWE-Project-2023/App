@@ -16,9 +16,13 @@ app.get('/homepage', (req, res) => {
     res.render('homepage.ejs');
 });
 
- app.get('/signup', (req, res) => {
-        res.render('signup.ejs');
-  });
+app.get('/signup', (req, res) => {
+    res.render('signup.ejs');
+});
+
+app.get('/checkout', (req, res) => {
+    res.render('checkout.ejs');
+});
   
 // Start the server
 app.listen(port, () => {
