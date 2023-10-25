@@ -1,0 +1,32 @@
+main {
+  background: hsl(224, 58%, 96%);
+}
+
+main .container {
+  padding-top: 1rem;
+}
+
+main .container .row h1 {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  main .container {
+    padding-top: 4rem;
+  }
+}
+
+.active {
+  background-color: #d2c1ff!important;
+  color: #fff!important;
+}
+
+.sidebar {
+  height: 100vh;
+}
+
+.subtable {
+    float: right;
+    padding-top: 1rem;
+}

@@ -1,0 +1,82 @@
+<%-include("./admin-partials/header.ejs", { title: "Dashboard" })%>
+
+<div class="container">
+  <div class="row">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Sales Today</h5>
+          <p class="card-text">$120</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Sales This Month</h5>
+          <p class="card-text">$3,500</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-body">
+          <h5 class="card-title">New Customers</h5>
+          <p class="card-text">12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-header">Top Sellers</div>
+        <div class="card-body">
+          <table class="table table-bordered table-responsive">
+            <thead>
+              <tr>
+                <th>Last Purchase</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2023-10-01</td>
+                <td>Panadol</td>
+                <td>50</td>
+                <td>$500</td>
+              </tr>
+              <tr>
+                <td>2023-10-02</td>
+                <td>Strepsils</td>
+                <td>30</td>
+                <td>$300</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-header">Sales Chart</div>
+        <div class="card-body">
+          <div class="chart">
+            <!-- Sample chart, for now :) -->
+            <img
+              class="img-fluid"
+              src="https://lh4.googleusercontent.com/MeMG6zW31suRtIe2-BaRADUcQ03EGiTXUrKo8DxkzuCs27v_2uXo7NwIh4fYRIKufgnyvATHO1Lc0AyzXg5_Zt01olVqXHR_jFmIVE_0-KzfBQba33mii0I5bgzYoOfoLiqfXT5L=s0"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%-include("./admin-partials/footer.ejs")%>
+</div>
