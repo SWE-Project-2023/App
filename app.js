@@ -1,7 +1,9 @@
+
 // Import required modules
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const mysql = require("mysql2");
 const port = 3010; // Specify the port you want to use
 
 // Configure session middleware
@@ -20,9 +22,53 @@ app.set('views', path.join(__dirname, 'views')); // Update the path accordingly
 
 app.listen(port, '127.0.0.1', () => {
   console.log(`Server is running on http://127.0.0.1:${port}`);
+
+
+const connection = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "qanaa",
+  port: 3306,
+});
+connection.getConnection((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL: " + err.stack);
+    return;
+  }
+  console.log("Connected to MySQL as ID " + connection);
+});
+
+const category = "Sample Category";
+const products = [
+  {
+    name: "Sample Product 1",
+    price: 10.0,
+    description: "This is a sample product.",
+    image: "/images/banner1.png",
+  },
+  {
+    name: "Sample Product 2",
+    price: 20.0,
+    description:
+      "Another sample product description sadsa das dasd asd asd sad sa das sda.",
+    image: "/images/featured2.png",
+  },
+  // Add more sample products here
+];
+
+app.get("/productList", (req, res) => {
+  res.render("productList.ejs", {
+    category,
+    products,
+    totalPages: 1,
+    currentPage: 1,
+  });
+
 });
 // Parse JSON requests
 app.use(express.json());
+
 
 // Parse URL-encoded requests
 app.use(express.urlencoded({ extended: true }));
