@@ -59,14 +59,17 @@ app.get("/productList", (req, res) => {
   });
 });
 
- app.get('/signup', (req, res) => {
-        res.render('signup.ejs');
+app.get('/signup', (req, res) => {
+    res.render('signup.ejs');
+});
 
-        });
+app.get('/checkout', (req, res) => {
+    res.render('checkout.ejs');
+});
 
 app.get('/itempage', (req, res) => {
-          res.render('itempage.ejs');
-    });
+    res.render('itempage.ejs');
+});
 
 // Start the server
 app.listen(port, () => {
