@@ -29,7 +29,7 @@ app.get('/itempage', (req, res) => {
 // Admin pages
 app.get('/admin', (req, res) => res.redirect('/admin/login'));
 app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
-app.get('/admin/main', (req, res) => res.render('admin/main.ejs'));
+app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard.ejs'));
 app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));
 app.get('/admin/users', (req, res) => res.render('admin/users.ejs'));
 app.get('/admin/orders', (req, res) => res.render('admin/orders.ejs'));
