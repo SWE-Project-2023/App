@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const loginController = {}; 
+const mysql = require("mysql2");
+
 
 // loginController.login = async (req, res) => {
 //   console.log("Login request received");
@@ -43,13 +45,27 @@ loginController.login = async (req, res) => {
 	  return res.status(400).send('All fields are required');
 	}
   
+	const connection = mysql.createPool({
+		host: "localhost",
+		user: "root",
+		password: "",
+		database: "qanaa",
+		port: 3306,
+	  });
+	  connection.getConnection((err) => {
+		if (err) {
+		  console.error("Error connecting to MySQL: " + err.stack);
+		  return;
+		}
+		console.log("Connected to MySQL as ID " + connection);
+	  });
 	// Check if the email exists in the database
-	const query = 'SELECT * FROM users WHERE email = ?';
+	const query = 'SELECT * FROM user WHERE email = ?';
 	connection.query(query, [email], async (err, results) => {
 	  if (err) {
 		return res.status(500).send(err);
 	  }
-  
+	  console.log("Result: " + results);
 	  // Check if a user with the provided email was found
 	  if (results.length === 0) {
 		return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });

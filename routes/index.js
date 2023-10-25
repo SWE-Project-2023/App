@@ -3,7 +3,6 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // res.render('index',{ userr: req.session.userr });
-  res.render('index');
+  res.render('index',{user: req.session.user===undefined?"":req.session.user});
 });
 module.exports = router;
