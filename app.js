@@ -16,8 +16,7 @@ const port = 3010; // Specify the port you want to use
 // );
 const app = express();
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Update the path accordingly
-
+app.use(express.static("public", { maxAge: "7d" }));
 // ... (the rest of your code)
 
 app.listen(port, '127.0.0.1', () => {
