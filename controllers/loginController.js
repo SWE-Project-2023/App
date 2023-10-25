@@ -1,6 +1,5 @@
-// const bcrypt = require("bcryptjs");
-// const User = require("../models/user.js");
-// const loginController = {}; 
+const bcrypt = require("bcryptjs");
+const loginController = {}; 
 
 // loginController.login = async (req, res) => {
 //   console.log("Login request received");
@@ -8,8 +7,6 @@
 //   const { email, pass } = req.body;
 
 //   try {
-//     // Find the user in the database by email
-//     const result = await User.findOne({ email });
 
 //     if (!result) {
 //       // User not found, display error message
@@ -37,4 +34,37 @@
 //   }
 // }
 
-// module.exports = loginController;
+loginController.login = async (req, res) => {
+	console.log("Login request received");
+	const { email, password } = req.body;
+  
+	// Perform data validation here
+	if (!email || !password) {
+	  return res.status(400).send('All fields are required');
+	}
+  
+	// Check if the email exists in the database
+	const query = 'SELECT * FROM users WHERE email = ?';
+	connection.query(query, [email], async (err, results) => {
+	  if (err) {
+		return res.status(500).send(err);
+	  }
+  
+	  // Check if a user with the provided email was found
+	  if (results.length === 0) {
+		return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
+	  }
+
+	  const isPasValid = await bcrypt.compare(password, results.password);
+	  if (!isPasValid) {
+
+		// Password does not match, display error message
+		return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
+	  }
+  
+	 // Password matches, render the account page with user data
+	 return res.redirect('/homepage');
+	});
+  };
+
+module.exports = loginController;
