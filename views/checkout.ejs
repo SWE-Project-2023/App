@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Checkout</title>
+
+	<link rel="stylesheet" href="../css/checkout.css">
+</head>
+
+<body>
+	<%- include('partials/header') %>
+
+	<div class="row">
+		<div class="col-75">
+			<div class="container">
+				<form action="" method="post">
+					<div class="row">
+						<div class="col-50">
+							<div class="cash-option">
+								<input type="radio" id="cash-radio" name="payment-method" value="cash">
+								<label for="cash-radio">
+									<h3>Cash on Delivery</h3>
+								</label>
+							</div>
+							<div id="cash-details" class="payment-details" style="display: none;">
+								<label for="fname"><i class="fa fa-user"></i> Full Name</label>
+								<input type="text" id="fname" name="firstname" placeholder="Nermine Heshmat">
+								<label for="email"><i class="fa fa-envelope"></i> Email</label>
+								<input type="text" id="email" name="email" placeholder="nermo@example.com">
+								<label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+								<input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+								<label for="city"><i class="fa fa-institution"></i> City</label>
+								<input type="text" id="city" name="city" placeholder="Cairo">
+							</div>
+						</div>
+
+						<div class="col-50">
+							<div class="visa-option">
+								<input type="radio" id="visa-radio" name="payment-method" value="visa">
+								<label for="visa-radio">
+									<h3>Pay with Visa</h3>
+								</label>
+							</div>
+							<div id="visa-details" class="payment-details" style="display: none;">
+								<label for="cname">Name on Card</label>
+								<input type="text" id="cname" name="cardname" placeholder="Hoss Ayman">
+								<label for="ccnum">Credit card number</label>
+								<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+								<label for="expmonth">Expiry Month</label>
+								<input type="text" id="expmonth" name="expmonth" placeholder="February">
+
+								<div class="row">
+									<div class="col-50">
+										<label for="expyear">Expiry Year</label>
+										<input type="text" id="expyear" name="expyear" placeholder="2027">
+									</div>
+									<div class="col-50">
+										<label for="cvv">CVV</label>
+										<input type="text" id="cvv" name="cvv" placeholder="352">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="submit" value="Continue To Checkout" class="btn">
+				</form>
+			</div>
+		</div>
+
+			<div class="col-25">
+				<div class="container">
+					<h4>Cart
+						<span class="price" style="color:black">
+							<i class="fa fa-shopping-cart"></i>
+							<b>4</b>
+						</span>
+					</h4>
+					<p><a href="#">Product 1</a> <span class="price">15 EGP</span></p>
+					<p><a href="#">Product 2</a> <span class="price">5 EGP</span></p>
+					<p><a href="#">Product 3</a> <span class="price">90 EGP</span></p>
+					<p><a href="#">Product 4</a> <span class="price">40 EGP</span></p>
+					<hr>
+					<p>Total <span class="price" style="color:black"><b>150 EGP</b></span></p>
+				</div>
+			</div>
+		</div>
+
+		<%- include('partials/footer') %>
+
+			<script>
+				const cashRadio = document.getElementById('cash-radio');
+				const visaRadio = document.getElementById('visa-radio');
+				const cashDetails = document.getElementById('cash-details');
+				const visaDetails = document.getElementById('visa-details');
+
+				cashRadio.addEventListener('change', () => {
+					if (cashRadio.checked) {
+						cashDetails.style.display = 'block';
+						visaDetails.style.display = 'none';
+					}
+				});
+
+				visaRadio.addEventListener('change', () => {
+					if (visaRadio.checked) {
+						visaDetails.style.display = 'block';
+						cashDetails.style.display = 'none';
+					}
+				});
+			</script>
+</body>
+
+</html>

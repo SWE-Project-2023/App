@@ -1,35 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Get references to the form and form elements
     const loginForm = document.getElementById("login-form");
-    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
-    const usernameError = document.getElementById("username-error");
+    const emailError = document.getElementById("email-error");
     const passwordError = document.getElementById("password-error");
 
     // Add an event listener for the form submission
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent the form from actually submitting
 
-        // Get the values of the username and password fields
-        const usernameValue = usernameInput.value;
+        // Get the values of the email and password fields
+        const emailValue = emailInput.value;
         const passwordValue = passwordInput.value;
 
         // Check if either field is empty
-        if (usernameValue === "") {
-            usernameInput.classList.add("error");
-            usernameError.textContent = "Username is required";
+        if (emailValue === "") {
+            emailInput.classList.add("error");
+            emailError.textContent = "email is required";
+            return false;
         } else {
-            usernameInput.classList.remove("error");
-            usernameError.textContent = "";
+            emailInput.classList.remove("error");
+            emailError.textContent = "";
         }
 
         if (passwordValue === "") {
             passwordInput.classList.add("error");
             passwordError.textContent = "Password is required";
+            return false;
         } else {
             passwordInput.classList.remove("error");
             passwordError.textContent = "";
         }
+        event.target.submit();
     });
 });
 
@@ -62,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (firstnameValue === "") {
             firstnameInput.classList.add("error");
             firstnameError.textContent = "Firstname is required";
+            return false;
         } else {
             firstnameInput.classList.remove("error");
             firstnameError.textContent = "";
@@ -71,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (lastnameValue === "") {
             lastnameInput.classList.add("error");
             lastnameError.textContent = "Lastname is required";
+            return false;
         } else {
             lastnameInput.classList.remove("error");
             lastnameError.textContent = "";
@@ -80,9 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (emailValue === "") {
             emailInput.classList.add("error");
             emailError.textContent = "Email is required";
+            return false;
         } else if (!isValidEmail(emailValue)) {
             emailInput.classList.add("error");
             emailError.textContent = "Please enter a valid email address";
+            return false;
         } else {
             emailInput.classList.remove("error");
             emailError.textContent = "";
@@ -92,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (passwordValue === "") {
             passwordInput.classList.add("error");
             passwordError.textContent = "Password is required";
+            return false;
         } else {
             passwordInput.classList.remove("error");
             passwordError.textContent = "";
@@ -101,13 +109,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (confirmPasswordValue === "") {
             confirmPasswordInput.classList.add("error");
             confirmPasswordError.textContent = "Please confirm your password";
+            return false;
         } else if (confirmPasswordValue !== passwordValue) {
             confirmPasswordInput.classList.add("error");
             confirmPasswordError.textContent = "Passwords do not match";
+            return false;
         } else {
             confirmPasswordInput.classList.remove("error");
             confirmPasswordError.textContent = "";
         }
+        event.target.submit();
     });
 
     // Function to validate email format

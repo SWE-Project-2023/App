@@ -4,53 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/loginAndSignup.css">
+    <link rel="stylesheet" href="../css/loginAndSignup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <%- include("./partials/header.ejs")%>
+    <%- include("partials/header.ejs")%>
     <div class="signupcontainer">
-    <form action="" method="post" class="form-main" id="form-main">
-    <header class="form_header">
-        <h1 class="form_title1">Create my account</h1>
-        <p class="form_title2">Please fill in the information below:</p>
-    </header>
-    <div class="form-input">
-        <!-- <label for="firstname">Firstname</label> -->
-        <input type="text" name="firstname" class="input-field" id="firstname" placeholder="firstname">
-        <span class="error-message" id="firstname-error"></span>
-    </div>
-    <div class="form-input">
-        <!-- <label for="lastname">Lastname</label> -->
-        <input type="text" name="lastname"  class="input-field"id="lastname" placeholder="lastname">
-        <span class="error-message" id="lastname-error"></span>
-    </div>
-    <div class="form-input">
-        <!-- <label for="email">Email</label> -->
-        <input type="text" name="email"  class="input-field" id="email" placeholder="email">
-        <span class="error-message" id="email-error"></span>
-    </div>
-    <div class="form-input">
-        <!-- <label for="password">Password</label> -->
-        <input type="password" name="password"  class="input-field" id="password"placeholder="password">
-        <span class="error-message" id="password-error"></span>
-    </div>
-    <div class="form-input">
-        <!-- <label for="confrimpassword">Confrim Password</label> -->
-        <input type="password" name="confrimpassword"  class="input-field" id="confirmpassword"placeholder="confirm password">
-        <span class="error-message" id="confirmpassword-error"></span>
-    </div>
-    <button type="submit" class="submit-button">Create my account </button>
+        <form action="" method="post" class="form-main" id="form-main">
+        <header class="form_header">
+            <h1 class="form_title1">Create my account</h1>
+            <p class="form_title2">Please fill in the information below:</p>
+        </header>
+        <div class="form-input">
+            <!-- <label for="firstname">Firstname</label> -->
+            <input type="text" name="firstname" class="input-field" id="firstname" placeholder="First Name">
+            <span class="error-message" id="firstname-error"></span>
+        </div>
+        <div class="form-input">
+            <!-- <label for="lastname">Lastname</label> -->
+            <input type="text" name="lastname"  class="input-field"id="lastname" placeholder="Last Name">
+            <span class="error-message" id="lastname-error"></span>
+        </div>
+        <div class="form-input">
+            <!-- <label for="email">Email</label> -->
+            <input type="text" name="email"  class="input-field" id="email" placeholder="Email">
+            <span class="error-message" id="email-error"></span>
+        </div>
+        <div class="form-input">
+            <!-- <label for="password">Password</label> -->
+            <input type="password" name="password"  class="input-field" id="password"placeholder="Password">
+            <span class="error-message" id="password-error"></span>
+        </div>
+        <div class="form-input">
+            <!-- <label for="confrimpassword">Confrim Password</label> -->
+            <input type="password" name="confrimpassword"  class="input-field" id="confirmpassword"placeholder="Confirm Password">
+            <span class="error-message" id="confirmpassword-error"></span>
+        </div>
+        <button type="submit" class="submit-button">Create My Account </button>
 
-    <div class="form_second">
-        <p>Already have a account?
-        <a href="/login" class="link">Login here</a>
-    </p>
+        <div class="form_second">
+            <p>Already have a account?
+            <a href="/login" class="link">Login here</a>
+            </p>
+        </div>
+        </form>
     </div>
-    </form>
-    </div>
+
+    <%-  include("partials/footer.ejs")%>
    
     <script type="text/javascript" src="/js/validations.js" ></script>
 </body>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Product List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/productList.css" />
+  </head>
+  <body>
+    <%- include("./partials/header.ejs")%>
+    <header>
+        <p class="product-list-title"><%- category %></p>
+      </header>
+
+      <div style = "display: block; height: 100vh; ">
+     
+        <div class="item-list">
+           
+
+            
+            <% products.forEach(function(product) { %>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="<%= product.image %>" alt="<%= product.name %>" />
+                </div>
+                <div class = "product-name">
+                    <p><%= product.name %></p>
+                </div>
+               <div class = "product-price">
+                <p>EGP<%= product.price %></p>
+               </div>
+                
+                
+              </div>
+            <% }); %>
+       
+          </div>
+          
+          <div class="pagination">
+            <% if (currentPage > 1) { %>
+              <a class="pagination-link" href="?page=<%= currentPage - 1 %>&category=<%= categoryQuery %>">Previous</a>
+            <% } %>
+            
+            <% for (let i = 1; i <= totalPages; i++) { %>
+              <% if (i === currentPage) { %>
+                <span class="current-page current-page-link"><%= i %></span>
+              <% } else { %>
+                <a class="pagination-link" href="?page=<%= i %>&category=<%= categoryQuery %>"><%= i %></a>
+              <% } %>
+            <% } %>
+          
+            <% if (currentPage < totalPages) { %>
+              <a class="pagination-link" href="?page=<%= currentPage + 1 %>&category=<%= categoryQuery %>">Next</a>
+            <% } %>
+          </div>
+        </div>
+  </body>
+</html>
