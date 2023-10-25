@@ -31,9 +31,6 @@ app.get("/homepage", (req, res) => {
   res.render("homepage.ejs");
 });
 
-app.get("/signup", (req, res) => {
-  res.render("signup.ejs");
-});
 
 const category = "Sample Category";
 const products = [
@@ -61,6 +58,16 @@ app.get("/productList", (req, res) => {
     currentPage: 1,
   });
 });
+
+ app.get('/signup', (req, res) => {
+        res.render('signup.ejs');
+
+        });
+
+app.get('/itempage', (req, res) => {
+          res.render('itempage.ejs');
+    });
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
