@@ -25,6 +25,15 @@ app.get('/itempage', (req, res) => {
           res.render('itempage.ejs');
     });
 
+
+// Admin pages
+app.get('/admin', (req, res) => res.redirect('/admin/login'));
+app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
+app.get('/admin/main', (req, res) => res.render('admin/main.ejs'));
+app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));
+app.get('/admin/users', (req, res) => res.render('admin/users.ejs'));
+app.get('/admin/orders', (req, res) => res.render('admin/orders.ejs'));
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
