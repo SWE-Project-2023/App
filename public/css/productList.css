@@ -1,0 +1,100 @@
+.product-list-title {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+ height:100%;
+  
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.2s;
+  height: 40%;
+  overflow: hidden;
+  width:20%;
+  text-align: left;
+}
+
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+ 
+  height: 70%;
+
+}
+.product-image img{
+ 
+    height: 100%;
+    width: 100%;
+  
+  }
+.product-name{
+    height:15%;
+}
+
+.product-price {
+  font-weight: bold;
+  height: 15%;
+}
+
+.wishlist-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wishlist-button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: 70%;
+    height: 70%;
+  }
+
+  
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+
+  }
+  
+  .pagination a {
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination a.active {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
+  }
+  
