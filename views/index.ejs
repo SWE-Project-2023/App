@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Homepage</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/homepage.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+</head>
+<body>
+	<%- include("./partials/header.ejs") %>
+
+	<div class="splide">
+		<div class="splide__track">
+		<ul class="splide__list">
+			<li class="splide__slide"><img src="/images/banner1.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner2.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner3.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner4.png" alt=""></li>
+			<li class="splide__slide"><img src="/images/banner5.png" alt=""></li>
+		</ul>
+	</div>
+		
+		<!-- Add the progress bar element -->
+		<div class="my-slider-progress">
+		  <div class="my-slider-progress-bar"></div>
+		</div>
+	  </div>
+
+	<div class="categories">
+		<a href="#">
+			<div class="cat" id="cat1">
+				<img src="/images/capsule.png" alt="capsule">
+				<p>Medications</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat2">
+				<img src="/images/baby.png" alt="baby">
+				<p>Mom and Baby</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat3">
+				<img src="/images/hand.png" alt="hand">
+				<p>Skin Care</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat4">
+				<img src="/images/hair.png" alt="blow dryer">
+				<p>Hair Care</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat5">
+				<img src="/images/beauty.png" alt="lip stick">
+				<p>Beauty</p>
+			</div>
+		</a>
+
+		<a href="#">
+			<div class="cat" id="cat6">
+				<img src="images/supplies.png" alt="first aid kit">
+				<p>Medical Supplies</p>
+			</div>
+		</a>
+	</div>
+
+	<div class="featured-products-container">
+		<h1>Our Feautured Products</h1>
+
+		<div class="featured-products">
+			<a href="">
+				<img src="/images/featured1.png" alt="product">
+				<p>Super Capsule</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured2.png" alt="product">
+				<p>Super Syringe</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured3.png" alt="product">
+				<p>Super Cannula</p>
+			</a>
+
+			<a href="">
+				<img src="/images/featured4.png" alt="product">
+				<p>Super Drugs</p>
+			</a>
+		</div>
+	</div>
+
+	<%- include("./partials/footer.ejs") %>
+
+	 <!-- --------------------- Scripts ---------------------  -->
+
+	<script>
+		var splide = new Splide( '.splide' );
+		var bar = splide.root.querySelector('.my-slider-progress-bar');
+		
+		// Updates the bar width whenever the carousel moves:
+		splide.on( 'mounted move', function () {
+			var end  = splide.Components.Controller.getEnd() + 1;
+			var rate = Math.min( ( splide.index + 1 ) / end, 1 );
+			bar.style.width = String( 100 * rate ) + '%';
+		} );
+		
+		splide.mount();
+	</script>
+
+</body>
+</html>
