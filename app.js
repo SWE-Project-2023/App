@@ -22,7 +22,7 @@ app.set('views', path.join(__dirname, 'views')); // Update the path accordingly
 
 app.listen(port, '127.0.0.1', () => {
   console.log(`Server is running on http://127.0.0.1:${port}`);
-
+});
 
 const connection = mysql.createPool({
   host: "localhost",
