@@ -1,10 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-router.get('/itempage', function(req, res, next) {
-  res.render('itempage');
+router.get("/itempage", function (req, res, next) {
+  res.render("itempage");
 });
-
 
 const category = "Sample Category";
 const products = [
@@ -25,15 +24,21 @@ const products = [
 ];
 
 router.get("/productlist", (req, res) => {
-  res.render("productList.ejs", {
-    category,
-    products,
-    totalPages: 1,
-    currentPage: 1,
-  });
+  res.render(
+    "productList.ejs",
+    {
+      category,
+      products,
+      totalPages: 1,
+      currentPage: 1,
+    },
+    { user: req.session.user === undefined ? "" : req.session.user }
+  );
 });
-router.get('/cart',function(req,res,next){
-res.render('cart')
+router.get("/cart", function (req, res, next) {
+  res.render("cart", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
 });
 
 module.exports = router;

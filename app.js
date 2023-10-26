@@ -53,22 +53,17 @@ app.use(express.json());
 
 // Parse URL-encoded requests
 app.use(express.urlencoded({ extended: true }));
-app.get('/admin', (req, res) => res.redirect('/admin/dashboard'));
-app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
-app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard.ejs'));
-app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));
-app.get('/admin/users', (req, res) => res.render('admin/users.ejs'));
-app.get('/admin/orders', (req, res) => res.render('admin/orders.ejs'));
+
 // Import route handlers
 const indexRouter = require("./routes/index.js");
 const productRouter = require("./routes/products.js");
 const authRouter = require("./routes/auth.js");
-
+const adminRouter = require("./routes/admin.js");
 // Register route handlers
 app.use("/", indexRouter);
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
-
+app.use("/admin", adminRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();
