@@ -47,37 +47,18 @@ connection.getConnection((err) => {
   console.log("Connected to MySQL as ID " + connection);
 });
 
-const category = "Sample Category";
-const products = [
-  {
-    name: "Sample Product 1",
-    price: 10.0,
-    description: "This is a sample product.",
-    image: "/images/banner1.png",
-  },
-  {
-    name: "Sample Product 2",
-    price: 20.0,
-    description:
-      "Another sample product description sadsa das dasd asd asd sad sa das sda.",
-    image: "/images/featured2.png",
-  },
-  // Add more sample products here
-];
 
-app.get("/productList", (req, res) => {
-  res.render("productList.ejs", {
-    category,
-    products,
-    totalPages: 1,
-    currentPage: 1,
-  });
-});
 // Parse JSON requests
 app.use(express.json());
 
 // Parse URL-encoded requests
 app.use(express.urlencoded({ extended: true }));
+app.get('/admin', (req, res) => res.redirect('/admin/dashboard'));
+app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
+app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard.ejs'));
+app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));
+app.get('/admin/users', (req, res) => res.render('admin/users.ejs'));
+app.get('/admin/orders', (req, res) => res.render('admin/orders.ejs'));
 // Import route handlers
 const indexRouter = require("./routes/index.js");
 const productRouter = require("./routes/products.js");
@@ -102,12 +83,7 @@ app.use((req, res) => {
 
 
 // Admin pages
-app.get('/admin', (req, res) => res.redirect('/admin/dashboard'));
-app.get('/admin/login', (req, res) => res.render('admin/login.ejs'));
-app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard.ejs'));
-app.get('/admin/products', (req, res) => res.render('admin/products.ejs'));
-app.get('/admin/users', (req, res) => res.render('admin/users.ejs'));
-app.get('/admin/orders', (req, res) => res.render('admin/orders.ejs'));
+
 
 // Start the server
 
