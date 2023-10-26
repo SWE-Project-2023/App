@@ -12,7 +12,7 @@
 <body>
     <%- include("partials/header.ejs")%>
     <div class="signupcontainer">
-        <form action="" method="post" class="form-main" id="form-main">
+        <form action="/auth/signup" method="post" class="form-main" id="form-main">
         <header class="form_header">
             <h1 class="form_title1">Create my account</h1>
             <p class="form_title2">Please fill in the information below:</p>
@@ -38,8 +38,8 @@
             <span class="error-message" id="password-error"></span>
         </div>
         <div class="form-input">
-            <!-- <label for="confrimpassword">Confrim Password</label> -->
-            <input type="password" name="confrimpassword"  class="input-field" id="confirmpassword"placeholder="Confirm Password">
+            <!-- <label for="conirmpassword">Confrim Password</label> -->
+            <input type="password" name="confirmpassword"  class="input-field" id="confirmPassword"placeholder="Confirm Password">
             <span class="error-message" id="confirmpassword-error"></span>
         </div>
         <button type="submit" class="submit-button">Create My Account </button>
