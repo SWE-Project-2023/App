@@ -24,16 +24,22 @@
                 </div>
             </div>
             <div class="inner_navII">
-                <a href="/signup"><i class='bx bx-user' ></i></a>
+                <% if (user==="") { %>
+
+                <a href="/auth/signup"><i class='bx bx-user' ></i></a>
+                <% } else { %>
+                    <a href="/logout"><i class='bx bx-exit' ></i></a>
+                <% } %>
                 <a href=""><i class='bx bx-heart'></i></a>
-                <a href=""><i class='bx bx-cart-alt' ></i></a>
+
+                <a href="/product/cart"><i class='bx bx-cart-alt' ></i></a>
 
             </div>
         </div>
         </div>
         <div class="heeader">
             <i class='bx bx-menu navOpenBtn' ></i>
-            <a href="#" class="logo">Pharmacy name</a>
+            <a href="/" class="logo">Pharmacy name</a>
             <div class="ccon">
                 <div class="searchcon">
                     <div class="icon">
