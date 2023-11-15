@@ -5,10 +5,10 @@ const mysql = require("mysql2");
 
 signupController.signup = async (req, res) => {
 	console.log("Signup request received");
-	const { firstname, lastname, email, password, confirmpassword } = req.body;
+	const { firstname, lastname, email, password, confirmpassword, address } = req.body;
 
 	// Perform data validation here
-	if (!firstname || !lastname || !email || !password || !confirmpassword) {
+	if (!firstname || !lastname || !email || !password || !confirmpassword || !address) {
 	  return res.status(400).send('All fields are required');
 	}
 
@@ -40,8 +40,8 @@ signupController.signup = async (req, res) => {
 	  });
 
 	const hashedPassword = await bcrypt.hash(password, 10);
-	const query = 'INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)';
-	connection.query(query, [firstname, lastname, email, hashedPassword], (err, results) => {
+	const query = 'INSERT INTO user (user_fname, user_Lname, email, user_password, user_address) VALUES (?, ?, ?, ?, ?)';
+	connection.query(query, [firstname, lastname, email, hashedPassword, address], (err, results) => {
 	  if (err) {
 		console.error(err);
 	  }
