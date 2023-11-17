@@ -1,8 +1,8 @@
 // Import required modules
-const express = require("express");
-const session = require("express-session");
-const path = require("path");
-const mysql = require("mysql2");
+import express from "express";
+import session from "express-session";
+import path from "path";
+import mysql from "mysql2";
 const port = 3010; // Specify the port you want to use
 
 // Configure session middleware
@@ -55,10 +55,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import route handlers
-const indexRouter = require("./routes/index.js");
-const productRouter = require("./routes/products.js");
-const authRouter = require("./routes/auth.js");
-const adminRouter = require("./routes/admin.js");
+
+
+import indexRouter from "./routes/index.js";
+import productRouter from "./routes/products.js";
+import authRouter from "./routes/auth.js";
+import adminRouter from "./routes/admin.js";
 // Register route handlers
 app.use("/", indexRouter);
 app.use("/product", productRouter);
@@ -84,4 +86,4 @@ app.use((req, res) => {
 
 
 // Export the app
-module.exports = app;
+export default app;
