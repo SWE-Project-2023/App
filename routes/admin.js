@@ -1,7 +1,16 @@
 // Require
-const express = require("express");
 const router = express.Router();
 
+import express from "express";
+import multer from "multer";
+import fs from "fs";
+const storage = multer.diskStorage({
+  destination: "public/images",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Use the original filename
+  },
+});
+const upload = multer({ storage });
 router.get("/", function (req, res, next) {
   {
     res.render("admin/dashboard", {user: req.session.user===undefined?"":req.session.user});
@@ -33,4 +42,6 @@ router.get("/orders", function (req, res, next) {
   }
 });
 
-module.exports = router;
+//export default 
+
+export default router;
