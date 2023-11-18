@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
   `admin_email` varchar(50) NOT NULL,
   `admin_fname` varchar(20) NOT NULL,
   `admin_lname` varchar(20) NOT NULL,
-  `admin_password` varchar(50) NOT NULL
+  `admin_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
