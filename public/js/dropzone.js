@@ -5,7 +5,7 @@ $(document).ready(function async() {
   let myDropzone = new Dropzone("#my-dropzone", {
     // Configuration options for Dropzone
     paramName: "file", // The name that will be used to transfer the file
-    url: "/adminproduct/upload", // The URL where the file should be uploaded
+    url: "/admin/upload", // The URL where the file should be uploaded
     maxFilesize: 5, // Maximum file size in megabytes
     acceptedFiles: ".jpg,.png,.gif,.webp,.jpeg", // Allowed file types
     autoProcessQueue: true,
@@ -50,7 +50,6 @@ $(document).ready(function async() {
         let errorText = document.createElement("p");
         errorText.innerHTML = "Upload Error: " + errorMessage;
         errorText.style.color = "red"; // Adjust the style as needed
-        previewElement.appendChild(errorText);
       });
 
       // Attach event listener to the remove button
@@ -63,7 +62,7 @@ $(document).ready(function async() {
 
           // Make an AJAX request to delete the file from the server
           $.ajax({
-            url: "/adminproduct/delete",
+            url: "/admin/delete",
             type: "POST",
             data: { filename: filename },
             success: function (response) {
@@ -133,7 +132,7 @@ $(document).ready(function async() {
 
         $.ajax({
           type: "POST",
-          url: "/adminproduct/furniture",
+          url: "/admin/addItem",
           data: formData,
           processData: false,
           contentType: false,
@@ -163,7 +162,7 @@ $(document).ready(function () {
   let myDropzone = new Dropzone("#my-dropzoneedit", {
     // Configuration options for Dropzone
     paramName: "file", // The name that will be used to transfer the file
-    url: "/adminproduct/upload", // The URL where the file should be uploaded
+    url: "/admin/upload", // The URL where the file should be uploaded
     maxFilesize: 5, // Maximum file size in megabytes
     acceptedFiles: ".jpg,.png,.gif,.webp,jpeg", // Allowed file types
     autoProcessQueue: true,
@@ -228,7 +227,7 @@ $(document).ready(function () {
 
           // Make an AJAX request to delete the file from the server
           $.ajax({
-            url: "/adminproduct/delete",
+            url: "/admin/delete",
             type: "POST",
             data: { filename: filename },
             success: function (response) {
@@ -261,7 +260,7 @@ $(document).ready(function () {
         let imageName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
         // Make an AJAX request to delete the image from the server
         $.ajax({
-          url: "/adminproduct/delete",
+          url: "/admin/delete",
           type: "POST",
           data: { filename: imageName },
           success: function (response) {
@@ -322,7 +321,7 @@ $(document).ready(function () {
         formData1.append("id", productID);
         $.ajax({
           type: "POST",
-          url: "/adminproduct/edit",
+          url: "/admin/edit",
           data: formData1,
           processData: false,
           contentType: false,
