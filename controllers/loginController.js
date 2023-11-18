@@ -7,40 +7,6 @@ import bcrypt from "bcryptjs";
 import mysql from "mysql2";
 
 
-
-// loginController.login = async (req, res) => {
-//   console.log("Login request received");
-
-//   const { email, pass } = req.body;
-
-//   try {
-
-//     if (!result) {
-//       // User not found, display error message
-//       return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
-//     }
-//     // Comparing the entered password with the hashed one.
-//     if (!result.verified) {
-//       return res.render("login", { errors: "Sorry, This Email is not Verified. Please check your email.", user: req.session.user === undefined ? "" : req.session.user });
-//     }
-//     const isPasValid = await bcrypt.compare(pass, result.password);
-
-//     if (!isPasValid) {
-//       // Password does not match, display error message
-//       return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
-//     }
-
-//     req.session.user = result;
-//     console.log(req.session.user);
-
-//     // Password matches, render the account page with user data
-//     return res.redirect('/auth/account');
-//   } catch (error) {
-//     console.error("Error during login:", error);
-//     return res.status(500).json({ error: "Internal server error" });
-//   }
-// }
-
 loginController.login = async (req, res) => {
 	console.log("Login request received");
 	const { email, password } = req.body;
@@ -76,15 +42,20 @@ loginController.login = async (req, res) => {
 		return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
 	  }
 
-	  const isPasValid = await bcrypt.compare(password, results.password);
-	  if (!isPasValid) {
+	  
 
+	  const isPasValid = await bcrypt.compare(password, results[0].user_password);
+	  if (!isPasValid) {
+		
+		console.log("reeee: " + isPasValid + "Password: " + password + "Hashed Password: " + results[0].user_password);
 		// Password does not match, display error message
 		return res.render("login", { errors: "Invalid email or password", user: req.session.user === undefined ? "" : req.session.user });
 	  }
+	  console.log("weeeeee: " + isPasValid);
+	  req.session.user = results[0];
   
 	 // Password matches, render the account page with user data
-	 return res.redirect('/homepage');
+	 return res.render('index',{user: req.session.user===undefined?"":req.session.user});
 	});
   };
 

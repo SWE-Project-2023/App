@@ -20,7 +20,11 @@
                 </div>
                 <div class="emailcont">
                     <i class='bx bx-envelope' ></i>
+                    <% if (user==="") { %>
                     <p>email@gmail.com</p>
+                    <% } else { %>
+                        <p><%=user.email%></p>
+                    <% } %>
                 </div>
             </div>
             <div class="inner_navII">

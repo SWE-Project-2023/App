@@ -39,7 +39,9 @@ signupController.signup = async (req, res) => {
 		console.log("Connected to MySQL as ID " + connection);
 	  });
 
-	const hashedPassword = await bcrypt.hash(password, 10);
+	  const saltRounds=bcrypt.genSaltSync(10);
+	  
+	const hashedPassword = await bcrypt.hash(password, saltRounds);
 	const query = 'INSERT INTO user (user_fname, user_Lname, email, user_password, user_address) VALUES (?, ?, ?, ?, ?)';
 	connection.query(query, [firstname, lastname, email, hashedPassword, address], (err, results) => {
 	  if (err) {
