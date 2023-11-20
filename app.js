@@ -59,11 +59,13 @@ const indexRouter = require("./routes/index.js");
 const productRouter = require("./routes/products.js");
 const authRouter = require("./routes/auth.js");
 const adminRouter = require("./routes/admin.js");
+const checkoutRouter = require("./routes/checkout.js");
 // Register route handlers
 app.use("/", indexRouter);
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
+app.use("/checkout", checkoutRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();

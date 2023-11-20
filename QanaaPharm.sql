@@ -111,7 +111,7 @@ CREATE TABLE `orders` (
   `item_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_quantity` int(3) NOT NULL,
-  `order_date` date NOT NULL,
+  `order_date` date NOT NULL DEFAULT current_timestamp(),
   `order_status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
