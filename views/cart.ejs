@@ -11,7 +11,7 @@
 </head>
 <body>
     <%-include("./partials/header.ejs")%>
-    <div class="cartcontainer">
+    <div class="container">
         <header class="cartheader">
             <h1>My Bag</h1>
         </header>
@@ -19,11 +19,11 @@
     <div class="cart-wrapper">
         <div class="cart-wrapper__inner">
             <div class="insidewrapper">
-                <div class="icontainer">
-                    <div class="Card">
+                <div class="container c_cart">
+                    <div class="card">
                         <div class="table-wrapper">
                             <table>
-                                <thead>
+                                <thead class="hidden-phone">
                                     <tr>
                                         <th>ITEM</th>
                                         <th class="table_center">QTY</th>
@@ -33,28 +33,40 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>
+                                        <td class="td_upper">
                                             <div class="prodductinfo">
                                                 <div class="item_image">
                                                     <div class="imgcont">
-                                                        <img src="../images/panadol-advance-24-tablets-285579_1024x.webp" alt="">
+                                                        <img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="item_title">
-                                                    <a href="">Panadol Advance - 24 Tablets</a>
+                                                    <a href="" class="inner_title">Panadol Advance - 24 Tablets</a>
                                                     <div class="item_price">
                                                         <span class="prices">EGP21.50</span>
+                                                    </div>
+                                                    <div class="line-item hidden-table">
+                                                        <div class="quantity_range">
+                                                            <button type="button"  onclick="decrement()" class="quan_button">
+                                                                <i class="fa-solid fa-minus"></i>
+                                                            </button>
+                                                            <input type="text" class="quantityvalue"  value="1">
+                                                            <button type="button"  onclick="increment()" class="quan_button">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <a href="" class="quantity_remove">Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="td_center">
+                                        <td class="td_center hidden-phone">
                                             <div class="Qty_div">
                                                 <div class="quantity_range">
                                                     <button type="button"  onclick="decrement()" class="quan_button">
                                                         <i class="fa-solid fa-minus"></i>
                                                     </button>
-                                                    <input type="text" class="quantityvalue" id="quantity_value" value="1">
+                                                    <input type="text" class="quantityvalue"  value="1">
                                                     <button type="button"  onclick="increment()" class="quan_button">
                                                         <i class="fa-solid fa-plus"></i>
                                                     </button>
@@ -64,47 +76,76 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td class="td_right">
+                                        <td class="td_right hidden-phone">
                                             <span>EGP 21.50</span>
                                         </td>
                                     </tr>
-                                    <tr></tr>
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
-            
-                </div>
-                <form action="/cart" class="carrtform">
-                    <div class="cart_scroller">
-                        <div class="Card">
-                            <div class="innercard">
-                                <div class="upperpart">
-                                    <div class="innerpart">
-                                        <div class="coupon">
-                                            <input type="text" placeholder="Coupon Code">
-                                            <div class="buttoninput">
-                                                <div class="inputbtn">Apply</div>
+                    <form action="/cart" class="cart-recap">
+                        <div class="cart_scroller">
+                            <div class="card">
+                                <div class="card__Section">
+                                    <div class="upperpart">
+                                        <div class="innerpart">
+                                            <div class="coupon">
+                                                <input type="text" placeholder="Coupon Code">
+                                                <div class="buttoninput">
+                                                    <div class="inputbtn">Apply</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="innerpart">
+                                            <div class="subtotal">
+                                                <span class="toleft">Subtotal</span>
+                                                <span class="toright">EGP 52.50</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="innerpart">
-                                        <div class="subtotal">
-                                            <span class="toleft">Subtotal</span>
-                                            <span class="toright">EGP 52.50</span>
-                                        </div>
-                                    </div>
+                                    <div class="notices"><p>Taxes and shipping calculated at checkout</p></div>
+                                    <button type="submit" class="butn">SECURE CHECKOUT</button>
                                 </div>
-                                <div class="notices"><p>Taxes and shipping calculated at checkout</p></div>
-                                <button type="submit" class="butn">SECURE CHECKOUT</button>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                
             </div>
             
         </div>
     </div>
+    <script>
+        function increment() {
+            const quantityInputs = document.getElementsByClassName('quantityvalue');
+            
+            // Loop through each element with the class name 'quantityvalue'
+            for (let i = 0; i < quantityInputs.length; i++) {
+                let currentValue = parseInt(quantityInputs[i].value, 10);
+                
+                if (!isNaN(currentValue)) {
+                    currentValue++;
+                    quantityInputs[i].value = currentValue;
+                }
+            }
+        }
+        
+        function decrement() {
+            const quantityInputs = document.getElementsByClassName('quantityvalue');
+            
+            // Loop through each element with the class name 'quantityvalue'
+            for (let i = 0; i < quantityInputs.length; i++) {
+                let currentValue = parseInt(quantityInputs[i].value, 10);
+                
+                if (!isNaN(currentValue) && currentValue > 1) {
+                    currentValue--;
+                    quantityInputs[i].value = currentValue;
+                }
+            }
+        }
+        </script>
+        
 </body>
 </html>

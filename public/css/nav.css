@@ -84,10 +84,6 @@ a{
     display: flex;
     align-items: center;
   }
-  a {
-    color: #3F3F95;
-    text-decoration: none;
-  }
   .heeader .logo {
     font-size: 22px;
     font-weight: 500;

@@ -38,6 +38,7 @@ function increment() {
         currentValue++;
         quantityInput.value = currentValue;
     }
+    console.log("hhh")
 }
 
 function decrement() {
@@ -48,4 +49,5 @@ function decrement() {
         currentValue--;
         quantityInput.value = currentValue;
     }
+    console.log("heh")
 }
