@@ -12,23 +12,30 @@
 </head>
 <body>
 	<%- include('partials/header') %>
+	
 
-	<div class="splide">
-		<div class="splide__track">
-		<ul class="splide__list">
-			<li class="splide__slide"><img src="/images/banner1.png" alt=""></li>
-			<li class="splide__slide"><img src="/images/banner2.png" alt=""></li>
-			<li class="splide__slide"><img src="/images/banner3.png" alt=""></li>
-			<li class="splide__slide"><img src="/images/banner4.png" alt=""></li>
-			<li class="splide__slide"><img src="/images/banner5.png" alt=""></li>
-		</ul>
-	</div>
+
+
+		<div class="containerr">
+			<div class="slider-container">
+				<div class="slider">
+					
+					<div class="slide"><img src="/images/591dff7e-205e-40fe-b24f-e6533282254e.avif" alt="Image 2"></div>
+					<div class="slide"><img src="/images/f925e78e-43c4-44a2-91b3-b26e9d5f89ca.avif" ></div>
+					<div class="slide"><img src="/images/image 1.png" alt="Image 4"></div>
+				</div>
+				<div class="slider-btns"></div>
+			</div>
+			
 		
-		<!-- Add the progress bar element -->
-		<div class="my-slider-progress">
-		  <div class="my-slider-progress-bar"></div>
+		
 		</div>
-	  </div>
+
+
+
+
+
+
 
 	<div class="categories">
 		<a href="#">
@@ -105,17 +112,81 @@
 	 <!-- --------------------- Scripts ---------------------  -->
 
 	<script>
-		var splide = new Splide( '.splide' );
-		var bar = splide.root.querySelector('.my-slider-progress-bar');
-		
-		// Updates the bar width whenever the carousel moves:
-		splide.on( 'mounted move', function () {
-			var end  = splide.Components.Controller.getEnd() + 1;
-			var rate = Math.min( ( splide.index + 1 ) / end, 1 );
-			bar.style.width = String( 100 * rate ) + '%';
-		} );
-		
-		splide.mount();
+
+
+		const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+var currentIndex = 0;
+
+// Ensure the correct height is set on page load
+window.addEventListener('load', () => {
+    adjustContainerHeight();
+});
+ // Add a window resize event listener to update image height
+ window.addEventListener('resize', () => {
+    adjustContainerHeight();
+});
+
+// Define nextSlide function
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlider();
+}
+
+// Create buttons for each slide
+const btnContainer = document.querySelector('.slider-btns');
+slides.forEach((slide, index) => {
+    const button = document.createElement('span');
+    button.className = 'slider-btn';
+    button.onclick = () => goToSlide(index);
+    btnContainer.appendChild(button);
+});
+
+function goToSlide(index) {
+    currentIndex = index;
+    updateSlider();
+}
+
+function updateSlider() {
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    // Highlight the active button
+    const buttons = document.querySelectorAll('.slider-btn');
+    buttons.forEach((button, index) => {
+        button.classList.toggle('active', index === currentIndex);
+    });
+}
+
+var intervalId;
+
+function startAutoPlay() {
+    intervalId = setInterval(nextSlide, 3000);
+}
+
+function stopAutoPlay() {
+    clearInterval(intervalId);
+}
+
+startAutoPlay(); // Start auto-play by default
+
+// Stop auto-play on mouseover
+slider.addEventListener('mouseenter', stopAutoPlay);
+
+// Resume auto-play on mouseleave
+slider.addEventListener('mouseleave', startAutoPlay);
+
+// Adjust container height based on the current slide's image
+function adjustContainerHeight() {
+    const currentSlide = slides[currentIndex];
+    const currentImage = currentSlide.querySelector('img');
+    if (currentImage) {
+        const imgHeight = currentImage.height;
+        document.querySelector('.slider-container').style.height = imgHeight + 'px';
+    }
+}
+
+// Initial adjustment and on slide change
+adjustContainerHeight();
+slider.addEventListener('transitionend', adjustContainerHeight);
 	</script>
 
 </body>
