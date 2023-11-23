@@ -90,6 +90,7 @@ $(document).ready(function async() {
       });
       // Function to validate the uploaded images
       function validateImages() {
+        console.log("validateImages() called");
         if (uploadedImagePaths.length === 0) {
           return false;
         }
@@ -118,21 +119,24 @@ $(document).ready(function async() {
           !isDescriptionValid ||
           !isImagesValid
         ) {
+          console.log("Form is invalid");
           return false;
         }
 
         let form = $(this);
-        let url = form.attr("action");
+        
         let formData = new FormData(form[0]);
         // Append the uploadedImagePaths to the form data
         formData.append(
           "uploadedImagePaths",
           JSON.stringify(uploadedImagePaths)
         );
-
+      
+       
+        console.log("formData",formData);
         $.ajax({
           type: "POST",
-          url: "/admin/addItem",
+          url: "/admin/createItem",
           data: formData,
           processData: false,
           contentType: false,
@@ -372,6 +376,7 @@ function validateProductName() {
 }
 
 function validateBrand() {
+  console.log("validateBrand() called");
   let field = $("#brand").val().trim();
   let brandError = $("#brand-error");
   let brandInput = $("#brand");
@@ -387,6 +392,7 @@ function validateBrand() {
 }
 
 function validateCategory() {
+  console.log("validateCategory() called");
   let field = $("#category").val().trim();
   let categoryError = $("#category-error");
   let categoryInput = $("#category");
@@ -402,6 +408,7 @@ function validateCategory() {
 }
 
 function validateQuantity() {
+  console.log("validateQuantity() called");
   let field = $("#quantity").val();
   let quantityError = $("#quantity-error");
   let quantityInput = $("#quantity");
@@ -423,6 +430,7 @@ function validateQuantity() {
 }
 
 function validatePrice() {
+  console.log("validatePrice() called");
   let field = $("#price").val();
   let priceError = $("#price-error");
   let priceInput = $("#price");
@@ -442,6 +450,7 @@ function validatePrice() {
 }
 
 function validateDescription() {
+  console.log("validateDescription() called");
   let field = $("#description").val().trim();
   let descriptionError = $("#description-error");
   let descriptionInput = $("#description");

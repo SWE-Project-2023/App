@@ -1,15 +1,16 @@
 const itemsController = {};
+import mysql from "mysql2/promise"; // Import mysql2 promise-based library
 
 itemsController.createItem = async (req, res) => {
   // Extract data from the request body
+  console.log( "req.body",req.body);
   const {
-    productname,
+    productName,
     category,
-    color,
+    brand,
     price,
+    description,
     quantity,
-    comments,
-    measurements,
   } = req.body;
 
   const uploadedImagePaths = JSON.parse(req.body.uploadedImagePaths);
@@ -17,67 +18,112 @@ itemsController.createItem = async (req, res) => {
   // Backend validation
   let errors = {};
 
-  if (!productname || productname.trim() === "") {
-    errors.productname = "Please enter the product name";
-  }
-
-  if (!color || color.trim() === "") {
-    errors.color = "Please enter the available color";
+  if (!productName || productName.trim() === "") {
+    errors.productName = "Please enter the product name";
   }
 
   if (!price) {
     errors.price = "Please enter the price";
   } else if (!/^\d+(\.\d{1,2})?$/.test(price)) {
-    errors.price = "Price must be a number with maximum two decimal places";
+    errors.price = "Price must be a number with a maximum of two decimal places";
   }
 
-  if (!quantity) {
-    errors.quantity = "Please enter the quantity";
-  } else if (!/^\d+$/.test(quantity)) {
+  if (!brand) {
+    errors.brand = "Please enter the brand";
+  }
+
+  if (!quantity || !/^\d+$/.test(quantity)) {
     errors.quantity = "Quantity must be a positive whole number";
   }
-  if (!measurements || measurements.trim() === "") {
-    errors.measurements = "Please enter the measurements name";
+
+  if (!description) {
+    errors.description = "Please enter the description";
   }
+
   if (Object.keys(errors).length > 0) {
     // Return validation errors to the client
+    console.log("Validation errors:", errors);
     return res.render("addeditproduct", { errors, product: "add" });
   }
 
+  // Create a MySQL connection pool
+  const connection = await mysql.createPool({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "qanaa",
+    port: 3306,
+  });
+
   try {
     // Check if the product already exists
-    const existingProduct = await Furniture.findOne({
-      productName: productname,
-    });
-    if (existingProduct) {
-      errors.productname = "Product already exists";
-      return res.render("addeditproduct", { errors, product: "add" });
+    const existingProductQuery = 'SELECT * FROM item WHERE item_title = ?';
+    console.log("Executing query:", existingProductQuery);
+    console.log("Query parameters:", [productName]);
+
+    const [rows, fields] = await connection.execute(existingProductQuery, [productName]);
+
+  if (!rows) {
+    console.error("Error executing query:", existingProductQuery);
+    console.error("Error details:", fields);
+    throw new Error("Error executing query");
+  }
+
+  else if (rows.length > 0) {
+    // Product with the same title already exists
+    errors.productName = "Product with this title already exists";
+    console.log("Product with the same title already exists");
+    return res.render("addeditproduct", { errors, product: "add" });
+  }
+    // Insert into the 'item' table
+    const insertItemQuery = `
+      INSERT INTO item (item_title, item_cat,item_brand, item_details, item_quantity, item_price)
+      VALUES (?,?, ?, ?, ?, ?)
+    `;
+    console.log("Executing query:", insertItemQuery);
+    console.log("Query parameters:", [
+      productName,
+      category,
+      description,
+      quantity,
+      price,
+      brand,
+    ]);
+
+    const [insertItemResult] = await connection.execute(insertItemQuery, [
+      productName,
+      category,
+      description,
+      quantity,
+      price,
+      brand,
+    ]);
+
+    const itemId = insertItemResult.insertId;
+    console.log("Item inserted with ID:", itemId);
+
+    // Insert into the 'item_images' table
+    const insertImageQuery = `
+      INSERT INTO item_images (item_id, image_path)
+      VALUES (?, ?)
+    `;
+    console.log("Executing query for image insertion:", insertImageQuery);
+    
+    for (const imagePath of uploadedImagePaths) {
+      console.log("Query parameters:", [itemId, imagePath]);
+      await connection.execute(insertImageQuery, [itemId, imagePath]);
     }
 
-    // Create a new furniture object
-    const newFurniture = new Furniture({
-      productName: productname,
-      category: category,
-      color: color,
-      price: parseFloat(price),
-      quantity: parseInt(quantity),
-      comments: comments,
-      photo: uploadedImagePaths,
-      size: measurements,
-      sold: 0,
-      offer: 0,
-    
-    });
-
-    // Save the new furniture item to the database
-    await newFurniture.save();
-    console.log("New furniture item:", newFurniture);
+    console.log("Images inserted successfully");
 
     return res.redirect("/admin/products");
   } catch (error) {
-    console.error("Error saving furniture item:", error);
+    console.error("Error saving item:", error);
     errors.general = "Failed to add item";
     res.render("addeditproduct", { errors, product: "add" });
+  } finally {
+    // Release the connection
+    connection.end();
   }
 };
 
@@ -90,7 +136,4 @@ itemsController.uploadImage = async (req, res) => {
   return res.status(200).json({ message: "File uploaded successfully" });
 };
 
-
-
-// ...
 export default itemsController;
