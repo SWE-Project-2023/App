@@ -80,7 +80,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form id = "product-form" class="product-form">
+        <form id = "product-form" action= "/admin/createItem" method="post" class="product-form" enctype="multipart/form-data">
           <div class="mb-3">
             <span><label for="productName" class="form-label">Product Name</label><div id="name-error" style="color:red"></div></span>
             <input
@@ -88,6 +88,7 @@
               class="form-control"
               id="productName"
               placeholder="Enter product name"
+              name = "productName"
             />
           </div>
           <div class="mb-3">
@@ -97,6 +98,7 @@
               class="form-control"
               id="brand"
               placeholder="Enter brand name"
+              name = "brand"
             />
           </div>
           <div class="mb-3">
@@ -106,6 +108,7 @@
               class="form-control"
               id="category"
               placeholder="Enter category"
+              name = "category"
             />
           </div>
           <div class="mb-3">
@@ -115,6 +118,7 @@
               class="form-control"
               id="quantity"
               placeholder="Enter quantity"
+              name = "quantity"
             />
           </div>
           <div class="mb-3">
@@ -124,6 +128,7 @@
               class="form-control"
               id="price"
               placeholder="Enter price"
+              name = "price"
             />
           </div>
           <div class="mb-3">
@@ -134,6 +139,7 @@
               id="description"
               rows="3"
               placeholder="Enter description"
+              name = "description"
             ></textarea>
           </div>
           <% if (products && products != "add") { %>
