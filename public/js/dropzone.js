@@ -28,7 +28,7 @@ $(document).ready(function async() {
             '<img src="' +
             e.target.result +
             '" style="max-width: 100px;" />' +
-            '<button type = "button" class="remove-btn">Remove</button>';
+            '<button type = "button" class="btn btn-danger remove-btn">Remove</button>';
           previewElement.appendChild(thumbnail);
         };
         reader.readAsDataURL(file);
@@ -37,8 +37,8 @@ $(document).ready(function async() {
       this.on("success", function (file, response) {
         console.log("File uploaded successfully: " + file.name);
         console.log("Server response: " + response);
-        let imagePath = "public/images/" + file.name;
-        uploadedImagePaths.push(imagePath);
+
+        uploadedImagePaths.push(file.name);
         console.log(uploadedImagePaths[0]);
         // Update the preview element based on the server's response
       });
@@ -124,16 +124,15 @@ $(document).ready(function async() {
         }
 
         let form = $(this);
-        
+
         let formData = new FormData(form[0]);
         // Append the uploadedImagePaths to the form data
         formData.append(
           "uploadedImagePaths",
           JSON.stringify(uploadedImagePaths)
         );
-      
-       
-        console.log("formData",formData);
+
+        console.log("formData", formData);
         $.ajax({
           type: "POST",
           url: "/admin/createItem",
@@ -148,7 +147,7 @@ $(document).ready(function async() {
             document.documentElement.innerHTML = response;
 
             // Optionally, you can update the browser's history so the user can use the back button
-            history.pushState({}, "", "/product");
+            location.reload();
           },
           error: function (xhr, status, error) {
             console.log("Error submitting form");
@@ -196,7 +195,7 @@ $(document).ready(function () {
             '<img src="' +
             e.target.result +
             '" style="max-width: 100px;" />' +
-            '<button type = "button" class="remove-button">Remove</button>';
+            '<button type = "button" class="btn btn-danger remove-button">Remove</button>';
           previewElement.appendChild(thumbnail);
         };
         reader.readAsDataURL(file);
@@ -205,7 +204,6 @@ $(document).ready(function () {
       this.on("success", function (file, response) {
         console.log("File uploaded successfully: " + file.name);
         console.log("Server response: " + response);
-        let imagePath = "public/images/" + file.name;
         uploadedImagePaths.push(imagePath);
         console.log(uploadedImagePaths[0]);
         // Update the preview element based on the server's response
@@ -257,6 +255,7 @@ $(document).ready(function () {
           });
         }
       });
+
       // Attach event listener to the remove button for previous images
       $("#previous-images").on("click", ".remove-btn", function () {
         let listItem = $(this).closest("li");
@@ -293,60 +292,109 @@ $(document).ready(function () {
         });
       });
       // Submit the form with AJAX
-      $("#formedit").submit(function (event) {
+      $("#edit-product-form").submit(function (event) {
         event.preventDefault();
-        let isProductNameValid = validateProductName();
-        let isColorValid = validateColor();
-        let isPriceValid = validatePrice();
-        let isQuantityValid = validateQuantity();
-        let isMeasurementsValid = validateMeasurements();
+
+        // Validate form fields
+        let isEditProductNameValid = validateEditProductName();
+        let isEditBrandValid = validateEditBrand();
+        let isEditCategoryValid = validateEditCategory();
+        let isEditQuantityValid = validateEditQuantity();
+        let isEditPriceValid = validateEditPrice();
+        let isEditDescriptionValid = validateEditDescription();
+        let isEditImagesValid = validateEditImages();
+
         if (
-          !isProductNameValid ||
-          !isColorValid ||
-          !isPriceValid ||
-          !isQuantityValid ||
-          !isMeasurementsValid
+          !isEditProductNameValid ||
+          !isEditBrandValid ||
+          !isEditCategoryValid ||
+          !isEditQuantityValid ||
+          !isEditPriceValid ||
+          !isEditDescriptionValid ||
+          !isEditImagesValid
         ) {
+          console.log("Form is invalid");
           return false;
         }
 
-        let form = $(this);
-        let url = form.attr("action");
-        let formData1 = new FormData(form[0]);
-        for (let i = 0; i < uploadedImagePaths.length; i++) {
-          console.log(uploadedImagePaths[i]);
-        }
-        let productID = $("#my-dropzoneedit").data("product-id");
+        // Create FormData object
+        let editForm = $(this);
+        let editFormData = new FormData(editForm[0]);
+
         // Append the uploadedImagePaths to the form data
-        formData1.append(
+        editFormData.append(
           "uploadedImagePaths",
           JSON.stringify(uploadedImagePaths)
         );
-        formData1.append("id", productID);
+
+        console.log("editFormData", editFormData);
+
+        // AJAX request for form submission
         $.ajax({
           type: "POST",
-          url: "/admin/edit",
-          data: formData1,
+          url: "/admin/editItem",
+          data: editFormData,
           processData: false,
           contentType: false,
           success: function (response) {
-            console.log("Form submitted successfully");
+            console.log("Edit form submitted successfully");
             console.log("Server response: " + response);
+            // Handle success response
             // Replace the current page's content with the response
             document.documentElement.innerHTML = response;
 
-            // Optionally, you can update the browser's history so the user can use the back button
-            history.pushState({}, "", "/product");
+            // Optionally, you can update the browser's history
+            location.reload();
           },
           error: function (xhr, status, error) {
-            console.log("Error submitting form");
+            console.log("Error submitting edit form");
             console.log("Error message: " + error);
             // Handle error response
           },
         });
+
         return false;
       });
     },
+  });
+  $(".edit-product-btn").click(function () {
+    var productId = $(this).data("product-id");
+
+    // Fetch product details based on productId using AJAX
+    $.ajax({
+      url: "/admin/getProductDetails", // Update this URL with your server endpoint
+      method: "POST",
+      data: { productId: productId },
+      success: function (response) {
+        // Update the edit form fields with the retrieved data
+        $("#edit-product-id").val(response.productId);
+        $("#edit-product-name").val(response.productName);
+        $("#edit-brand").val(response.brand);
+        $("#edit-category").val(response.category);
+        $("#edit-quantity").val(response.quantity);
+        $("#edit-price").val(response.price);
+        $("#edit-description").val(response.description);
+        console.log("response.images", response.images);
+        $("#previous-images").empty();
+        response.images.forEach(function (image) {
+          // Remove "public/" from the beginning of the image path
+          let imagePath = image.replace(/^(admin\\|public\\)/, "");
+          imagePath = imagePath.replace(/\\/g, "/");
+          //empty the previous images
+          
+          let listItem = document.createElement("li");
+          listItem.innerHTML =
+            '<img src="/images/' +
+            imagePath +
+            '" alt="Product image" style="max-width: 100px;"/>' +
+            '<button type="button" class="btn btn-danger remove-btn">Remove</button>';
+          $("#previous-images").append(listItem);
+        });
+      },
+      error: function (error) {
+        console.error("Error fetching product details:", error);
+      },
+    });
   });
 });
 
@@ -454,6 +502,121 @@ function validateDescription() {
   let field = $("#description").val().trim();
   let descriptionError = $("#description-error");
   let descriptionInput = $("#description");
+
+  if (field === "") {
+    descriptionError.text("You must enter the description!");
+    descriptionInput.css("border-color", "red");
+    return false;
+  }
+  descriptionError.text("");
+  descriptionInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditImages() {
+  // Get the ul element
+  let previousImagesList = document.getElementById("previous-images");
+
+  // Count the number of li elements inside the ul
+  let numberOfImages = previousImagesList.childElementCount;
+
+  if (numberOfImages === 0) {
+    let imagesError = document.getElementById("images-error");
+    imagesError.innerHTML = "Please upload at least one image";
+    return false;
+  }
+
+  return true;
+}
+function validateEditProductName() {
+  let field = $("#edit-product-name").val().trim();
+  let nameError = $("#edit-name-error");
+  let nameInput = $("#edit-product-name");
+
+  if (field === "") {
+    nameError.text("You must enter the product name!");
+    nameInput.css("border-color", "red");
+    return false;
+  }
+  nameError.text("");
+  nameInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditBrand() {
+  let field = $("#edit-brand").val().trim();
+  let brandError = $("#edit-brand-error");
+  let brandInput = $("#edit-brand");
+
+  if (field === "") {
+    brandError.text("You must enter the brand!");
+    brandInput.css("border-color", "red");
+    return false;
+  }
+  brandError.text("");
+  brandInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditCategory() {
+  let field = $("#edit-category").val().trim();
+  let categoryError = $("#edit-category-error");
+  let categoryInput = $("#edit-category");
+
+  if (field === "") {
+    categoryError.text("You must enter the category!");
+    categoryInput.css("border-color", "red");
+    return false;
+  }
+  categoryError.text("");
+  categoryInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditQuantity() {
+  let field = $("#edit-quantity").val();
+  let quantityError = $("#edit-quantity-error");
+  let quantityInput = $("#edit-quantity");
+
+  if (
+    isNaN(field) ||
+    !Number.isInteger(parseFloat(field)) ||
+    parseInt(field) <= 0
+  ) {
+    quantityError.text(
+      "Please enter a valid quantity (a positive whole number)."
+    );
+    quantityInput.css("border-color", "red");
+    return false;
+  }
+  quantityError.text("");
+  quantityInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditPrice() {
+  let field = $("#edit-price").val();
+  let priceError = $("#edit-price-error");
+  let priceInput = $("#edit-price");
+
+  if (
+    isNaN(field) ||
+    parseFloat(field) <= 0 ||
+    !/^\d+(\.\d{1,2})?$/.test(field)
+  ) {
+    priceError.text("Please enter a valid price (up to 2 decimal places).");
+    priceInput.css("border-color", "red");
+    return false;
+  }
+  priceError.text("");
+  priceInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditDescription() {
+  let field = $("#edit-description").val().trim();
+  let descriptionError = $("#edit-description-error");
+  let descriptionInput = $("#edit-description");
 
   if (field === "") {
     descriptionError.text("You must enter the description!");

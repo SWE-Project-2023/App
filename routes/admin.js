@@ -3,8 +3,7 @@ const router = express.Router();
 import productController from "../controllers/productController.js";
 import express from "express";
 import multer from "multer";
-import fs from "fs";
-import path from "path";
+
 const storage = multer.diskStorage({
   destination: "public/images",
   filename: (req, file, cb) => {
@@ -59,30 +58,9 @@ router.get("/orders", function (req, res, next) {
 });
 router.post("/createItem", upload.array("photo", 5), itemsController.createItem);
 router.post("/upload", upload.single("file"), itemsController.uploadImage);
-router.post('/delete', (req, res) => {
-  const { filename } = req.body;
-console.log("filename",filename);
-  // Define the path to the file
-  const filePath = path.join('public/images', filename);
-
-  // Check if the file exists
-  if (fs.existsSync(filePath)) {
-    // Delete the file
-    fs.unlink(filePath, (error) => {
-      if (error) {
-        console.log('Error deleting file:', error);
-        res.status(500).send('Error deleting file');
-      } else {
-        console.log('File deleted successfully:', filename);
-        res.status(200).send('File deleted successfully');
-      }
-    });
-  } else {
-    console.log('File not found:', filename);
-    res.status(404).send('File not found');
-  }
-});
-
+router.post('/delete', itemsController.deleteImage);
+router.post("/getProductDetails", itemsController.getProductDetails);
+router.post("/editItem", upload.array("photo", 5), itemsController.editItem);
 //export default 
 
 export default router;
