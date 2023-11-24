@@ -104,6 +104,7 @@ CREATE TABLE `user` (
   `user_id` int(3) NOT NULL,
   `user_fname` varchar(20) NOT NULL,
   `user_address` text NOT NULL
+  `user_isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

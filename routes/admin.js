@@ -1,6 +1,7 @@
 // Require
 const router = express.Router();
 import productController from "../controllers/productController.js";
+import userController from "../controllers/userController.js";
 import express from "express";
 import multer from "multer";
 
@@ -46,10 +47,22 @@ router.get("/products", async function (req, res, next) {
     });
   }
 });
-router.get("/users", function (req, res, next) {
+router.get("/users", async function (req, res, next) {
+  var users = await userController.getUsers();
   {
-    res.render("admin/users.ejs",{user: req.session.user===undefined?"":req.session.user});
+    res.render("admin/users.ejs", {
+      user: req.session.user===undefined?"":req.session.user,
+      users,
+    });
   }
+});
+router.get("/users/toggle_admin/:id", async function (req, res, next) {
+  await userController.toggleAdmin(req.params.id);
+  res.redirect("/admin/users");
+});
+router.get("/users/delete/:id", async function (req, res, next) {
+  await userController.deleteUser(req.params.id);
+  res.redirect("/admin/users");
 });
 router.get("/orders", function (req, res, next) {
   {
