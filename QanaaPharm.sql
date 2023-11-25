@@ -100,10 +100,10 @@ CREATE TABLE `orders` (
 CREATE TABLE `user` (
   `user_Lname` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `user_password` varchar(50) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
   `user_id` int(3) NOT NULL,
   `user_fname` varchar(20) NOT NULL,
-  `user_address` text NOT NULL
+  `user_address` text NOT NULL, 
   `user_isAdmin` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
