@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -25,14 +27,21 @@
             </div>
             <div class="inner_navII">
                 <% if (user==="") { %>
-
-                <a href="/auth/signup"><i class='bx bx-user' ></i></a>
+                    <div class="Account">
+                <a href="/auth/signup" class="header_icon"><i class='bx bx-user' ></i></a>
+                <a href ="/auth/signup" class="header_item_link">Account</a>
+            </div>
                 <% } else { %>
                     <a href="/logout"><i class='bx bx-exit' ></i></a>
                 <% } %>
-                <a href=""><i class='bx bx-heart'></i></a>
-
-                <a href="/product/cart"><i class='bx bx-cart-alt' ></i></a>
+                <div class="wishlist">
+                <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
+                <a href ="" class="header_item_link">Wishlist</a>
+            </div>
+                    <div class="cart">
+                <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
+                <a href ="/product/cart" class="header_item_link">Cart</a>
+            </div>
 
             </div>
         </div>
