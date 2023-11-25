@@ -6,13 +6,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="../css/itempage.css">
     <title>Document</title>
 </head>
 <body>
     <%-include("./partials/header.ejs")%>
-<div class="itemcontanier">
+<div class="mainContainer">
     <div class="page_header">
         <nav>
             <ol class="page-list">
@@ -30,24 +31,147 @@
             </ol>
         </nav>
     </div>
-    <div class="productcontanier">
-        <div class="product_wrapper">
-            <div class="product_item_gallery">
-                <div class="card">
-                    <div class="card__section">
-                        <div class="product-gallery">
-                            <div class="gallery_preview">
-                                
-                                <div class="previewproduct">
-                                    <img src="/images/panadol-advance-24-tablets-287033.webp" alt="">
-                               
+
+    <div class="mainContainer">
+        <div class="product_list">
+            <div class="product_list_wrapper">
+                <div class="mobile_only">
+                    <div class="cardsection">
+                        <h1 class="title_prod">
+                           Vichy Liftactiv B3 Serum Dark Spots &amp; Wrinkles Serum - 30ml
+                        </h1>
+                        <div class="product_ref">
+                            <a href="" class="producttitle">Vichy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_list_item">
+                    <div class="card">
+                        <div class="cardsection">
+                            <div class="product_gallery">
+                                <div class="product_gallery_wrapper">
+                                    <div class="tag">
+                                        <span></span>
+                                    </div>
+                                    <div class="product_gallery_img">
+                                        <div class="prod_item" id="dynamicDiv">
+                                            <div class="imgslider">
+                                                <div class="img_1">
+                                                    <div class="product_size">
+                                                        <div class="ratio">
+                                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="img_2">
+                                                    <div class="sec_product_size">
+                                                        <div class="ratio">
+                                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="productitems">
+                                    <div class="desktop_only">
+                                    <div class="scroller">
+                                        <div class="inner_scroller">
+                                            <div class="items_img">
+                                                <a href="#" class="item" onclick="changeImage(0)"><img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt=""></a>
+                                                <a href="#" class="item" onclick="changeImage(1)"><img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                            </div>
-                            <div class="scroller">
-                                <div class="scroller_inner">
-                                    <div class="products_list">
-                                        <a href="" class="product__item selected"><img src="/images/panadol-advance-24-tablets-287033.webp" alt=""></a>
-                                        <a href="" class="product__item"><img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_item_info">
+                    <div class="cardinfo">
+                        <div class="card_section">
+                            <form method="post" action="/cart/add" class="product_form">
+                                <div class="product_catageory">
+                                    <div class="inner_catageory">
+                                        <div class="desktop_only">
+                                            <a href="" class="producttitle">Eucerin</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="desktop_only">
+                                    <div class="product-title">
+                                        <h1>Eucerin Hyaluron Filler Moisture Booster Serum - 30ml</h1>
+                                    </div>
+                                </div>
+                                <div class="product_extra_info">
+                                    <div class="item_stock">
+                                        <span class="stock">In stock</span>
+                                    </div>
+                                </div>
+                                <hr class="card__separator">
+                                <div class="product_info">
+                                    <div class="product_price">
+                                        <span class="prod-info">Price:</span>
+                                        <div class="costprod">
+                                            <div class="price">
+                                                <span>EGP 31.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="prodcut-quantity">
+                                        <label class="quantity">Quantity</label>
+                                        <div class="quantity_no">
+                                            <div class="quantity_sector">
+                                                <button type="button"  onclick="decrement()" class="quantity_button">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </button>
+                                                <input type="text" class="quantity_value" id="quantity_value" value="1">
+                                                <button type="button"  onclick="increment()" class="quantity_button">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product_payment">
+                                    <button type="submit" class="btn_addtocart">ADD TO BAG</button>
+                                    <button type="button" class="buy">Buy Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_descrption">
+                    <div class="card">
+                        <button class="card_button">
+                            <span class="card_title">PRODUCT INFORMATION</span>
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <div class=""></div>
+                    </div>
+                </div>
+                <div class="delivery">
+                    <div class="card">
+                        <button class="card_button">
+                            <span class="card_title">Delivery & Returns</span>
+                        </button>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="product_review">
+                    <div class="card">
+                        <div class="card__section">
+                            <div class="reviewcontainer">
+                                <div class="review_header">
+                                    <h2 class="headerr_title">Customer Reviews</h2>
+                                    <div class="reviewsummary">
+                                        <span class="rev_caption">No reviews yet</span>
+                                        <span class="rev_btn">
+                                            <a href="" class="write_rev_btn">Write a review</a>
+                                        </span>
 
                                     </div>
                                 </div>
@@ -56,97 +180,191 @@
                     </div>
                 </div>
             </div>
-            <div class="product_item_info">
-                <div class="cardinfo">
-                    <div class="card_section">
-                        <form method="post" action="/cart/add" class="product_form">
-                            <div class="product-title">
-                                <h1>Panadol Advance - 24 Tablets</h1>
-                            </div>
-                            <hr class="card__separator">
-                            <div class="product_info">
-                                <div class="product_price">
-                                    <span class="prod-info">Price:</span>
-                                    <div class="costprod">
-                                        <div class="price">
-                                            <span>EGP 31.00</span>
+        </div>
+    </div>
+    <div class="mainContainer">
+        <div class="header_section">
+            <h2 class="header_title h2">YOU MAY ALSO LIKE</h2>
+        </div>
+        <div class="product-recommendations">
+            <div class="scroller">
+                <div class="inner_scroller">
+                    <div class="products_list">
+                        <div class="inner_list" id="inner_List">
+                            <div class="product_slider" id="productSlider">
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/beurer-bm28-upper-arm-blood-pressure-monitor-229954.webp" alt="">
                                         </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
                                     </div>
                                 </div>
-                                <div class="prodcut-quantity">
-                                    <label class="quantity">Quantity</label>
-                                    <div class="quantity_no">
-                                        <div class="quantity_sector">
-                                            <button type="button"  onclick="decrement()" class="quantity_button">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </button>
-                                            <input type="text" class="quantity_value" id="quantity_value" value="1">
-                                            <button type="button"  onclick="increment()" class="quantity_button">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product_payment">
-                                <button type="submit" class="btn_addtocart">CheckOut</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="product_item_descrp">
-                <div class="card">
-                    <div class="contextbox">
-                    <button class="card_collapsible_button">
-                        <span class="card__title">PRODUCT INFORMATION</span>
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <div class="details_block">
-                        <div class="card_content">
-                            <div class="content">
-                                <p><strong>Ingredients & concentrations:</strong> Paracetamol (Acetaminophen) 500 mg</p>
-                                <p><strong>How to use:</strong> 1-2 tablets after meals every 4-6 hours, maximum 4 times per day</p>
-                                <p><strong>Precautions:</strong> Acetaminophen overdose may be manifested by renal tubular necrosis, hypoglycemic coma, and thrombocytopenia. Sometimes, liver necrosis can occur as well as liver failure.
-                                     Death and the requirement of a liver transplant may also occur. Metabolism by the CYP2E1 pathway releases a toxic acetaminophen metabolite known as N-acetyl-p-benzoquinoneimine(NAPQI). The toxic effects
-                                      caused by this drug are attributed to NAPQI, not acetaminophen alone.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="product_item_delivery">
-                <div class="card">
-                    <div class="contextbox">
-                    <button class="card_collapsible_button">
-                        <span class="card__title">Delivery & Returns</span>
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <div class="details_block">
-                        <div class="card_content">
-                            <div class="content">
-                                <p>
-                                    Bloom Super Express - receive your order same day or next day according to your location in Greater Cairo from 2:00PM till 9:00PM. Bloom super saver - receive your order within 2-3 business days in Greater Cairo. Other locations inside Egypt receive your order within 2-7 business days. Shipping & Returns
-                                </p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt="" class="pic-1">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="" class="pic-2">
 
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div>
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div>
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div>
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div> <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div> <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div> <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div>
+                                 <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button class="product_btn">Add to Bag</button>
+                                    </div>
+                                </div> 
+                                <div class="product_Item">
+                                    <a href="" class="product_item_img">
+                                        <div class="ratio">
+                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                        </div>
+                                    </a>
+                                    <div class="product_items_info">
+                                        <div class="product_items_info_inner">
+                                            <a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+                                            <div class="product_item_price">
+                                                <span class="price_item">EGP 1,999.00</span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="product_btn">add to bag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="button_prev" type="button"onclick="prevSlide()" id="prevButton" disabled><span class="material-symbols-outlined">
+                            chevron_left
+                            </span></button>
+                            <button class="button_next" type="button" onclick="nextSlide()" id="nextButton"><span class="material-symbols-outlined">
+                                chevron_right
+                                </span></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="FeaturedProd">
-        <div class="featurecontainer">
-            <header class="section__header">
-                <h2>YOU MAY ALSO LIKE</h2>
-            </header>
-        </div>
-    </div>
+  
 </div>
 <script src="/js/itempage.js">
 </script>
