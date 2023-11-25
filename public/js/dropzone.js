@@ -109,7 +109,7 @@ $(document).ready(function async() {
         let isPriceValid = validatePrice();
         let isDescriptionValid = validateDescription();
         let isImagesValid = validateImages();
-
+        let isOffersValid = validateOffers();
         if (
           !isProductNameValid ||
           !isBrandValid ||
@@ -117,10 +117,13 @@ $(document).ready(function async() {
           !isQuantityValid ||
           !isPriceValid ||
           !isDescriptionValid ||
-          !isImagesValid
+          !isImagesValid ||
+          !isOffersValid
         ) {
           console.log("Form is invalid");
           return false;
+        } else {
+          console.log("Form is valid");
         }
 
         let form = $(this);
@@ -170,7 +173,7 @@ $(document).ready(function () {
     acceptedFiles: ".jpg,.png,.gif,.webp,jpeg", // Allowed file types
     autoProcessQueue: true,
     init: function () {
-      let previewElement = document.getElementById("preview");
+      let previewElement = document.getElementById("edit-preview");
       // Get the img elements and extract the src attribute
       let productImages = document.querySelectorAll("#previous-images img");
       for (let i = 0; i < productImages.length; i++) {
@@ -204,7 +207,7 @@ $(document).ready(function () {
       this.on("success", function (file, response) {
         console.log("File uploaded successfully: " + file.name);
         console.log("Server response: " + response);
-        uploadedImagePaths.push(imagePath);
+        uploadedImagePaths.push(file.name);
         console.log(uploadedImagePaths[0]);
         // Update the preview element based on the server's response
       });
@@ -303,6 +306,7 @@ $(document).ready(function () {
         let isEditPriceValid = validateEditPrice();
         let isEditDescriptionValid = validateEditDescription();
         let isEditImagesValid = validateEditImages();
+        let isEditOffersValid = validateEditOffers();
 
         if (
           !isEditProductNameValid ||
@@ -311,7 +315,8 @@ $(document).ready(function () {
           !isEditQuantityValid ||
           !isEditPriceValid ||
           !isEditDescriptionValid ||
-          !isEditImagesValid
+          !isEditImagesValid ||
+          !isEditOffersValid
         ) {
           console.log("Form is invalid");
           return false;
@@ -374,21 +379,21 @@ $(document).ready(function () {
         $("#edit-quantity").val(response.quantity);
         $("#edit-price").val(response.price);
         $("#edit-description").val(response.description);
+        $("#edit-offers").val(response.offers);
         console.log("response.images", response.images);
         $("#previous-images").empty();
+        let previewElement = document.getElementById("edit-preview");
         response.images.forEach(function (image) {
-          // Remove "public/" from the beginning of the image path
-          let imagePath = image.replace(/^(admin\\|public\\)/, "");
-          imagePath = imagePath.replace(/\\/g, "/");
-          //empty the previous images
-          
-          let listItem = document.createElement("li");
-          listItem.innerHTML =
+          let thumbnail = document.createElement("div");
+          thumbnail.classList.add("thumbnail");
+          thumbnail.setAttribute("data-dz-name", image); // Add a custom attribute with the file name
+          thumbnail.setAttribute("data-file-id", image.uuid); // Add a custom attribute with the file ID
+          thumbnail.innerHTML =
             '<img src="/images/' +
-            imagePath +
-            '" alt="Product image" style="max-width: 100px;"/>' +
-            '<button type="button" class="btn btn-danger remove-btn">Remove</button>';
-          $("#previous-images").append(listItem);
+            image +
+            '" style="max-width: 100px;" />' +
+            '<button type = "button" class="btn btn-danger remove-button">Remove</button>';
+          previewElement.appendChild(thumbnail);
         });
       },
       error: function (error) {
@@ -441,15 +446,16 @@ function validateBrand() {
 
 function validateCategory() {
   console.log("validateCategory() called");
-  let field = $("#category").val().trim();
+  let selectedCategory = $("#category").val();
   let categoryError = $("#category-error");
   let categoryInput = $("#category");
 
-  if (field === "") {
-    categoryError.text("You must enter the category!");
+  if (!selectedCategory) {
+    categoryError.text("You must select a category!");
     categoryInput.css("border-color", "red");
     return false;
   }
+
   categoryError.text("");
   categoryInput.css("border-color", "black");
   return true;
@@ -515,7 +521,7 @@ function validateDescription() {
 
 function validateEditImages() {
   // Get the ul element
-  let previousImagesList = document.getElementById("previous-images");
+  let previousImagesList = document.getElementById("edit-preview");
 
   // Count the number of li elements inside the ul
   let numberOfImages = previousImagesList.childElementCount;
@@ -559,15 +565,16 @@ function validateEditBrand() {
 }
 
 function validateEditCategory() {
-  let field = $("#edit-category").val().trim();
+  let selectedCategory = $("#edit-category").val();
   let categoryError = $("#edit-category-error");
   let categoryInput = $("#edit-category");
 
-  if (field === "") {
-    categoryError.text("You must enter the category!");
+  if (!selectedCategory) {
+    categoryError.text("You must select a category!");
     categoryInput.css("border-color", "red");
     return false;
   }
+
   categoryError.text("");
   categoryInput.css("border-color", "black");
   return true;
@@ -625,5 +632,46 @@ function validateEditDescription() {
   }
   descriptionError.text("");
   descriptionInput.css("border-color", "black");
+  return true;
+}
+function validateOffers() {
+  let field = $("#offers").val();
+  let offersError = $("#offers-error");
+  let offersInput = $("#offers");
+
+  if (
+    isNaN(field) ||
+    !Number.isInteger(parseFloat(field)) ||
+    parseInt(field) < 0 ||
+    parseInt(field) > 100
+  ) {
+    offersError.text("Please enter a valid offer percentage (0 to 100).");
+    offersInput.css("border-color", "red");
+    return false;
+  }
+
+  offersError.text("");
+  offersInput.css("border-color", "black");
+  return true;
+}
+
+function validateEditOffers() {
+  let field = $("#edit-offers").val();
+  let offersError = $("#edit-offers-error");
+  let offersInput = $("#edit-offers");
+
+  if (
+    isNaN(field) ||
+    !Number.isInteger(parseFloat(field)) ||
+    parseInt(field) < 0 ||
+    parseInt(field) > 100
+  ) {
+    offersError.text("Please enter a valid offer percentage (0 to 100).");
+    offersInput.css("border-color", "red");
+    return false;
+  }
+
+  offersError.text("");
+  offersInput.css("border-color", "black");
   return true;
 }

@@ -49,10 +49,11 @@ CREATE TABLE `item` (
   `item_id` int(5) NOT NULL,
   `item_title` varchar(250) NOT NULL,
   `item_brand` varchar(250) NOT NULL,
-  `item_cat` varchar(15) NOT NULL,
+  `item_cat` varchar(250) NOT NULL,
   `item_details` text NOT NULL,
   `item_quantity` int(3) NOT NULL,
   `item_price` int(10) NOT NULL,
+  `item_offers` int(1) DEFAULT 0,
   PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

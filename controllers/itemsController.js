@@ -21,6 +21,7 @@ itemsController.createItem = async (req, res) => {
     price,
     description,
     quantity,
+    offers,
   } = req.body;
 
   const uploadedImagePaths = JSON.parse(req.body.uploadedImagePaths);
@@ -50,6 +51,9 @@ itemsController.createItem = async (req, res) => {
     errors.description = "Please enter the description";
   }
 
+  if(!offers){
+    errors.offers = "Please enter the offers";
+  }
   if (Object.keys(errors).length > 0) {
     // Return validation errors to the client
     console.log("Validation errors:", errors);
@@ -81,8 +85,8 @@ itemsController.createItem = async (req, res) => {
   }
     // Insert into the 'item' table
     const insertItemQuery = `
-      INSERT INTO item (item_title, item_cat,item_brand, item_details, item_quantity, item_price)
-      VALUES (?,?, ?, ?, ?, ?)
+      INSERT INTO item (item_title, item_cat,item_brand, item_details, item_quantity, item_price,item_offers)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
     console.log("Executing query:", insertItemQuery);
     console.log("Query parameters:", [
@@ -92,6 +96,7 @@ itemsController.createItem = async (req, res) => {
       quantity,
       price,
       brand,
+      offers,
     ]);
 
     const [insertItemResult] = await query(insertItemQuery, [
@@ -101,6 +106,7 @@ itemsController.createItem = async (req, res) => {
       description,
       quantity,
       price,
+      offers,
     ]);
 
     const itemId = insertItemResult.insertId;
@@ -151,6 +157,7 @@ itemsController.getProductDetails = async (req, res) => {
       i.item_details,
       i.item_quantity,
       i.item_price,
+      i.item_offers,
       im.image_path
     FROM
       item i
@@ -177,6 +184,7 @@ itemsController.getProductDetails = async (req, res) => {
       description: results[0].item_details,
       quantity: results[0].item_quantity,
       price: results[0].item_price,
+      offers: results[0].item_offers,
       images: results.map(result => result.image_path).filter(image => image !== null)
     };
 
@@ -238,6 +246,7 @@ itemsController.editItem = async (req, res) => {
     price,
     description,
     quantity,
+    offers,
   } = req.body;
 
   const uploadedImagePaths = JSON.parse(req.body.uploadedImagePaths);
@@ -272,6 +281,9 @@ itemsController.editItem = async (req, res) => {
     errors.description = "Please enter the description";
   }
 
+  if(!offers){
+    errors.offers = "Please enter the offers";
+  }
   if (Object.keys(errors).length > 0) {
     // Return validation errors to the client
     console.log("Validation errors:", errors);
@@ -282,7 +294,7 @@ itemsController.editItem = async (req, res) => {
     // Update the 'item' table
     const updateItemQuery = `
       UPDATE item
-      SET item_title=?, item_cat=?, item_brand=?, item_details=?, item_quantity=?, item_price=?
+      SET item_title=?, item_cat=?, item_brand=?, item_details=?, item_quantity=?, item_price=?, item_offers=?
       WHERE item_id=?
     `;
     console.log("Executing query:", updateItemQuery);
@@ -294,6 +306,7 @@ itemsController.editItem = async (req, res) => {
       quantity,
       price,
       productId,
+      offers,
     ]);
 
     await query(updateItemQuery, [
@@ -304,6 +317,7 @@ itemsController.editItem = async (req, res) => {
       quantity,
       price,
       productId,
+      offers,
     ]);
 
     console.log("Item updated successfully");
