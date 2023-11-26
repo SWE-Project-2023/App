@@ -1,10 +1,9 @@
 import express from "express";
+import itemsController from "../controllers/itemsController.js";
 const router = express.Router();
 
-router.get("/itempage", function (req, res, next) {
-  res.render("itempage");
-});
 
+router.get("/itempage", itemsController.displayitem);
 const category = "Sample Category";
 const products = [
   {
@@ -31,10 +30,11 @@ router.get("/productlist", (req, res) => {
       products,
       totalPages: 1,
       currentPage: 1,
-    },
-    { user: req.session.user === undefined ? "" : req.session.user }
+      user: req.session.user === undefined ? "" : req.session.user
+    }
   );
 });
+
 router.get("/cart", function (req, res, next) {
   res.render("cart", {
     user: req.session.user === undefined ? "" : req.session.user,

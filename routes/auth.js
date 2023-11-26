@@ -1,7 +1,7 @@
 import express from "express";
+
 // Create a new router instance
 const router = express.Router();
-
 
 import loginController from "../controllers/loginController.js";
 import signupController from "../controllers/signupController.js";

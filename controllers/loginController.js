@@ -1,4 +1,3 @@
-
 const loginController = {}; 
 import bcrypt from "bcryptjs";
 import execute from "../queries/userQueries.js";
