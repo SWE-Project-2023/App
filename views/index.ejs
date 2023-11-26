@@ -100,12 +100,14 @@
 					<div class="products_list">
 						<div class="inner_list" id="inner_List">
 							<div class="product_slider" id="productSlider">
+								<% products.forEach(product => {%>
 
+								
 								<div class="product_Item">
 									<div class="product_img">
-									<a href="" class="product_item_img">
+									<a href="/product/itempage" class="product_item_img">
 										<div class="ratio">
-											<img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt="">
+											<img src="<%=product.item_image%>" alt="">
 										</div>
 									</a>
 									<div class="links">
@@ -116,9 +118,9 @@
 								</div>
 									<div class="product_items_info">
 										<div class="product_items_info_inner">
-											<a href="#" class="product_item_title">Beurer Bm28 Upper Arm Blood Pressure ...</a>
+											<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_title"><%=product.item_title%></a>
 											<div class="product_item_price">
-												<span class="price_item">EGP 1,999.00</span>
+												<span class="price_item">EGP <%=product.item_price%></span>
 											</div>
 										</div>
 										<form method="post" >
@@ -126,7 +128,8 @@
 										</form>
 									</div>
 								</div>
-								<div class="product_Item">
+								<%})%>
+								<!-- <div class="product_Item">
 									<div class="product_img">
 									<a href="" class="product_item_img">
 										<div class="ratio">
@@ -403,7 +406,7 @@
 										<button type="submit" class="product_btn">add to bag</button>
 									</form>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<button class="button_prev" type="button"onclick="PrevSlide()" id="prevButton" disabled><span class="material-symbols-outlined">
