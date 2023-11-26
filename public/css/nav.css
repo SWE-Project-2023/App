@@ -84,10 +84,6 @@ a{
     display: flex;
     align-items: center;
   }
-  a {
-    color: #3F3F95;
-    text-decoration: none;
-  }
   .heeader .logo {
     font-size: 22px;
     font-weight: 500;
@@ -176,6 +172,25 @@ a{
   .heeader .navCloseBtn {
     display: none;
   }
+  .inner_navII{
+    display: flex;
+    text-align: center;
+    gap: 20px;
+    margin-left: 20px;
+  }
+  .inner_navII  .header_icon{
+    display: block;
+    height: 25px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+  }
+   .header_item_link{
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+  }
   /* responsive */
   @media screen and (max-width: 1160px) {
     .heeader {
@@ -188,7 +203,7 @@ a{
         right: 80px;
     }
   }
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 999px) {
     .heeader {
       padding: 28px 50px;
     }
@@ -197,6 +212,9 @@ a{
     }
     .searchcon .Input .clear{
         right: 120px;
+    }
+    .header_item_link{
+      display: none;
     }
   }
   @media screen and (max-width: 768px) {
@@ -260,3 +278,4 @@ a{
       padding-right: 0; /* Remove padding for inner_navII icons on smaller screens */
   }
   }
+  

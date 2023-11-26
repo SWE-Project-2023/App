@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 router.get("/itempage", function (req, res, next) {
@@ -41,4 +41,4 @@ router.get("/cart", function (req, res, next) {
   });
 });
 
-module.exports = router;
+export default router;
