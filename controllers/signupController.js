@@ -1,4 +1,3 @@
-
 const signupController = {}; 
 import bcrypt from "bcryptjs";
 import mysql from "mysql2";

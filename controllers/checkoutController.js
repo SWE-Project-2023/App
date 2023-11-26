@@ -1,5 +1,5 @@
 const checkoutController = {};
-const axios = require('axios');
+import axios from "axios";
 
 // Function to create an order using Paymob's API
 checkoutController.toPaymob = async (req, res) => {
@@ -45,4 +45,4 @@ async function createOrder(req) {
   }
 }
 
-module.exports = checkoutController;
+export default checkoutController;

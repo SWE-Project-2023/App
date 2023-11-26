@@ -1,7 +1,4 @@
-
 const loginController = {}; 
-
-
 
 import bcrypt from "bcryptjs";
 import mysql from "mysql2/promise"; 
