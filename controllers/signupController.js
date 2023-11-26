@@ -1,8 +1,7 @@
 
 const signupController = {}; 
 import bcrypt from "bcryptjs";
-import mysql from "mysql2";
-
+import execute from "../queries/userQueries.js";
 signupController.signup = async (req, res) => {
 	console.log("Signup request received");
 	const { firstname, lastname, email, password, confirmpassword, address } = req.body;
@@ -24,29 +23,15 @@ signupController.signup = async (req, res) => {
 		return res.status(400).send('Invalid email');
 	}
   
-	const connection = mysql.createPool({
-		host: "localhost",
-		user: "root",
-		password: "",
-		database: "qanaa",
-		port: 3306,
-	  });
-	  connection.getConnection((err) => {
-		if (err) {
-		  console.error("Error connecting to MySQL: " + err.stack);
-		  return;
-		}
-		console.log("Connected to MySQL as ID " + connection);
-	  });
-
+	
 	const hashedPassword = await bcrypt.hash(password, 10);
-	const query = 'INSERT INTO user (user_fname, user_Lname, email, user_password, user_address) VALUES (?, ?, ?, ?, ?)';
-	connection.query(query, [firstname, lastname, email, hashedPassword, address], (err, results) => {
-	  if (err) {
-		console.error(err);
-	  }
-	  return res.redirect('/auth/login');
-  	});
+	await execute.createUser(firstname, lastname, email, hashedPassword, address), (err, results) => {
+		if (err) {
+		  console.error(err);
+		}
+		return res.redirect('/auth/login');
+	  };
+	
 }
 
 export default signupController;
