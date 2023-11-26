@@ -1,7 +1,7 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
 
-const checkoutController = require('../controllers/checkoutController.js');
+import checkoutController from "../controllers/checkoutController.js";
 
 router.get('/', (req, res) => {
   console.log("Checkout request received");
@@ -18,4 +18,4 @@ router.post('/paymentCallback', (req, res) => {
   // Return appropriate response
 });[]
 
-module.exports = router;
+export default router;
