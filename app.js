@@ -55,17 +55,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import route handlers
-
-
 import indexRouter from "./routes/index.js";
 import productRouter from "./routes/products.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
+import checkoutRouter from "./routes/checkout.js";
+
 // Register route handlers
 app.use("/", indexRouter);
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
+app.use("/checkout", checkoutRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();
