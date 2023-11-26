@@ -60,6 +60,7 @@ import productRouter from "./routes/products.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
 import checkoutRouter from "./routes/checkout.js";
+
 // Register route handlers
 app.use("/", indexRouter);
 app.use("/product", productRouter);

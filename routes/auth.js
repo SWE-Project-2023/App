@@ -3,9 +3,8 @@ import express from "express";
 // Create a new router instance
 const router = express.Router();
 
-import loginController from '../controllers/loginController.js';
-import signupController from '../controllers/signupController.js';
-
+import loginController from "../controllers/loginController.js";
+import signupController from "../controllers/signupController.js";
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index',{user: req.session.user===undefined?"":req.session.user});

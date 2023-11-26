@@ -1,7 +1,6 @@
-import bcrypt from "bcryptjs";
 const signupController = {}; 
+import bcrypt from "bcryptjs";
 import mysql from "mysql2";
-
 
 signupController.signup = async (req, res) => {
 	console.log("Signup request received");

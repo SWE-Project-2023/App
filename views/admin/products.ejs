@@ -1,89 +1,10 @@
 <%-include("./admin-partials/header.ejs", { title: "Products" })%>
 
-<!-- Sample Products -->
-<% products = [
-    {
-        "id": 1,
-        "title": "Brufen Cold",
-        "brand": "Kahira Pharmaceuticals",
-        "category": "Medicines",
-        "quantity": 10,
-        "price": 53
-    },
-    {
-        "id": 2,
-        "title": "Amoxicillin",
-        "brand": "Generic Pharma",
-        "category": "Medicines",
-        "quantity": 25,
-        "price": 12
-    },
-    {
-        "id": 3,
-        "title": "Lipitor",
-        "brand": "Pfizer",
-        "category": "Medicines",
-        "quantity": 8,
-        "price": 65
-    },
-    {
-        "id": 4,
-        "title": "Ventolin Inhaler",
-        "brand": "GlaxoSmithKline",
-        "category": "Medicines",
-        "quantity": 15,
-        "price": 30
-    },
-    {
-        "id": 5,
-        "title": "Zyrtec",
-        "brand": "Johnson & Johnson",
-        "category": "Medicines",
-        "quantity": 20,
-        "price": 18
-    },
-    {
-        "id": 6,
-        "title": "Nexium",
-        "brand": "AstraZeneca",
-        "category": "Medicines",
-        "quantity": 12,
-        "price": 40
-    },
-    {
-        "id": 7,
-        "title": "Advil",
-        "brand": "Pfizer",
-        "category": "Medicines",
-        "quantity": 30,
-        "price": 10
-    },
-    {
-        "id": 8,
-        "title": "Synthroid",
-        "brand": "Abbott Laboratories",
-        "category": "Medicines",
-        "quantity": 10,
-        "price": 22
-    },
-    {
-        "id": 9,
-        "title": "Metformin",
-        "brand": "Generic Pharma",
-        "category": "Medicines",
-        "quantity": 20,
-        "price": 15
-    },
-    {
-        "id": 10,
-        "title": "Prozac",
-        "brand": "Eli Lilly",
-        "category": "Medicines",
-        "quantity": 10,
-        "price": 35
-    },
-]
-%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/min/dropzone.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/min/dropzone.min.css"
+/>
 
 <div class="container">
   <div class="row">
@@ -105,14 +26,21 @@
       <tbody>
         <% products.forEach(product => { %>
         <tr>
-          <td><%= product.id %></td>
-          <td><%= product.title %></td>
-          <td><%= product.brand %></td>
-          <td><%= product.category %></td>
-          <td><%= product.quantity %></td>
-          <td><%= product.price.toFixed(2) %></td>
+          <td><%= product.item_id %></td>
+          <td><%= product.item_title %></td>
+          <td><%= product.item_brand %></td>
+          <td><%= product.item_cat %></td>
+          <td><%= product.item_quantity %></td>
+          <td><%= product.item_price.toFixed(2) %></td>
           <td>
-            <a href="#" class="btn btn-outline-primary btn-sm">Edit</a>
+            <a
+              href="#"
+              class="btn btn-outline-primary btn-sm edit-product-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#editProduct"
+              data-product-id="<%= product.item_id %>"
+              >Edit</a
+            >
             <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
           </td>
         </tr>
@@ -121,46 +49,430 @@
     </table>
   </div>
   <div class="subtable">
-      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProduct">Add new product</a>
+    <a
+      href="#"
+      class="btn btn-outline-secondary"
+      data-bs-toggle="modal"
+      data-bs-target="#filterProducts"
+      >Filter products</a
+    >
+    <a
+      href="#"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#createProduct"
+      >Add new product</a
+    >
   </div>
 </div>
-<div class="modal fade" id="createProduct" tabindex="-1" aria-labelledby="createProductLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="createProduct"
+  tabindex="-1"
+  aria-labelledby="createProductLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="createProductLabel">Add new product</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="createProductLabel">
+          Add new product
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form
+          id="product-form"
+          action="/admin/createItem"
+          method="post"
+          class="product-form"
+          enctype="multipart/form-data"
+        >
           <div class="mb-3">
-            <label for="productName" class="form-label">Product Name</label>
-            <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+            <span
+              ><label for="productName" class="form-label">Product Name</label>
+              <div id="name-error" style="color: red"></div
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              placeholder="Enter product name"
+              name="productName"
+            />
           </div>
           <div class="mb-3">
-            <label for="brand" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="brand" placeholder="Enter brand name">
+            <span
+              ><label for="brand" class="form-label">Brand</label>
+              <div id="brand-error" style="color: red"></div
+            ></span>
+            <input
+              type="text"
+              class="form-control"
+              id="brand"
+              placeholder="Enter brand name"
+              name="brand"
+            />
           </div>
           <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <input type="text" class="form-control" id="category" placeholder="Enter category">
+            <span
+              ><label for="category" class="form-label">Category</label>
+              <div id="category-error" style="color: red"></div
+            ></span>
+            <select class="form-select" id="category" name="category">
+              <option value="" disabled selected>Select a category</option>
+              <option value="Over-the-Counter Medications">
+                Over-the-Counter (OTC) Medications
+              </option>
+              <option value="Health and Wellness">Health and Wellness</option>
+              <option value="Personal Care">Personal Care</option>
+              <option value="Baby and Child Care">Baby and Child Care</option>
+              <option value="Home Health Care">Home Health Care</option>
+              <option value="Beauty and Cosmetics">Beauty and Cosmetics</option>
+              <option value="Diet and Nutrition">Diet and Nutrition</option>
+              <option value="Travel Health">Travel Health</option>
+              <option value="Specialty Health">Specialty Health</option>
+              <option value="Medical Devices">Medical Devices</option>
+              <option value="Pet Health">Pet Health</option>
+              <!-- Add other categories as needed -->
+            </select>
           </div>
           <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
+            <span
+              ><label for="quantity" class="form-label">Quantity</label>
+              <div id="quantity-error" style="color: red"></div
+            ></span>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              placeholder="Enter quantity"
+              name="quantity"
+            />
           </div>
           <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" placeholder="Enter price">
+            <span
+              ><label for="price" class="form-label">Price</label>
+              <div id="price-error" style="color: red"></div
+            ></span>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              placeholder="Enter price"
+              name="price"
+            />
+          </div>
+          <!-- Error area for Offers -->
+          <div class="mb-3">
+            <span><label for="offers" class="form-label">Offers</label></span>
+            <input
+              type="number"
+              class="form-control"
+              id="offers"
+              placeholder="Enter offers"
+              name="offers"
+              value="0"
+              min="0"
+              max="100"
+            />
+            <div id="offers-error" style="color: red"></div>
+          </div>
+          <div class="mb-3">
+            <span
+              ><label for="description" class="form-label">Description</label>
+              <div id="description-error" style="color: red"></div
+            ></span>
+            <textarea
+              class="form-control"
+              id="description"
+              rows="3"
+              placeholder="Enter description"
+              name="description"
+            ></textarea>
+          </div>
+
+          <div class="mb-3">
+            <div id="images-error" style="color: red"></div>
+
+            <div id="my-dropzone" class="dropzone"></div>
+            <div id="preview"></div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="filterProducts"
+  tabindex="-1"
+  aria-labelledby="filterProductsLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form
+          id="product-form"
+          class="product-form"
+          action="/admin/products"
+          method="GET"
+        >
+          <div class="mb-3">
+            <span><label for="brand" class="form-label">Brand</label></span>
+            <input
+              type="text"
+              class="form-control"
+              name="brand"
+              placeholder="Enter brand name"
+            />
+          </div>
+          <div class="mb-3">
+            <span
+              ><label for="description" class="form-label"
+                >Search..</label
+              ></span
+            >
+            <input
+              class="form-control"
+              name="title"
+              rows="3"
+              placeholder="Enter title"
+            />
+          </div>
+          <div class="mb-3">
+            <span
+              ><label for="price" class="form-label">Min. Price</label></span
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="price_min"
+              placeholder="Enter minimum price"
+            />
+          </div>
+          <div class="mb-3">
+            <span
+              ><label for="price" class="form-label">Max. Price</label></span
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="price_max"
+              placeholder="Enter maximum price"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="editProduct"
+  tabindex="-1"
+  aria-labelledby="editProductLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editProductLabel">Edit Product</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          id="edit-product-form"
+          action="/admin/editItem"
+          method="post"
+          class="product-form"
+          enctype="multipart/form-data"
+        >
+          <!-- Error area for Product Name -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-product-name" class="form-label"
+                >Product Name</label
+              ></span
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="edit-product-name"
+              placeholder="Enter product name"
+              name="productName"
+            />
+            <div id="edit-name-error" style="color: red"></div>
+          </div>
+
+          <!-- Error area for Brand -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-brand" class="form-label">Brand</label></span
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="edit-brand"
+              placeholder="Enter brand name"
+              name="brand"
+            />
+            <div id="edit-brand-error" style="color: red"></div>
+          </div>
+
+          <!-- Error area for Category -->
+          <!-- Dropdown for Category -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-category" class="form-label"
+                >Category</label
+              ></span
+            >
+            <select class="form-select" id="edit-category" name="category">
+              <option value="" disabled selected>Select a category</option>
+              <option value="Over-the-Counter Medications">
+                Over-the-Counter (OTC) Medications
+              </option>
+              <option value="Health and Wellness">Health and Wellness</option>
+              <option value="Personal Care">Personal Care</option>
+              <option value="Baby and Child Care">Baby and Child Care</option>
+              <option value="Home Health Care">Home Health Care</option>
+              <option value="Beauty and Cosmetics">Beauty and Cosmetics</option>
+              <option value="Diet and Nutrition">Diet and Nutrition</option>
+              <option value="Travel Health">Travel Health</option>
+              <option value="Specialty Health">Specialty Health</option>
+              <option value="Medical Devices">Medical Devices</option>
+              <option value="Pet Health">Pet Health</option>
+              <!-- Add other categories as needed -->
+            </select>
+            <div id="edit-category-error" style="color: red"></div>
+          </div>
+
+          <!-- Error area for Quantity -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-quantity" class="form-label"
+                >Quantity</label
+              ></span
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="edit-quantity"
+              placeholder="Enter quantity"
+              name="quantity"
+            />
+            <div id="edit-quantity-error" style="color: red"></div>
+          </div>
+
+          <!-- Error area for Price -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-price" class="form-label">Price</label></span
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="edit-price"
+              placeholder="Enter price"
+              name="price"
+            />
+            <div id="edit-price-error" style="color: red"></div>
+          </div>
+          <!-- Error area for Offers -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-offers" class="form-label">Offers</label></span
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="edit-offers"
+              placeholder="Enter offers"
+              name="offers"
+              value="0"
+              min="0"
+              max="100"
+            />
+            <div id="edit-offers-error" style="color: red"></div>
+          </div>
+          <!-- Error area for Description -->
+          <div class="mb-3">
+            <span
+              ><label for="edit-description" class="form-label"
+                >Description</label
+              ></span
+            >
+            <textarea
+              class="form-control"
+              id="edit-description"
+              rows="3"
+              placeholder="Enter description"
+              name="description"
+            ></textarea>
+            <div id="edit-description-error" style="color: red"></div>
+          </div>
+
+          <div class="mb-3">
+            <div id="images-error" style="color: red"></div>
+            <div id="my-dropzoneedit" class="dropzone"></div>
+            <div id="edit-preview">
+              <ul id="edit-previous-images"></ul>
+            </div>
+          </div>
+
+          <!-- Additional input fields or hidden inputs based on your requirements -->
+          <input type="hidden" id="edit-product-id" name="productId" value="" />
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <%-include("./admin-partials/footer.ejs")%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/js/dropzone.js"></script>

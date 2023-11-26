@@ -21,8 +21,7 @@ button{
     border: none;
     border-radius: 0;
 }
-.cartcontainer,
-.icontainer{
+.container{
     max-width: 1480px;
     margin-left: auto;
     margin-right: auto;
@@ -46,12 +45,7 @@ button{
     min-height: 302px;
     margin-bottom: 50px;
 }
-.insidewrapper{
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-}
-.Card{
+.card{
     position: relative;
     margin-bottom: 18px;
     background:#fff;
@@ -129,9 +123,15 @@ tbody td{
     top: 0;
     left: 0;
 }
-.item_title a{
+.item_title .inner_title{
     font-size: 14px;
     font-weight: 500;
+        display: block;
+        margin-bottom: 4px;
+        line-height: 1.5;
+        transition: color .2s ease-in-out;
+        color: black;
+
 }
 .prices{
     display: inline-block;
@@ -160,6 +160,7 @@ tbody td{
     height: 100%;
     transition: color .2s ease-in-out;
     touch-action: manipulation;
+    cursor: pointer;
 }
 
 .quantityvalue{
@@ -185,7 +186,7 @@ tbody td{
     font-weight: 700;
     color: #000;
 }
-.innercard{
+.card__Section{
     background: #f3f3f3;
     position: relative;
     padding: 20px;
@@ -270,12 +271,59 @@ tbody td{
     float: right;
     font-weight: 700;
 }
-.carrtform{
-    flex: 1;
+.quantity_remove{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 1;
+}
+@media screen and (max-width:480px){
+    .card{
+        margin-bottom: 0;
+    } 
+    tr{
+        padding-bottom: 20px;
+    }
+}
+@media screen and (max-width:640px){
+    .c_cart{
+        padding: 0;
+    }
+    .hidden-phone{
+        display: none!important;
+    }
+    .table-wrapper table{
+        margin-left: 20px;
+    }
+    .table-wrapper table,
+    table tbody{
+        display: block;
+        width: auto;
+    }
+    tbody tr{
+        display: block;
+    }
+    table td:first-child{
+        padding-left:0;
+    }
+    table .td_upper{
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    }
+    .item_image{
+        width: 80px;
+        min-width: 80px;
+    }
+    .line-item {
+    margin-top: 12px;
+    }
+    tr{
+        background-color: #fff;
+    }
 }
 @media screen and (min-width:641px){
-    .cartcontainer,
-    .icontainer{
+    .container{
         padding: 0 40px;
     }
     .cartheader{
@@ -285,9 +333,9 @@ tbody td{
     }
     .cartheader h1{
         font-size: 29px;
-    line-height: 1.43;
+        line-height: 1.43;
     }
-    .Card{
+    .card{
         margin-bottom: 30px;
         border-radius: 3px;
         border: 1px solid #e1e3e4;
@@ -311,19 +359,19 @@ tbody td{
         width: 90px;
         min-width: 90px;
     }
-    .item_title a{
-        display: block;
-        margin-bottom: 4px;
-        line-height: 1.5;
-        transition: color .2s ease-in-out;
-        color: black;
-    }
-    .innercard{
+    .card__Section{
         padding: 30px;
     }
-    
+    .hidden-table{
+        display:none;
+    }
+    .quantity_remove{
+    display: block;
+    width: max-content;
+    margin: 10px auto 0;
+    }
 }
-@media scree and (min-width:1000px){
+@media screen and (min-width:1000px){
     .cartheader{
         flex-direction: column;
         align-items: flex-start;
@@ -343,7 +391,7 @@ tbody td{
         white-space: normal;
         overflow: visible;
     }
-    .carrtform{
+    .cart-recap{
     position: absolute;
     right:40px;
     top: 0;
@@ -360,7 +408,7 @@ tbody td{
     .insidewrapper{
         width: calc(100% - 430px);
     }
-.carrtform{
+    .cart-recap{
     width:400px;
 }
 }

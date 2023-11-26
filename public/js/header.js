@@ -1,8 +1,7 @@
 const nav = document.querySelector(".heeader"),
   navOpenBtn = document.querySelector(".navOpenBtn"),
   navCloseBtn = document.querySelector(".navCloseBtn");
-  const links = document.querySelector(".nav-links");
-
+const links = document.querySelector(".nav-links");
 
 navOpenBtn.addEventListener("click", () => {
   nav.classList.add("openNav");
@@ -17,16 +16,14 @@ navOpenBtn.addEventListener("click", () => {
 });
 navCloseBtn.addEventListener("click", () => {
   nav.classList.remove("openNav");
-
-  
 });
 
-const search = document.querySelector('.search');
-    const clear = document.querySelector('.clear');
-    search.onclick = function(){
-      document.querySelector(".searchcon").classList.toggle('active');
-    }
+const search = document.querySelector(".search");
+const clear = document.querySelector(".clear");
+search.onclick = function () {
+  document.querySelector(".searchcon").classList.toggle("active");
+};
 
-    clear.onclick = function(){
-      document.getElementById("search").value='';
-    }
+clear.onclick = function () {
+  document.getElementById("search").value = "";
+};
