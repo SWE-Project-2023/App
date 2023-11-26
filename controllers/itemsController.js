@@ -355,4 +355,33 @@ itemsController.editItem = async (req, res) => {
   }
 };
 
+itemsController.displayitem = async (req, res) => {
+  try {
+    
+    const productId = req.query.id;
+    console.log(productId);
+
+    // SQL query to fetch the product details from the database based on the product ID
+    const sql = "SELECT * FROM item WHERE item_id = ?";
+   
+    const [results] = await query(sql, [productId]);
+
+    // Check if a product was found
+    if (results.length > 0) {
+      const product = results[0];
+     
+      res.render("itempage.ejs", {user: req.session.user===undefined?"":req.session.user, product });
+    } else {
+      // If no product is found, you might want to handle this case (e.g., show an error page)
+      res.status(404).send("Product not found");
+    }
+  } catch (error) {
+    console.error(error.message);
+    // Handle any errors that occurred during the database query
+    res.status(500).send("Internal Server Error");
+  }
+
+
+};
+
 export default itemsController;

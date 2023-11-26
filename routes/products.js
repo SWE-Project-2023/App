@@ -1,10 +1,9 @@
 import express from "express";
+import itemsController from "../controllers/itemsController.js";
 const router = express.Router();
 
-router.get("/itempage", function (req, res, next) {
-  res.render("itempage", {user: req.session.user===undefined?"":req.session.user});
-});
 
+router.get("/itempage", itemsController.displayitem);
 const category = "Sample Category";
 const products = [
   {
