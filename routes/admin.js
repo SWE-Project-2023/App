@@ -1,5 +1,5 @@
 // Require
-const express = require("express");
+import express from"express";
 const router = express.Router();
 
 router.get("/", function (req, res, next) {
@@ -33,4 +33,4 @@ router.get("/orders", function (req, res, next) {
   }
 });
 
-module.exports = router;
+export default router;

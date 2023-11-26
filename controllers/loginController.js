@@ -1,6 +1,6 @@
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 const loginController = {}; 
-const mysql = require("mysql2");
+import mysql from "mysql2";
 
 
 // loginController.login = async (req, res) => {
@@ -83,4 +83,4 @@ loginController.login = async (req, res) => {
 	});
   };
 
-module.exports = loginController;
+export default loginController;
