@@ -1,18 +1,8 @@
 const loginController = {}; 
-
 import bcrypt from "bcryptjs";
-import mysql from "mysql2/promise"; 
+import execute from "../queries/userQueries.js";
 //function to connect to sql
 
-
-const connection = await mysql.createPool({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "qanaa",
-	port: 3306,
-  });
-const sqlquery = (sql, params) => connection.execute(sql, params);
 loginController.login = async (req, res) => {
     console.log("Login request received");
     const { email, password } = req.body;
@@ -23,9 +13,7 @@ loginController.login = async (req, res) => {
     }
 
     // Check if the email exists in the database
-    const query = 'SELECT * FROM user WHERE email = ?';
-    const [result, fields] = await sqlquery(query, [email]);
-
+    const result = await execute.getUserByEmail(email);
     if (result.length === 0) {
         return res.status(400).send('Invalid email or password');
     }
