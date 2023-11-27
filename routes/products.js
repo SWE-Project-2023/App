@@ -22,18 +22,7 @@ const products = [
   // Add more sample products here
 ];
 
-router.get("/productlist", (req, res) => {
-  res.render(
-    "productList.ejs",
-    {
-      category,
-      products,
-      totalPages: 1,
-      currentPage: 1,
-      user: req.session.user === undefined ? "" : req.session.user
-    }
-  );
-});
+router.get("/productlist", itemsController.getbyCategory);
 
 router.get("/cart", function (req, res, next) {
   res.render("cart", {

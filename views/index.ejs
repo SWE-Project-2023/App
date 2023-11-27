@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="container">
-			<a href="#" class="category-link">
+			<a href="/product/productlist?category=medicine" class="category-link">
 				<div class="category">
 					<i class="fas fa-pills icon" style="font-size: 35px;"></i>
 					<h2>Medications</h2>
@@ -56,7 +56,7 @@
 					<h2>Hand & Body</h2>
 				</div>
 			</a>
-			<a href="#" class="category-link">
+			<a href="product/productlist?category=HealthSupplements" class="category-link">
 			<div class="category">
 				<i class="fas fa-heartbeat icon"></i>
 				<h2>Health Supplements</h2>
@@ -68,7 +68,7 @@
 				<h2>Oral Care</h2>
 			</div>
 			</a>
-			<a href="#" class="category-link">
+			<a href="/product/productlist?category=self-care" class="category-link">
 			<div class="category">
 				<i class="fas fa-bacteria icon"></i>
 				<h2>Skincare</h2>
@@ -105,9 +105,9 @@
 								
 								<div class="product_Item">
 									<div class="product_img">
-									<a href="/product/itempage" class="product_item_img">
+									<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_img">
 										<div class="ratio">
-											<img src="<%=product.item_image%>" alt="">
+											<img src="<%=product.item_image%>" alt="<%=product.item_image%>">
 										</div>
 									</a>
 									<div class="links">
