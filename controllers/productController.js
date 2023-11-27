@@ -1,4 +1,4 @@
-import execute from "../queries/productQueries";
+import execute from "../queries/productQueries.js";
 
 const productController = {
   searchItems: async (options) => {

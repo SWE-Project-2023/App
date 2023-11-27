@@ -177,6 +177,30 @@ const execute = {
       console.error(error.message);
       throw error;
     }
+  },
+  displayitem : async (productId) => {
+      // SQL query to fetch the product details from the database based on the product ID
+    const sql = "SELECT * FROM item WHERE item_id = ?";
+    try {
+      const [result] = await query(sql, [productId]);
+      return result;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+    
+  },
+  getbyCategory :async (category) =>{
+    // SQL query to fetch items by category
+    const sql = `SELECT * FROM item WHERE item_cat = ?`;
+      
+    try {
+      const [results] = await query(sql, [category]);
+      return results;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
   }
 };
 
