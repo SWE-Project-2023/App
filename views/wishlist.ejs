@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/wishlist.css">
+  <title>Wishlist</title>
+</head>
+<body>
+    <%-include("./partials/header.ejs")%>
+    <div class="wishlist">
+    
+      <div class="wishlist-item">
+        <img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt="Item 1" class="wishlist-image">
+        <div class="wishlist-details">
+          <div class="item-name">Item 1 Name</div>
+          <div class="item-price">$19.99</div>
+          <div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        </div>
+        <div>
+            <button class="remove-button" onclick="removeFromWishlist(this)"><i class="fas fa-trash"></i> Remove</button>
+            <button class="quick-view-button" onclick="quickView(this)"><i class="fas fa-search"></i> Quick View</button>
+          </div>
+      </div>
+    
+      <div class="wishlist-item">
+        <img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt="Item 2" class="wishlist-image">
+        <div class="wishlist-details">
+          <div class="item-name">Item 2 Name</div>
+          <div class="item-price">$29.99</div>
+          <div class="item-description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        </div>
+        <div>
+            <button class="remove-button" onclick="removeFromWishlist(this)"><i class="fas fa-trash"></i> Remove</button>
+          <button class="quick-view-button" onclick="quickView(this)"><i class="fas fa-search"></i> Quick View</button>
+        </div>
+        </div>
+    </div>
+  <!-- Add more wishlist items as needed -->
+  <%-include("./partials/footer.ejs")%>
+
+  <script>
+    function removeFromWishlist(button) {
+      const wishlistItem = button.parentElement;
+      wishlistItem.style.display = 'none';
+    }
+    function quickView(button) {
+
+    }
+  </script>
+</body>
+</html>

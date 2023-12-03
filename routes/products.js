@@ -29,5 +29,10 @@ router.get("/cart", function (req, res, next) {
     user: req.session.user === undefined ? "" : req.session.user,
   });
 });
+router.get("/wishlist", function (req, res, next) {
+  res.render("wishlist", {
+    user: req.session.user === undefined ? "" : req.session.user,
+  });
+});
 
 export default router;
