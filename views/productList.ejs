@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/productList.css" />
+
   </head>
   <body>
-    <%- include("./partials/header.ejs")%>
+    <%- include("./partials/header.ejs", { userId: user.id }) %>
+
     <div class="container">
       <div class="page_header">
         <nav>
@@ -66,14 +68,17 @@
                         <div class="product_item_info_inner">
                           <a href="/product/itempage" class="product_title"><%=product.item_title%></a>
                           <div class="product_item_price">
-                            <span class="price">EGP 490.00</span>
+                            <span class="price">EGP <%=product.item_price%></span>
                           </div>
                         </div>
-                        <form action="" method="post">
+                  
+                        <form onsubmit="addToBag(event)" data-product-id="<%= product.item_id %>" data-user-id = "<%=user.user_id%>">
                           <button type="submit" class="add_to_bag_btn">
-                            Add to bag  
+                            Add to Bag
                           </button>
                         </form>
+                        
+                        
                       </div>
                     </div>
                   </div>
@@ -86,5 +91,10 @@
         </div>
       </div>
     </div>
+    <!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="/js/cart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </body>
 </html>

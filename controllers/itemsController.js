@@ -306,5 +306,36 @@ itemsController.getbyCategory = async(req,res)=>{
     res.status(500).send('Internal Server Error');
   }
 };
+itemsController.addtoCart = async(req,res) =>{
+  try{
+    const itemId = req.body.itemId;
+    const userId=req.body.userId;
+    console.log(itemId);
+    console.log(userId);
+    const results = await execute.addtoCart(itemId,userId);
+    console.log(results);
+    if (results.length > 0) {
+      const products = results[0];
+    console.log(products);
+      res.send(products);
+    } else {
+      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+    }
+  }catch(error){
+    console.error(error.message);
+    res.status(500).send('Internal Server Error');
+  }
+  };
+  itemsController.additem = async(req,res)=>{
+    const userId = req.body.userId;
+    console.log("iddd "+userId);
+    const results = await execute.additem(userId);
+    if (results.length > 0) {
+      const products = results;
+      res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
+    } else {
+      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+    }
+  };
 
 export default itemsController;

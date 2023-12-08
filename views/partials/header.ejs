@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <title>Document</title>
 </head>
 <body>
@@ -35,12 +37,29 @@
                     <a href="/logout"><i class='bx bx-exit' ></i></a>
                 <% } %>
                 <div class="wishlist">
-                <a href="/product/wishlist" class="header_icon"><i class='bx bx-heart'></i></a>
-                <a href ="/product/wishlist" class="header_item_link">Wishlist</a>
+                <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
+                <a href ="" class="header_item_link">Wishlist</a>
             </div>
                     <div class="cart">
-                <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
-                <a href ="/product/cart" class="header_item_link">Cart</a>
+                <a href="" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
+                <a href ="" class="header_item_link">Cart</a>
+                <form action="/product/cart-add-bag" class="min-cart" aria-hidden="true"  method="post" >
+                    <div class="min-cart_inner">
+                        <div class="min-cart_content" >
+                            <div class="min-cart_item_list" id="cart">
+                                
+                            </div>
+                        </div>
+                        <div class="min-cart_recap">
+                        <input type="hidden" id="userId" name="userId" value="">
+                         <input type="hidden" id="productIds" name="productIds" value="">
+                        <button type="submit" class="viewcart">viewcart</button>
+                        <button type="submit" class="checkout">checkout</button>
+                            
+                        </div>
+                    </div>
+                </form>
+              
             </div>
 
             </div>
