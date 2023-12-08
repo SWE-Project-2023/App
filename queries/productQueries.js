@@ -263,6 +263,27 @@ const execute = {
     console.error(error.message);
     throw error;
   }
+},
+getCart:async(userId)=>{
+  const sql = `
+  SELECT c.user_id, c.item_id,c.quantity, i.item_title,
+  i.item_brand,
+  i.item_cat,
+  i.item_details,
+  i.item_quantity,
+  i.item_price,
+  i.item_offers
+  FROM cart c
+  JOIN item i ON c.item_id = i.item_id
+  WHERE c.user_id = ?;
+`;
+try {
+  const [results]= await query(sql, [userId]);
+return results;
+} catch (error) {
+console.error(error.message);
+throw error;
+}
 }
 };
 
