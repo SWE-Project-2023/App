@@ -32,6 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% products.forEach(product => {%>
                                     <tr>
                                         <td class="td_upper">
                                             <div class="prodductinfo">
@@ -41,16 +42,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="item_title">
-                                                    <a href="" class="inner_title">Panadol Advance - 24 Tablets</a>
+                                                    <a href="" class="inner_title"><%=product.item_title%></a>
                                                     <div class="item_price">
-                                                        <span class="prices">EGP21.50</span>
+                                                        <span class="prices"><%=product.item_price%></span>
                                                     </div>
                                                     <div class="line-item hidden-table">
                                                         <div class="quantity_range">
                                                             <button type="button"  onclick="decrement()" class="quan_button">
                                                                 <i class="fa-solid fa-minus"></i>
                                                             </button>
-                                                            <input type="text" class="quantityvalue"  value="1">
+                                                            <input type="text" class="quantityvalue"  value="<%=product.quantity%>">
                                                             <button type="button"  onclick="increment()" class="quan_button">
                                                                 <i class="fa-solid fa-plus"></i>
                                                             </button>
@@ -66,7 +67,7 @@
                                                     <button type="button"  onclick="decrement()" class="quan_button">
                                                         <i class="fa-solid fa-minus"></i>
                                                     </button>
-                                                    <input type="text" class="quantityvalue"  value="1">
+                                                    <input type="text" class="quantityvalue"  value="<%=product.quantity%>">
                                                     <button type="button"  onclick="increment()" class="quan_button">
                                                         <i class="fa-solid fa-plus"></i>
                                                     </button>
@@ -77,10 +78,10 @@
                                             </div>
                                         </td>
                                         <td class="td_right hidden-phone">
-                                            <span>EGP 21.50</span>
+                                            <span>EGP  <%= product.item_price * product.quantity.toFixed(2) %></span>
                                         </td>
                                     </tr>
-
+                                    <%})%>
                                 </tbody>
                             </table>
                         </div>

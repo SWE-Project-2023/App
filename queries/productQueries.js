@@ -201,7 +201,69 @@ const execute = {
       console.error(error.message);
       throw error;
     }
+  },
+ addtoCart: async (itemId, userId) => {
+  // Check if the item already exists in the user's cart
+  const checkIfExistsQuery = 'SELECT * FROM cart WHERE user_id = ? AND item_id = ?';
+  const sql = `
+  SELECT c.user_id, c.item_id, i.item_title,
+  i.item_brand, i.item_cat, i.item_details,
+   c.quantity, i.item_price, i.item_offers
+  FROM cart c
+  JOIN item i ON c.item_id = i.item_id
+  WHERE c.user_id = ? AND c.item_id = ?;
+`;
+  try {
+    const [existingCartItem] = await query(checkIfExistsQuery, [userId, itemId]);
+
+    if (existingCartItem.length>0) {
+  console.log("hi2")
+
+      // If the item already exists, update the quantity
+      const updateQuantityQuery = 'UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND item_id = ?';
+      await query(updateQuantityQuery, [userId, itemId]);
+      
+      // Return information about the updated item
+      const [updatedItem] = await query(sql,[userId,itemId]);
+      return updatedItem;
+    } else {
+  console.log("hi3")
+
+      // If the item doesn't exist, insert a new row
+      const insertQuery = 'INSERT INTO cart (user_id, item_id, quantity) VALUES (?, ?, 1)';
+      await query(insertQuery, [userId, itemId]);
+
+      // Return information about the inserted item
+      const [insertedItem] = await query(sql, [userId,itemId]);
+      return insertedItem;
+    }
+  } catch (error) {
+    console.error(error.message);
+    throw error;
   }
+},
+
+  additem: async (productIds) =>{
+    const sql = `
+    SELECT c.user_id, c.item_id,c.quantity, i.item_title,
+    i.item_brand,
+    i.item_cat,
+    i.item_details,
+    i.item_quantity,
+    i.item_price,
+    i.item_offers
+    FROM cart c
+    JOIN item i ON c.item_id = i.item_id
+    WHERE c.user_id = ?;
+  `;
+    try {
+      const [results]= await query(sql, [productIds]);
+    return results;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+}
 };
 
 export default execute;
