@@ -16,17 +16,14 @@ function addToBag(event) {
   data: { itemId: productId ,userId:userId},
   success: function (response) {
     console.log('Server response:', response);
-  
-    // Extract properties from the object
-    const itemName = response.item_title;
-    const itemPrice = response.item_price;
     const quantity = response.quantity;
-    console.log(quantity);
-    
+    const itemId = response.item_id;
+
+    // to pass the user_id to the input tag in the form
     const userIdInput = $('#userId');
     const currentuserIds = userIdInput.val(userId);
     if (response.quantity > 1) {
-      updateCartItemQuantity(response.item_id,quantity);
+      updateCartItemQuantity(itemId,quantity);
     }else{
     createCartItemDiv(response);}
 
@@ -78,7 +75,7 @@ function addToBag(event) {
     const itemPrice = response.item_price;
     const quantity = response.quantity;
     const itemId = response.item_id
-    console.log("hhh"+itemId);
+
     
     // Create the cart item container
     
