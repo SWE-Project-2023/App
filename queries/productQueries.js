@@ -217,7 +217,7 @@ const execute = {
     const [existingCartItem] = await query(checkIfExistsQuery, [userId, itemId]);
 
     if (existingCartItem.length>0) {
-  console.log("hi2")
+
 
       // If the item already exists, update the quantity
       const updateQuantityQuery = 'UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND item_id = ?';
@@ -227,7 +227,7 @@ const execute = {
       const [updatedItem] = await query(sql,[userId,itemId]);
       return updatedItem;
     } else {
-  console.log("hi3")
+  
 
       // If the item doesn't exist, insert a new row
       const insertQuery = 'INSERT INTO cart (user_id, item_id, quantity) VALUES (?, ?, 1)';
@@ -284,6 +284,17 @@ return results;
 console.error(error.message);
 throw error;
 }
+},
+deleteitem:async(userId,productId)=>{
+  const sql = `DELETE FROM cart WHERE user_id = ? AND item_id = ?`;
+  try {
+    const [results]= await query(sql, [userId,productId]);
+    console.log("deleteeed")
+  return results;
+  } catch (error) {
+  console.error(error.message);
+  throw error;
+  }
 }
 };
 

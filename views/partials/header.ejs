@@ -34,15 +34,18 @@
                 <a href ="/auth/signup" class="header_item_link">Account</a>
             </div>
                 <% } else { %>
-                    <a href="/logout"><i class='bx bx-exit' ></i></a>
+                   <div class="logout">
+                     <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
+                     <a href ="" class="header_item_link"><%=user.user_fname%></a>
+                    </div>
                 <% } %>
                 <div class="wishlist">
                 <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
                 <a href ="" class="header_item_link">Wishlist</a>
             </div>
                     <div class="cart">
-                <a href="" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
-                <a href ="" class="header_item_link">Cart</a>
+                <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
+                <a href ="/product/cart" class="header_item_link">Cart</a>
                 <form action="/product/cart-add-bag" class="min-cart" aria-hidden="true"  method="post" >
                     <div class="min-cart_inner">
                         <div class="min-cart_content" >

@@ -72,7 +72,7 @@
                                                         <i class="fa-solid fa-plus"></i>
                                                     </button>
                                                 </div>
-                                                <a href="" class="delete">
+                                                <a href="" class="delete" data-product-id="<%=product.item_id%>">
                                                     <i class='bx bx-trash'></i> Delete
                                                 </a>
                                             </div>
@@ -119,6 +119,7 @@
             
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function increment() {
             const quantityInputs = document.getElementsByClassName('quantityvalue');
@@ -148,6 +149,8 @@
             }
         }
         </script>
+        <script src="/js/cart.js"></script>
+       
         
 </body>
 </html>

@@ -176,3 +176,23 @@ function updateCartItemQuantity(itemId,quantity) {
 
   quantityInput.val(quantity);
 }
+
+$('.delete').on('click', function(event) {
+  event.preventDefault();
+  const productId = $(this).data('product-id');
+
+  // Use AJAX to send a request to delete the item from the cart
+  $.ajax({
+      url: '/product/cart/delete', // Replace with your server endpoint for deleting from the cart
+      method: 'POST',
+      data: { productId: productId },
+      success: function(response) {
+          console.log('Item deleted from cart:', response);
+          $(this).closest('tr').remove();
+          window.location.href = '/product/cart';
+      },
+      error: function(error) {
+          console.error('Error deleting item from cart:', error);
+      }
+  });
+});
