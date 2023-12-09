@@ -15,5 +15,7 @@ router.get("/wishlist", function (req, res, next) {
 });
 router.post("/cart/add",itemsController.addtoCart);
 router.post("/cart-add-bag",itemsController.additem);
+router.post("/cart/delete",itemsController.deleteitem);
+
 
 export default router;

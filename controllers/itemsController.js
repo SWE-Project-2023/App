@@ -349,4 +349,17 @@ itemsController.addtoCart = async(req,res) =>{
     }
   };
 
+  itemsController.deleteitem = async(req,res)=>{
+    const userId = req.session.user.user_id;
+    const productId = req.body.productId;
+    const results = await execute.deleteitem(userId,productId);
+    try{
+    res.json({ success: true, message: 'Item deleted from cart' });
+  } catch (error) {
+      console.error('Error deleting item from cart:', error);
+      // Send an error response
+      res.status(500).json({ success: false, message: 'Error deleting item from cart' });
+  }
+  };
+
 export default itemsController;
