@@ -1,19 +1,8 @@
+const userController = {};
 import execute from "../queries/userQueries.js";
 
-const userController = {
-  getUsers: async () => {
-    return await execute.getAllUsers();
-  },
-  deleteUser: async (id) => {
-    return await execute.deleteUser(id);
-  },
-  toggleAdmin: async (id) => {
-    return await execute.toggleAdmin(id);
-  },
-  // Assuming execute.getUserDetails is a function that queries the database for user details
-
-  getUserDetails: async (req, res) => {
-    const userId = parseInt(req.body.userId);
+userController.getUserDetails = async (req, res) => {
+  const userId = parseInt(req.body.userId);
 
     try {
       // Execute the query to get user details
@@ -42,19 +31,25 @@ const userController = {
       console.error("Error fetching user details:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
-  },
-  editUser: async (req, res) => {
-    // Extract data from the request body
-    const {
+  };
+  userController.getUsers = async () => {
+    return await execute.getAllUsers();
+  };
+  userController.deleteUser = async (id) => {
+    return await execute.deleteUser(id);
+  };
+  userController.toggleAdmin = async (id) => {
+    return await execute.toggleAdmin(id);
+  };
+  userController.editUser = async (req, res) => {
+     // Extract data from the request body
+     const {
       userId,
       userFname,
       userLname,
-      userEmail,
+      email,
       userAddress,
-      userIsAdmin,
     } = req.body;
-
-    console.log("req.body", req.body);
 
     // Backend validation
     let errors = {};
@@ -71,8 +66,8 @@ const userController = {
       errors.userLname = "Please enter the last name";
     }
 
-    if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
-      errors.userEmail = "Please enter a valid email address";
+    if (!email) {
+      errors.email = "Please enter a valid email address";
     }
 
     if (!userAddress || userAddress.trim() === "") {
@@ -93,9 +88,8 @@ const userController = {
         userId,
         userFname,
         userLname,
-        userEmail,
+        email,
         userAddress,
-        userIsAdmin
         // Add more attributes as needed
       );
 
@@ -105,9 +99,9 @@ const userController = {
     } catch (error) {
       console.error("Error updating user:", error);
       errors.general = "Failed to update user";
-      res.render("/admin/users", { errors });
+      //res.redirect("/admin/users");
     }
-  },
-};
+  };
+
 
 export default userController;

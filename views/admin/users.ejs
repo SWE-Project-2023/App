@@ -57,7 +57,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="edit-user-form" action="/admin/editUser" method="post" class="user-form" enctype="multipart/form-data">
+        <form id="edit-user-form" action="/admin/editUser" method="post" class="user-form">
           <!-- User ID (hidden) -->
           <input type="hidden" id="edit-user-id" name="userId" value="" />
 
@@ -87,13 +87,6 @@
             <label for="edit-user-address" class="form-label">Address</label>
             <input type="text" class="form-control" id="edit-user-address" placeholder="Enter address" name="userAddress" />
             <div id="edit-address-error" class="invalid-feedback"></div>
-          </div>
-
-          <!-- Admin status -->
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="edit-user-admin" name="userIsAdmin">
-            <label class="form-check-label" for="edit-user-admin">Admin?</label>
-            <div id="edit-admin-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Additional input fields or hidden inputs based on your requirements -->
