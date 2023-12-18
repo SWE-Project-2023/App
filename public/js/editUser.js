@@ -1,6 +1,19 @@
 // editUser.js
 
 $(document).ready(function () {
+  $('.delete-user-btn').click(function () {
+    var userId = $(this).data('user-id');
+    // Set the user ID for deletion in the confirmation modal
+    $('#confirmDeleteBtn').data('user-id', userId);
+  });
+
+  // Handle confirmation modal delete button click
+  $('#confirmDeleteBtn').click(function () {
+    var userId = $(this).data('user-id');
+    // Redirect or trigger the server-side deletion logic here
+    window.location.href = '/admin/users/delete/' + userId;
+  });
+  
   $(".edit-user-btn").click(function () {
     var userId = $(this).data("user-id");
 

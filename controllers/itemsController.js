@@ -392,5 +392,51 @@ itemsController.addtoCart = async(req,res) =>{
       res.status(500).json({ success: false, message: 'Error deleting item from cart' });
   }
   };
-
+  itemsController.deleteProduct = async (id) => {
+    try {
+  
+      const productId = id;
+  
+      // Step 1: Retrieve all images associated with the product
+      const images = await execute.getImagesByProductId(productId);
+      
+      // Log the images retrieved
+      console.log('Images associated with product:', images);
+  
+      // Step 2: Delete and unlink each image
+      for (const image of images) {
+        const imagePath = image.image_path;
+  
+        if (fs.existsSync("public/images/" + imagePath)) {
+          fs.unlink("public/images/" + imagePath, (error) => {
+            if (error) {
+              console.log("Error deleting file:", error);
+              // Handle the error if necessary
+            } else {
+              console.log("File deleted successfully:", imagePath);
+            }
+          });
+        }
+  
+        // Log the image deletion from the database
+        console.log('Deleting image from the database:', imagePath);
+  
+        // Step 3: Delete the image from the database
+        await execute.deleteImageByPath(imagePath);
+      }
+  
+      // Log the product deletion from the database
+      console.log('Deleting product from the database:', productId);
+  
+      // Step 4: Delete the product from the database
+      await execute.deleteProduct(productId);
+      
+    } catch (error) {
+      // Log any errors that occur during the deletion process
+      console.error('Error deleting product:', error);
+      
+    }
+  };
+  
+  
 export default itemsController;
