@@ -68,19 +68,13 @@ const execute = {
         user_lname,
         email,
         user_address,
-        user_isAdmin
       ) => {
-        const sql = `
-          UPDATE user 
-          SET user_fname = ?, user_Lname = ?, email = ?, user_address = ?, user_isAdmin = ? 
-          WHERE user_id = ?
-        `;
+        const sql = `UPDATE user SET user_fname = ?, user_Lname = ?, email = ?, user_address = ? WHERE user_id = ?`;
         const params = [
           user_fname,
           user_lname,
           email,
           user_address,
-          user_isAdmin,
           user_id,
         ];
       

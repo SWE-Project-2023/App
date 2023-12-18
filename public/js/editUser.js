@@ -1,6 +1,6 @@
 // editUser.js
 
-$(document).ready(function async() {
+$(document).ready(function () {
   $(".edit-user-btn").click(function () {
     var userId = $(this).data("user-id");
 
@@ -31,6 +31,7 @@ $(document).ready(function async() {
   // You can add more event handlers or functions related to the edit user functionality here
   // For example, handling form submission and sending updated user details to the server
   $("#edit-user-form").submit(function (event) {
+    console.log("Edit user form submitted");
     event.preventDefault();
   
     // Validate form fields (modify the validation functions accordingly)
@@ -50,18 +51,22 @@ $(document).ready(function async() {
     }
   
     // Create FormData object
-    let editUserForm = $("#edit-user-form");
-    let editUserFormData = new FormData(editUserForm[0]);
-  
+    let editUserFormData = {
+      userId: $("#edit-user-id").val(),
+      userFname: $("#edit-user-fname").val(),
+      userLname: $("#edit-user-lname").val(),
+      email: $("#edit-user-email").val(),
+      userAddress: $("#edit-user-address").val()
+    };
+
     console.log("editUserFormData", editUserFormData);
   
     // AJAX request for form submission
     $.ajax({
       type: "POST",
       url: "/admin/editUser",
-      data: editUserFormData,
-      processData: false,
-      contentType: false,
+      data: JSON.stringify(editUserFormData),
+      contentType: 'application/json',
       success: function (response) {
         console.log("Edit user form submitted successfully");
         console.log("Server response: " + response);

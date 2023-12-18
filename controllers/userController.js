@@ -43,16 +43,13 @@ userController.getUserDetails = async (req, res) => {
   };
   userController.editUser = async (req, res) => {
      // Extract data from the request body
-     console.log("req.body", req.body);
      const {
       userId,
       userFname,
       userLname,
-      userEmail,
+      email,
       userAddress,
     } = req.body;
-
-    
 
     // Backend validation
     let errors = {};
@@ -69,8 +66,8 @@ userController.getUserDetails = async (req, res) => {
       errors.userLname = "Please enter the last name";
     }
 
-    if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
-      errors.userEmail = "Please enter a valid email address";
+    if (!email) {
+      errors.email = "Please enter a valid email address";
     }
 
     if (!userAddress || userAddress.trim() === "") {
@@ -91,7 +88,7 @@ userController.getUserDetails = async (req, res) => {
         userId,
         userFname,
         userLname,
-        userEmail,
+        email,
         userAddress,
         // Add more attributes as needed
       );
