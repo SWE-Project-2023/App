@@ -46,7 +46,7 @@
                     <div class="cart">
                 <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
                 <a href ="/product/cart" class="header_item_link">Cart</a>
-                <form action="/product/cart-add-bag" class="min-cart" aria-hidden="true"  method="post" >
+                <form action="/product/cart-add-bag" class="min-cart" aria-hidden="false"  method="post" >
                     <div class="min-cart_inner">
                         <div class="min-cart_content" >
                             <div class="min-cart_item_list" id="cart">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="min-cart_recap">
-                        <input type="hidden" id="userId" name="userId" value="">
+                        <input type="hidden" id="userId" name="userId" value="<%=user.user_id%>">
                          <input type="hidden" id="productIds" name="productIds" value="">
                         <button type="submit" class="viewcart">viewcart</button>
                         <button type="submit" class="checkout">checkout</button>
@@ -94,6 +94,7 @@
     </div>
         
     </nav>
+   
    <script src="/js/header.js"></script>
 </body>
 </html>

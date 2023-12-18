@@ -338,16 +338,24 @@ itemsController.addtoCart = async(req,res) =>{
     }
   };
 
-  itemsController.getCart = async(req,res)=>{
-    const userId = req.session.user.user_id;
-    const results = await execute.getCart(userId);
-    if (results.length > 0) {
-      const products = results;
-      res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
+  itemsController.getCart = async (req, res) => {
+    // Check if user session exists
+    if (req.session.user && req.session.user.user_id) {
+      const userId = req.session.user.user_id;
+      const results = await execute.getCart(userId);
+      
+      if (results.length > 0) {
+        const products = results;
+        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
+      } else {
+        res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+      }
     } else {
+      // Render 404 if user session is not established
       res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
     }
   };
+  
 
   itemsController.deleteitem = async(req,res)=>{
     const userId = req.session.user.user_id;
