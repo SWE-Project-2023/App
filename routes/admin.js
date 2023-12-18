@@ -74,12 +74,16 @@ router.get("/orders", function (req, res, next) {
     res.render("admin/orders.ejs",{user: req.session.user===undefined?"":req.session.user});
   }
 });
+router.get("/deleteProduct/:id",async function (req, res, next) {
+  await itemsController.deleteProduct(req.params.id);
+  res.redirect("/admin/products");
+});
+
 router.post("/editUser", userController.editUser);
 router.post("/createItem", upload.array("photo", 5), itemsController.createItem);
 router.post("/upload", upload.single("file"), itemsController.uploadImage);
 router.post('/delete', itemsController.deleteImage);
 router.post("/getUserDetails", userController.getUserDetails);
-
 router.post("/editItem", upload.array("photo", 5), itemsController.editItem);
 //export default 
 

@@ -296,7 +296,38 @@ deleteitem:async(userId,productId)=>{
   console.error(error.message);
   throw error;
   }
-}
+},
+ getImagesByProductId: async (productId) => {
+  const sql = `SELECT image_path FROM item_images WHERE item_id = ?`;
+  try {
+    const [rows] = await query(sql, [productId]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+deleteImageByPath: async (imagePath) => {
+  const sql = `DELETE FROM item_images WHERE image_path = ?`;
+  try {
+    const [rows] = await query(sql, [imagePath]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+deleteProduct: async (productId) => {
+  const sql = `DELETE FROM item WHERE item_id = ?`;
+  try {
+    const [rows] = await query(sql, [productId]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
 };
 
 export default execute;

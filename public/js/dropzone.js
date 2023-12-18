@@ -2,6 +2,18 @@ Dropzone.autoDiscover = false;
 let uploadedImagePaths = [];
 $(document).ready(function async() {
   // Initialize Dropzone
+  $('.delete-product-btn').click(function () {
+    var productId = $(this).data('product-id');
+    // Set the product ID for deletion in the confirmation modal
+    $('#confirmDeleteProductBtn').data('product-id', productId);
+  });
+
+  // Handle confirmation modal delete button click
+  $('#confirmDeleteProductBtn').click(function () {
+    var productId = $(this).data('product-id');
+    // Redirect or trigger the server-side deletion logic here
+    window.location.href = '/admin/deleteProduct/' + productId;
+  });
   let myDropzone = new Dropzone("#my-dropzone", {
     // Configuration options for Dropzone
     paramName: "file", // The name that will be used to transfer the file
