@@ -31,10 +31,10 @@
               
               <a
               href="#"
-              class="btn btn-outline-primary btn-sm edit-product-btn"
+              class="btn btn-outline-primary btn-sm edit-user-btn"
               data-bs-toggle="modal"
               data-bs-target="#editUser"
-              data-product-id="<%= user.user_id %>"
+              data-user-id="<%= user.user_id %>"
               >Edit</a
             >
             </td>
@@ -57,7 +57,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="edit-user-form" action="/admin/editUser" method="post" class="user-form">
+        <form id="edit-user-form" action="/admin/editUser" method="post" class="user-form" enctype="multipart/form-data">
           <!-- User ID (hidden) -->
           <input type="hidden" id="edit-user-id" name="userId" value="" />
 
@@ -65,34 +65,35 @@
           <div class="mb-3">
             <label for="edit-user-fname" class="form-label">First Name</label>
             <input type="text" class="form-control" id="edit-user-fname" placeholder="Enter first name" name="userFname" />
-            <!-- Add error handling if needed -->
+            <div id="edit-fname-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Last Name -->
           <div class="mb-3">
             <label for="edit-user-lname" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="edit-user-lname" placeholder="Enter last name" name="userLname" />
-            <!-- Add error handling if needed -->
+            <div id="edit-lname-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Email -->
           <div class="mb-3">
             <label for="edit-user-email" class="form-label">Email</label>
             <input type="email" class="form-control" id="edit-user-email" placeholder="Enter email" name="userEmail" />
-            <!-- Add error handling if needed -->
+            <div id="edit-email-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Address -->
           <div class="mb-3">
             <label for="edit-user-address" class="form-label">Address</label>
             <input type="text" class="form-control" id="edit-user-address" placeholder="Enter address" name="userAddress" />
-            <!-- Add error handling if needed -->
+            <div id="edit-address-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Admin status -->
           <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="edit-user-admin" name="userIsAdmin">
             <label class="form-check-label" for="edit-user-admin">Admin?</label>
+            <div id="edit-admin-error" class="invalid-feedback"></div>
           </div>
 
           <!-- Additional input fields or hidden inputs based on your requirements -->
@@ -107,4 +108,8 @@
   </div>
 </div>
 
+
 <%- include("./admin-partials/footer.ejs") %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/js/editUser.js"></script>
