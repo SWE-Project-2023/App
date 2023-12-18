@@ -17,12 +17,12 @@
         <form id="login-form" action="/auth/login" method="post" novalidate>
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="Email" class="input-field" required>
-                <span class="error-message" id="email-error"></span>
+                <span class="error-message" id="email-error"><%= errors.find(error => error.field === 'email') ? errors.find(error => error.field === 'email').message : '' %></span>
             </div>
             
             <div class="form-group">
                 <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
-                <span class="error-message" id="password-error"></span>
+                <span class="error-message" id="password-error"><%= errors.find(error => error.field === 'password') ? errors.find(error => error.field === 'password').message : '' %></span>
             </div>
             
             <input type="submit" value="Submit" id="submit-button" class="submit-button">

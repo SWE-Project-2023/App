@@ -1,36 +1,55 @@
-const signupController = {}; 
+const signupController = {};
 import bcrypt from "bcryptjs";
 import execute from "../queries/userQueries.js";
+
 signupController.signup = async (req, res) => {
-	console.log("Signup request received");
-	const { firstname, lastname, email, password, confirmpassword, address } = req.body;
+  console.log("Signup request received");
+  const { firstname, lastname, email, password, confirmpassword, address } = req.body;
 
-	// Perform data validation here
-	if (!firstname || !lastname || !email || !password || !confirmpassword || !address) {
-	  return res.status(400).send('All fields are required');
-	}
+  // Create an array to store error messages with field names
+  const errors = [];
 
-	if (password.length < 8) {
-		return res.status(400).send('Password must be at least 8 characters long');
-	}
+  // Perform data validation here
+  if (!firstname) {
+    errors.push({ field: 'firstname', message: 'First name is required' });
+  }
 
-	if (password !== confirmpassword) {
-		return res.status(400).send('Passwords do not match');
-	}
+  if (!lastname) {
+    errors.push({ field: 'lastname', message: 'Last name is required' });
+  }
 
-	if (!email.includes('@') || !email.includes('.')) {
-		return res.status(400).send('Invalid email');
-	}
-  
-	
-	const hashedPassword = await bcrypt.hash(password, 10);
-	await execute.createUser(firstname, lastname, email, hashedPassword, address), (err, results) => {
-		if (err) {
-		  console.error(err);
-		}
-		return res.redirect('/auth/login');
-	  };
-	
-}
+  if (!email) {
+    errors.push({ field: 'email', message: 'Email is required' });
+  } else if (!email.includes('@') || !email.includes('.')) {
+    errors.push({ field: 'email', message: 'Invalid email' });
+  }
+
+  if (!password || password.length < 8) {
+    errors.push({ field: 'password', message: 'Password must be at least 8 characters long' });
+  }
+
+  if (password !== confirmpassword) {
+    errors.push({ field: 'confirmpassword', message: 'Passwords do not match' });
+  }
+
+  if (!address) {
+    errors.push({ field: 'address', message: 'Address is required' });
+  }
+
+  // If there are errors, render the signup form with the errors
+  if (errors.length > 0) {
+    return res.render('signup', { user: req.session.user===undefined?"": req.session.user, errors, firstname, lastname, email, address });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await execute.createUser(firstname, lastname, email, hashedPassword, address);
+    return res.redirect('/auth/login');
+  } catch (err) {
+    console.error(err);
+    // Handle database error
+    return res.status(500).render('error', { message: 'Internal Server Error' });
+  }
+};
 
 export default signupController;

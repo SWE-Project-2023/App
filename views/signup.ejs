@@ -3,62 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="../css/loginAndSignup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <%- include("partials/header.ejs")%>
+    <%- include("./partials/header.ejs")%>
     <div class="signupcontainer">
         <form action="/auth/signup" method="post" class="form-main" id="form-main">
-        <header class="form_header">
-            <h1 class="form_title1">Create my account</h1>
-            <p class="form_title2">Please fill in the information below:</p>
-        </header>
-        <div class="form-input">
-            <!-- <label for="firstname">Firstname</label> -->
-            <input type="text" name="firstname" class="input-field" id="firstname" placeholder="First Name">
-            <span class="error-message" id="firstname-error"></span>
-        </div>
-        <div class="form-input">
-            <!-- <label for="lastname">Lastname</label> -->
-            <input type="text" name="lastname"  class="input-field"id="lastname" placeholder="Last Name">
-            <span class="error-message" id="lastname-error"></span>
-        </div>
-        <div class="form-input">
-            <!-- <label for="email">Email</label> -->
-            <input type="text" name="email"  class="input-field" id="email" placeholder="Email">
-            <span class="error-message" id="email-error"></span>
-        </div>
-        <div class="form-input">
-            <!-- <label for="password">Password</label> -->
-            <input type="password" name="password"  class="input-field" id="password"placeholder="Password">
-            <span class="error-message" id="password-error"></span>
-        </div>
-        <div class="form-input">
-            <!-- <label for="conirmpassword">Confrim Password</label> -->
-            <input type="password" name="confirmpassword"  class="input-field" id="confirmPassword"placeholder="Confirm Password">
-            <span class="error-message" id="confirmpassword-error"></span>
-        </div>
-        <div class="form-input">
-            <!-- <label for="address">Address</label> -->
-            <input type="text" name="address"  class="input-field" id="address"placeholder="Address">
-            <span class="error-message" id="address-error"></span>
-        </div>
-        <button type="submit" class="submit-button">Create My Account </button>
+            <header class="form_header">
+                <h1 class="form_title1">Create my account</h1>
+                <p class="form_title2">Please fill in the information below:</p>
+            </header>
+            <div class="form-input">
+                <input type="text" name="firstname" class="input-field" id="firstname" placeholder="First Name" value="<%= firstname || '' %>">
+                <span class="error-message" id="firstname-error"><%= errors.find(error => error.field === 'firstname') ? errors.find(error => error.field === 'firstname').message : '' %></span>
+            </div>
+            <div class="form-input">
+                <input type="text" name="lastname" class="input-field" id="lastname" placeholder="Last Name" value="<%= lastname || '' %>">
+                <span class="error-message" id="lastname-error"><%= errors.find(error => error.field === 'lastname') ? errors.find(error => error.field === 'lastname').message : '' %></span>
+            </div>
+            <div class="form-input">
+                <input type="text" name="email" class="input-field" id="email" placeholder="Email" value="<%= email || '' %>">
+                <span class="error-message" id="email-error"><%= errors.find(error => error.field === 'email') ? errors.find(error => error.field === 'email').message : '' %></span>
+            </div>
+            <div class="form-input">
+                <input type="password" name="password" class="input-field" id="password" placeholder="Password">
+                <span class="error-message" id="password-error"><%= errors.find(error => error.field === 'password') ? errors.find(error => error.field === 'password').message : '' %></span>
+            </div>
+            <div class="form-input">
+                <input type="password" name="confirmpassword" class="input-field" id="confirmPassword" placeholder="Confirm Password">
+                <span class="error-message" id="confirmpassword-error"><%= errors.find(error => error.field === 'confirmpassword') ? errors.find(error => error.field === 'confirmpassword').message : '' %></span>
+            </div>
+            <div class="form-input">
+                <input type="text" name="address" class="input-field" id="address" placeholder="Address" value="<%= address || '' %>">
+                <span class="error-message" id="address-error"><%= errors.find(error => error.field === 'address') ? errors.find(error => error.field === 'address').message : '' %></span>
+            </div>
+            <button type="submit" class="submit-button">Create My Account</button>
 
-        <div class="form_second">
-            <p>Already have a account?
-            <a href="/auth/login" class="link">Login here</a>
-            </p>
-        </div>
+            <div class="form_second">
+                <p>Already have an account?
+                    <a href="/auth/login" class="link">Login here</a>
+                </p>
+            </div>
         </form>
     </div>
 
-    <%-  include("partials/footer.ejs")%>
-   
-    <script type="text/javascript" src="/js/validations.js" ></script>
+    <%- include("./partials/footer.ejs") %>
+
+    <script type="text/javascript" src="/js/validations.js"></script>
 </body>
 </html>

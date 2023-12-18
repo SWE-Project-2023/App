@@ -13,12 +13,12 @@ router.get('/', function(req, res, next) {
 /* GET Sign Up page. */
 router.get('/signup', function(req, res, next) {
   const errors = {};
-    res.render('signup',{user: req.session.user===undefined?"": req.session.user});
+    res.render('signup',{user: req.session.user===undefined?"": req.session.user,errors: [], firstname: '', lastname: '', email: '', address: ''});
   });
 
 router.get('/login', function(req, res, next) {
   const errors = '';
-  res.render('login',{user:req.session.user===undefined?"":req.session.user});
+  res.render('login',{user:req.session.user===undefined?"":req.session.user,errors: [],email});
 });
 
 router.post('/login', loginController.login);
