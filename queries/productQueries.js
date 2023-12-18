@@ -11,36 +11,36 @@ const execute = {
   searchItems: async (options) => {
     let sql = "SELECT * FROM item WHERE 1"; // 1 so we can use AND for the rest of the sql
 
-    if (options.item_id) {
-      sql += ` AND item_id = ${options.item_id}`;
+    if (options?.item_id) {
+      sql += ` AND item_id = ${options?.item_id}`;
     }
 
-    if (options.item_title) {
-      sql += ` AND item_title LIKE '%${options.item_title}%'`;
+    if (options?.item_title) {
+      sql += ` AND item_title LIKE '%${options?.item_title}%'`;
     }
 
-    if (options.item_brand) {
-      sql += ` AND item_brand = '${options.item_brand}'`;
+    if (options?.item_brand) {
+      sql += ` AND item_brand = '${options?.item_brand}'`;
     }
 
-    if (options.item_cat) {
-      sql += ` AND item_cat = '${options.item_cat}'`;
+    if (options?.item_cat) {
+      sql += ` AND item_cat = '${options?.item_cat}'`;
     }
 
-    if (options.item_price_min) {
-      sql += ` AND item_price >= ${options.item_price_min}`;
+    if (options?.item_price_min) {
+      sql += ` AND item_price >= ${options?.item_price_min}`;
     }
 
-    if (options.item_price_max) {
-      sql += ` AND item_price <= ${options.item_price_max}`;
+    if (options?.item_price_max) {
+      sql += ` AND item_price <= ${options?.item_price_max}`;
     }
 
-    if (options.item_qty_min) {
-      sql += ` AND item_qty >= ${options.item_qty_min}`;
+    if (options?.item_qty_min) {
+      sql += ` AND item_qty >= ${options?.item_qty_min}`;
     }
 
-    if (options.item_qty_max) {
-      sql += ` AND item_qty <= ${options.item_qty_max}`;
+    if (options?.item_qty_max) {
+      sql += ` AND item_qty <= ${options?.item_qty_max}`;
     }
     try {
       const [rows] = await query(sql);

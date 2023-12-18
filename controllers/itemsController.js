@@ -289,8 +289,29 @@ itemsController.displayitem = async (req, res) => {
 
 
 };
+itemsController.viewProducts = async (req, res) => {
+  try {
+    var products = await execute.searchItems({
+      item_id: req.query.id,
+      item_title: req.query.title,
+      item_brand: req.query.brand,
+      item_cat: req.query.category,
+      item_price_min: req.query.price_min,
+      item_price_max: req.query.price_max,
+      item_qty_min: req.query.qty_min,
+      item_qty_max: req.query.qty_max,
+    });
+    if (products.length > 0) {
+      res.render("productsList.ejs", { user: req.session.user===undefined?"":req.session.user, products });
+    } else {
+      res.status(404).render("404.ejs", { user: req.session.user===undefined?"":req.session.user });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+};
 itemsController.getbyCategory = async(req,res)=>{
-
   try {
     const category = req.query.category;
     console.log(category)
@@ -299,7 +320,7 @@ itemsController.getbyCategory = async(req,res)=>{
     if (results.length > 0) {
       const products = results;
       console.log(results);
-      res.render('productList.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
+      res.render('productLists.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
     } else {
       res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
     }
