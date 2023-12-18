@@ -18,7 +18,7 @@ router.get('/signup', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
   const errors = '';
-  res.render('login',{user:req.session.user===undefined?"":req.session.user,errors: [],email});
+  res.render('login',{user:req.session.user===undefined?"":req.session.user,errors: [], email: ''});
 });
 
 router.post('/login', loginController.login);

@@ -14,6 +14,20 @@ const storage = multer.diskStorage({
 import itemsController from "../controllers/itemsController.js";
 
 const upload = multer({ storage });
+
+// Add this middleware to the beginning of your router
+router.use((req, res, next) => {
+  if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
+    next();
+  } else {
+    res.render("404", {
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  }
+});
+
+
+
 router.get("/", function (req, res, next) {
   {
     res.render("admin/dashboard", {user: req.session.user===undefined?"":req.session.user});
