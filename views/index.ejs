@@ -123,9 +123,11 @@
 												<span class="price_item">EGP <%=product.item_price%></span>
 											</div>
 										</div>
-										<form method="post" >
-											<button type="submit" class="product_btn">add to bag</button>
-										</form>
+										<form onsubmit="addToBag(event)" data-product-id="<%= product.item_id %>" data-user-id = "<%=user.user_id%>">
+											<button type="submit" class="add_to_bag_btn">
+											  Add to Bag
+											</button>
+										  </form>
 									</div>
 								</div>
 								<%})%>
@@ -148,6 +150,7 @@
 	 <!-- --------------------- Scripts ---------------------  -->
 
 	<script src="/js/homepage.js"></script>
+	<script src="/js/cart.js"></script>
 
 </body>
 </html>
