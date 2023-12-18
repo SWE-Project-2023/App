@@ -128,7 +128,7 @@ const execute = {
     }
   },
   deleteImage: async (imageId) => {
-    const sql = `DELETE FROM item_images WHERE image_id = ?`;
+    const sql = `DELETE FROM item_images WHERE image_path = ?`;
     const params = [imageId];
     try {
       const [rows] = await query(sql, params);
@@ -139,15 +139,16 @@ const execute = {
     }
   },
   updateItem: async (
+    item_id,
     item_title,
     item_cat,
     item_brand,
     item_details,
     item_quantity,
     item_price,
-    item_offers,
-    item_id
+    item_offers
   ) => {
+    console.log(item_title, item_cat, item_brand, item_details, item_quantity, item_price, item_offers, item_id);
     const sql = `UPDATE item SET item_title = ?, item_cat = ?, item_brand = ?, item_details = ?, item_quantity = ?, item_price = ?, item_offers = ? WHERE item_id = ?`;
     const params = [
       item_title,

@@ -16,15 +16,16 @@ import itemsController from "../controllers/itemsController.js";
 const upload = multer({ storage });
 
 // Add this middleware to the beginning of your router
-router.use((req, res, next) => {
-  if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
-    next();
-  } else {
-    res.render("404", {
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-  }
-});
+router.post("/getProductDetails", itemsController.getProductDetails);
+// router.use((req, res, next) => {
+//   if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
+//     next();
+//   } else {
+//     res.render("404", {
+//       user: req.session.user === undefined ? "" : req.session.user,
+//     });
+//   }
+// });
 
 
 
@@ -86,7 +87,7 @@ router.get("/orders", function (req, res, next) {
 router.post("/createItem", upload.array("photo", 5), itemsController.createItem);
 router.post("/upload", upload.single("file"), itemsController.uploadImage);
 router.post('/delete', itemsController.deleteImage);
-router.post("/getProductDetails", itemsController.getProductDetails);
+
 router.post("/editItem", upload.array("photo", 5), itemsController.editItem);
 //export default 
 

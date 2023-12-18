@@ -106,24 +106,25 @@ itemsController.getProductDetails = async (req, res) => {
   try {
     // Execute the query
     const results = await execute.getProductDetails(productId);
-
+   
     if (results.length === 0) {
       return res.status(404).json({ error: "Product not found" });
     }
-
+  
     // Format the data and send it as JSON
+    // Access the first element of the array
+    const productDetail = results[0];
+
     const productDetails = {
-      productId: results.item_id,
-      productName: results.item_title,
-      brand: results.item_brand,
-      category: results.item_cat,
-      description: results.item_details,
-      quantity: results.item_quantity,
-      price: results.item_price,
-      offers: results.item_offers,
-      images: results
-        .map((result) => result.image_path)
-        .filter((image) => image !== null),
+      productId: productDetail.item_id,
+      productName: productDetail.item_title,
+      brand: productDetail.item_brand,
+      category: productDetail.item_cat,
+      description: productDetail.item_details,
+      quantity: productDetail.item_quantity,
+      price: productDetail.item_price,
+      offers: productDetail.item_offers,
+      images: results.map((result) => result.image_path).filter((image) => image !== null),
     };
 
     res.json(productDetails);
@@ -139,9 +140,9 @@ itemsController.deleteImage = async (req, res) => {
 
     // Step 1: Define the path to the file
     // Step 2: Check if the file exists
-    if (fs.existsSync(filename)) {
+    if (fs.existsSync("public/images/" + filename)) {
       // Step 3: Delete the file
-      fs.unlink(filename, (error) => {
+      fs.unlink("public/images/" + filename, (error) => {
         if (error) {
           console.log("Error deleting file:", error);
           return res.status(500).send("Error deleting file");
@@ -183,6 +184,7 @@ itemsController.editItem = async (req, res) => {
     offers,
   } = req.body;
 
+  console.log("req.body", req.body);
   const uploadedImagePaths = JSON.parse(req.body.uploadedImagePaths);
 
   // Backend validation
