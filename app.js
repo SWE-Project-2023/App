@@ -67,6 +67,7 @@ import adminRouter from "./routes/admin.js";
 import checkoutRouter from "./routes/checkout.js";
 import aboutRouter from "./routes/about.js";
 import contactRouter from "./routes/contact.js";
+import accountRouter from "./routes/account.js";
 
 // Register route handlers
 app.use("/", indexRouter);
@@ -76,6 +77,7 @@ app.use("/admin", adminRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/about", aboutRouter);
 app.use("/contact", contactRouter);
+app.use("/account", accountRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();
