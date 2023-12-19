@@ -59,9 +59,6 @@ router.get("/dashboard", async function (req, res, next) {
     let salesToday = await productQueries.salesTodayQuery();
     let salesThisMonth = await productQueries.salesThisMonthQuery();
     let allCustomers = await productQueries.allUsers();
-    console.log(salesToday);
-    console.log(salesThisMonth);
-    console.log(allCustomers);
     res.render("admin/dashboard.ejs",{user: req.session.user===undefined?"":req.session.user, salesToday: salesToday[0].totalSalesToday, salesThisMonth: salesThisMonth[0].totalSalesThisMonth, allCustomers});
   }
 });
