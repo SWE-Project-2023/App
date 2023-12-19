@@ -13,6 +13,10 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="../css/productList.css" />
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  />
   </head>
   <body>
     <%- include("./partials/header.ejs", { userId: user.id }) %>
@@ -114,6 +118,16 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Add a hidden modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="cart-icon material-symbols-outlined" style="font-size: 60px"
+          >shopping_cart</span
+        >
+        <p class="success-message">Successfully added to bag!</p>
       </div>
     </div>
     <%- include("./partials/footer.ejs") %>
