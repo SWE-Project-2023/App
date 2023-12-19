@@ -9,21 +9,30 @@
 </head>
 <body>
     <%-include("./partials/header.ejs")%>
-    <div class="wishlist">
-    <%products.forEach(product=>{%>
-      <div class="wishlist-item">
-        <img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt="Item 1" class="wishlist-image">
-        <div class="wishlist-details">
-          <div class="item-name"><%=product.item_title%></div>
-          <div class="item-price">EGY <%=product.item_price%></div>
-          <div class="item-description"><%=product.item_details%></div>
-        </div>
-        <div>
-            <button class="remove-button" data-product-id="<%=product.item_id%>"><i class="fas fa-trash"></i> Remove</button>
-            <button class="quick-view-button" onclick="quickView(this)"><i class="fas fa-search"></i> Quick View</button>
-          </div>
+    <div class="wishlist-container">
+      <h1>My Wishlist</h1>
+
+      <div class="headers">
+        <p>ITEM</p>
+        <p>PRICE</p>
       </div>
-    <%})%>
+
+
+
+      <%products.forEach(product=>{%>
+        <div class="wishlist-item">
+          <img src="/images/panadol-advance-24-tablets-285579_1024x.webp" alt="Item 1" class="wishlist-image">
+          <div class="wishlist-details">
+            <div class="item-name"><%=product.item_title%></div>
+            <div class="item-price">EGY <%=product.item_price%></div>
+            <div class="item-description"><%=product.item_details%></div>
+          </div>
+          <div>
+              <button class="remove-button" data-product-id="<%=product.item_id%>"><i class="fas fa-trash"></i> Remove</button>
+              <button class="quick-view-button" onclick="quickView(this)"><i class="fas fa-search"></i> Quick View</button>
+            </div>
+        </div>
+      <%})%>
     </div>
       
   <!-- Add more wishlist items as needed -->

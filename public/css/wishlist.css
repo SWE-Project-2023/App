@@ -1,7 +1,29 @@
-.wishlist {
+.wishlist-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    margin: 30px 70px;
+    height: 55vh;
+  }
+
+  .wishlist-container h1 {
+    font-size: 29px;
+    line-height: 1.43;
+    margin-bottom: 55px;
+  }
+
+  .wishlist-container .headers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+  }
+
+  .wishlist-container .headers p {
+    font-size: 12px;
+    font-weight: bold;
   }
 
   .wishlist-item {
