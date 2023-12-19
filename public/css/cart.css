@@ -125,7 +125,7 @@ tbody td{
 }
 .item_title .inner_title{
     font-size: 14px;
-    font-weight: 500;
+    font-weight: bold;
         display: block;
         margin-bottom: 4px;
         line-height: 1.5;
@@ -277,6 +277,17 @@ tbody td{
     font-size: 14px;
     line-height: 1;
 }
+/* Add this to your stylesheet or style tag */
+.button-remove {
+    margin-left: 15px;
+    background-color: #ff0000; /* Change the background color to your preference */
+    color: #ffffff; /* Change the text color to your preference */
+    padding: 8px 16px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+    cursor: pointer;
+  }
+  
 @media screen and (max-width:480px){
     .card{
         margin-bottom: 0;

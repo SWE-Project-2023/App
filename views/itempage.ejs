@@ -137,8 +137,14 @@
                                     </div>
                                 </div>
                                 <div class="product_payment">
+                                    <% if (user === "") { %>
+                                    <button class="btn_addtocart">ADD TO BAG</button>
+                                    <button class="buy">Buy Now</button>
+                                    <% } else { %>
+
                                     <button type="submit" class="btn_addtocart">ADD TO BAG</button>
                                     <button type="button" class="buy">Buy Now</button>
+                                    <% } %>
                                 </div>
                             </form>
                         </div>

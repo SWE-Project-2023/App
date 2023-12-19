@@ -2,6 +2,17 @@ const itemsController = {};
 import fs from "fs";
 import path from "path";
 import execute from "../queries/productQueries.js";
+function calculateSubtotal(products) {
+  let subtotal = 0;
+
+  // Loop through each product and add its price multiplied by quantity to the subtotal
+  products.forEach((product) => {
+      subtotal += product.item_price * product.quantity;
+  });
+
+  // Return the formatted subtotal
+  return subtotal.toFixed(2);
+}
 itemsController.createItem = async (req, res) => {
   // Extract data from the request body
   console.log("req.body", req.body);
@@ -364,20 +375,26 @@ itemsController.addtoCart = async(req,res) =>{
   itemsController.getCart = async (req, res) => {
     // Check if user session exists
     if (req.session.user && req.session.user.user_id) {
-      const userId = req.session.user.user_id;
-      const results = await execute.getCart(userId);
-      
-      if (results.length > 0) {
-        const products = results;
-        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
-      } else {
-        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user,products });
-      }
+        const userId = req.session.user.user_id;
+        const results = await execute.getCart(userId) ?? 0;
+
+        let products = [];
+
+        if (results.length > 0) {
+            products = results;
+        }
+
+        // Calculate subtotal in the controller
+        const subtotal = calculateSubtotal(products);
+
+        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user, products, subtotal });
     } else {
-      // Render 404 if user session is not established
-      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+        // Render 404 if user session is not established
+        res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
     }
-  };
+};
+
+
   
 
   itemsController.deleteitem = async(req,res)=>{
@@ -385,7 +402,7 @@ itemsController.addtoCart = async(req,res) =>{
     const productId = req.body.productId;
     const results = await execute.deleteitem(userId,productId);
     try{
-    res.json({ success: true, message: 'Item deleted from cart' });
+      res.status(200).json({ success: true, message: 'Quantity updated successfully' });
   } catch (error) {
       console.error('Error deleting item from cart:', error);
       // Send an error response
@@ -437,6 +454,25 @@ itemsController.addtoCart = async(req,res) =>{
       
     }
   };
+
+  itemsController.updateCartItemQuantity = async (req, res) => {
+    const { productId, newQuantity } = req.body;
+    const userId = req.session.user.user_id; // Assuming user information is stored in the session
+  
+    try {
+      // Update the quantity in the database
+      const updateResult = await execute.updateCartItemQuantity(userId, productId, newQuantity);
+  
+      // Check if the update was successful
+     
+        res.status(200).json({ success: true, message: 'Quantity updated successfully' });
+      
+    } catch (error) {
+      console.error('Error updating item quantity:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  };
+  
   
   
 export default itemsController;
