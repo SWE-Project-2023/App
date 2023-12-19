@@ -295,6 +295,7 @@ const execute = {
   WHERE c.user_id = ?
   GROUP BY c.item_id;
 `;
+
     try {
       const [results] = await query(sql, [userId]);
       return results;
@@ -349,6 +350,7 @@ const execute = {
     SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesToday
     FROM orders
     WHERE DATE(order_date) = CURDATE();
+
   `;
     try {
       const [rows] = await query(sql);
@@ -363,11 +365,13 @@ const execute = {
     }
   },
 
+
   salesThisMonthQuery: async () => {
     const sql = `
     SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesThisMonth
     FROM orders
     WHERE MONTH(order_date) = MONTH(CURDATE()) AND YEAR(order_date) = YEAR(CURDATE());
+
   `;
     try {
       const [rows] = await query(sql);

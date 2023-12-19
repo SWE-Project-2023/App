@@ -90,7 +90,7 @@
                                             <div class="items_img">
                                                 <% const image = product.image_path ? product.image_path.split(',') : []; %>
                                                 <% for (let i = 0; i < image.length; i++) { %>
-                                                  <a href="#" class="item" onclick="changeImage(<%=i%>)">
+                                                  <a href="#" class="item" onclick="changeImage('<%=i%>')">
                                                     <img src="/images/<%= image[i] %>" alt="<%= image[i] %>">
                                                   </a>
                                                 <% } %>
@@ -106,7 +106,7 @@
                 <div class="product_item_info">
                     <div class="cardinfo">
                         <div class="card_section">
-                            <form method="post" action="/cart/add" class="product_form">
+                           
                                 <div class="product_catageory">
                                     <div class="inner_catageory">
                                         <div class="desktop_only">
@@ -155,11 +155,20 @@
                                     <button class="buy">Buy Now</button>
                                     <% } else { %>
 
-                                    <button type="submit" class="btn_addtocart">ADD TO BAG</button>
+                                        <form
+                                        onsubmit="addToBag(event)"
+                                        data-product-id="<%= product.item_id %>"
+                                        data-user-id="<%= user.user_id %>"
+                                        style="    display: contents;"
+                                      >
+                                        <button type="submit" class="btn_addtocart">
+                                          Add to Bag
+                                        </button>
+                                      </form>
                                     <button type="button" class="buy">Buy Now</button>
                                     <% } %>
                                 </div>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -385,6 +394,8 @@
     </div>
   
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/cart.js"></script>
 <script src="/js/itempage.js">
 </script>
 </body>
