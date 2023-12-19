@@ -517,12 +517,8 @@ itemsController.addtoCart = async(req,res) =>{
       const userId = req.session.user.user_id;
       const product = req.body.productId;
       const results = await execute.deleteWishlistItem(userId,product);
-      // let products = [];
-      // if (results.length > 0) {
-      //     products = results;
-      //     console.log(products);
-      // }
-      res.status(200).send("send");
+
+      res.status(200).send("sent");
   } else {
       // Render 404 if user session is not established
       res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });

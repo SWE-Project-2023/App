@@ -184,7 +184,12 @@ const execute = {
   },
   displayitem : async (productId) => {
       // SQL query to fetch the product details from the database based on the product ID
-    const sql = "SELECT * FROM item WHERE item_id = ?";
+      const sql = `
+      SELECT item.*, GROUP_CONCAT(item_images.image_path) AS image_path
+      FROM item
+      LEFT JOIN item_images ON item.item_id = item_images.item_id
+      WHERE item.item_id = ?
+    `;
     try {
       const [result] = await query(sql, [productId]);
       return result;
