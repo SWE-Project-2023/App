@@ -472,6 +472,62 @@ itemsController.addtoCart = async(req,res) =>{
       res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
   };
+  itemsController.addtoWishlist =async (req, res) => {
+    const productId=req.body.productId;
+    const userId=req.body.userId;
+    console.log(productId);
+    console.log(userId);
+    
+    try {
+      // Update the quantity in the database
+      const result = await execute.addtoWishlist(userId, productId);
+  
+      // Check if the update was successful
+      if (result.length > 0) {
+      const products = result[0];
+      console.log(products);
+        res.send(products);
+      } else {
+        res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+      }
+       
+      
+    } catch (error) {
+      console.error(error.message);
+    res.status(500).send('Internal Server Error');
+    }
+  };
+  itemsController.getwishlist = async(req,res)=>{
+    if (req.session.user && req.session.user.user_id) {
+      const userId = req.session.user.user_id;
+      const results = await execute.getwishlist(userId);
+      let products = [];
+      if (results.length > 0) {
+          products = results;
+          console.log(products);
+      }
+      res.render('wishlist.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
+  } else {
+      // Render 404 if user session is not established
+      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+  }
+  };
+  itemsController.deleteWishlistItem = async(req,res)=>{
+    if (req.session.user && req.session.user.user_id) {
+      const userId = req.session.user.user_id;
+      const product = req.body.productId;
+      const results = await execute.deleteWishlistItem(userId,product);
+      // let products = [];
+      // if (results.length > 0) {
+      //     products = results;
+      //     console.log(products);
+      // }
+      res.status(200).send("send");
+  } else {
+      // Render 404 if user session is not established
+      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+  }
+  };
   
   
   

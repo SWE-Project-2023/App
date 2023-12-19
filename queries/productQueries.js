@@ -398,7 +398,60 @@ getCategories: async () => {
   }
 },
 
+addtoWishlist:async(userId,productId)=>{
+    
+  try {
+    // Check if the item is already in the wishlist for the user
+    const checkDuplicateSql = 'SELECT * FROM wishlist WHERE item_id = ?';
+    const [duplicateCheckResult] = await query(checkDuplicateSql, [ productId]);
 
+    if (duplicateCheckResult.length > 0) {
+      // Item already exists in the wishlist for the user, you can handle this as needed
+      console.log('Item already in wishlist for the user');
+      return duplicateCheckResult; // You can return the existing entry or handle it as needed
+    }else{
+
+    // Item is not in the wishlist, proceed with the insertion
+    const insertSql = 'INSERT INTO wishlist (user_id, item_id) VALUES (?, ?)';
+    console.log('Item  in wishlist for the user');
+    const insertResult = await query(insertSql, [userId, productId]);
+
+    return insertResult;}
+} catch (error) {
+  throw error;
+}
+},
+getwishlist:async(userId)=>{
+const sql = `
+SELECT w.user_id, w.item_id, i.item_title,
+i.item_brand,
+i.item_cat,
+i.item_details,
+i.item_quantity,
+i.item_price,
+i.item_offers
+FROM wishlist w
+JOIN item i ON w.item_id = i.item_id
+WHERE w.user_id = ?;
+`;
+try {
+const [results]= await query(sql, [userId]);
+return results;
+} catch (error) {
+console.error(error.message);
+throw error;
+}},
+deleteWishlistItem:async(userId,productId)=>{
+const sql = `DELETE FROM wishlist WHERE user_id =? AND item_id = ?`;
+try {
+  const [results]= await query(sql, [userId,productId]);
+  console.log("deleteeed");
+return results;
+} catch (error) {
+console.error(error.message);
+throw error;
+}
+}
 
 };
 

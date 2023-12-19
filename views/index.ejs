@@ -85,7 +85,8 @@
 										  </div>
 										</a>
 										<div class="links">
-										  <a href="" class="wishlist_icon"><span class="material-symbols-outlined">
+											<a href="#" class="wishlist_icon" onclick="addToWishlist(event)" data-product-id="<%= product.item_id %>" data-user-id="<%= user.user_id %>">
+												<span class="material-symbols-outlined">
 											favorite
 										  </span></a>
 										</div>
@@ -131,6 +132,7 @@
 	 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script src="/js/homepage.js"></script>
 	<script src="/js/cart.js"></script>
+	<script src="/js/wishlist.js"></script>
 
 </body>
 </html>
