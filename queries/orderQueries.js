@@ -23,9 +23,27 @@ const execute = {
           );
         });
       });
-      console.log("order", orders);
-      console.log("order_item_0", orders[0].order_items);
       return orders;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  changeStatus: async (id) => {
+    try {
+      const sql = 'UPDATE orders SET order_status = !order_status WHERE order_id = ?';
+      const [result] = await query(sql, [id]);
+      return result;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  deleteOrder: async (id) => {
+    try {
+      const sql = 'DELETE FROM orders WHERE order_id = ?';
+      const [result] = await query(sql, [id]);
+      return result;
     } catch (error) {
       console.error(error.message);
       throw error;

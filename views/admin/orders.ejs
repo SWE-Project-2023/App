@@ -39,8 +39,8 @@
                 </span>
             </td>
             <td>
-                <a href="#" class="btn btn-outline-secondary btn-sm">Change Status</a>
-                <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+                <a href="/admin/orders/change_status/<%= order.order_id %>" class="btn btn-outline-secondary btn-sm">Change Status</a>
+                <a href="/admin/orders/delete/<%= order.order_id %>" class="btn btn-outline-danger btn-sm">Delete</a>
             </td>
         <% }) %>
       </tbody>
