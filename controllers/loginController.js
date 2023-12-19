@@ -38,5 +38,38 @@ loginController.login = async (req, res) => {
     req.session.user = user;
     res.redirect("/");
 };
+loginController.changeAccount = async (req, res) => {
+    console.log("Change Account request received");
+    console.log(req.body);
+    const { id, user_fname, user_Lname, user_address } = req.body;
+
+    // Create an array to store error messages with field names
+    const errors = [];
+
+    // Perform data validation here
+    if (!id || !user_fname || !user_Lname || !user_address) {
+        errors.push({ field: 'all', message: 'All fields are required' });
+    }
+
+    // If there are errors, handle them accordingly
+    if (errors.length > 0) {
+        return res.status(400).json({ success: false, message: 'Validation failed', errors });
+    }
+
+    // Update the user details in the database
+    try {
+        const result = await execute.updateUserDetails(id, user_fname, user_Lname, user_address);
+        
+        // Check if the update was successful
+        if (result.affectedRows > 0) {
+            return res.status(200).json({ success: true, message: 'User details updated successfully' });
+        } else {
+            return res.status(500).json({ success: false, message: 'Error updating user details' });
+        }
+    } catch (error) {
+        console.error('Error updating user details:', error);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
 
 export default loginController;

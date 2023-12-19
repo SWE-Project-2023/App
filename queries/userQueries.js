@@ -82,7 +82,36 @@ const execute = {
           throw error;
         }
       },
-      
+      updateUserDetails: async (
+        user_id,
+        user_fname,
+        user_Lname,
+        user_address
+    ) => {
+      console.log("Update user details request received");
+        const sql = `
+            UPDATE user
+            SET
+                user_fname = ?,
+                user_Lname = ?,
+                user_address = ?
+            WHERE
+                user_id = ?
+        `;
+        const params = [user_fname, user_Lname, user_address, user_id];
+
+        try {
+            // Execute the query
+            const [rows] = await query(sql, params);
+
+            // Return the result
+            return rows;
+        } catch (error) {
+            // Handle errors
+            console.error(error.message);
+            throw error;
+        }
+    },
 
 }
 

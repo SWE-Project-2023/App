@@ -13,32 +13,35 @@
 			referrerpolicy="no-referrer"
 		/>
 		<link rel="stylesheet" href="../css/account.css" />
+		<script src="/js/account.js"></script>
 	</head>
 
-<body>
-	<%- include('partials/header') %>
+	<body>
+		<%- include('partials/header') %>
 
-	<div class="account-container">
-		<h2>Account Details</h2>
-		
-		<div class="account-details" id="accountdetails">
-			<div class="form-group">
-				<label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" value="<%=user.user_fname%>" class="input-field">
-            </div>
-			<div class="form-group">
-				<label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" value="<%=user.user_Lname%>" class="input-field">
-            </div>
-			<div class="form-group">
-				<label for="address">Address</label>
-                <input type="text" id="address" name="address" value="<%=user.user_address%>" class="input-field">
-            </div>
-			<button type="submit" class="submit-button">Save Changes</button>
+		<div class="account-container">
+			<h2>Account Details</h2>
+			<form action="/auth/changeAccount" method="POST" onsubmit="return validateAccountDetails()">
+				<div class="account-details" id="accountdetails">
+					<input type = "hidden" id="userId" name="id" value="<%= myUser.user_id %>">
+					<div class="form-group">
+						<label for="fname">First Name</label>
+						<input type="text" id="fname" name="fname" value="<%= myUser.user_fname %>" class="input-field">
+					</div>
+					<div class="form-group">
+						<label for="lname">Last Name</label>
+						<input type="text" id="lname" name="lname" value="<%= myUser.user_Lname %>" class="input-field">
+					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" id="address" name="address" value="<%= myUser.user_address %>" class="input-field">
+					</div>
+					<button type="submit" class="submit-button">Save Changes</button>
+				</div>
+			</form>
 		</div>
-	</div>
 
-	<%- include('partials/footer') %>
-
-</body>
+		<%- include('partials/footer') %>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </html>
