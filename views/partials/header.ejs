@@ -33,7 +33,12 @@
                 <a href="/auth/signup" class="header_icon"><i class='bx bx-user' ></i></a>
                 <a href ="/auth/signup" class="header_item_link">Account</a>
             </div>
-                <% } else { %>
+                <% } else { 
+                    if (user._isAdmin)%>
+                        <div class="dashboard-button">
+                            <a href="/admin" class="header_icon"><i class='bx bxs-dashboard' ></i></a>
+                            <a href ="/admin" class="header_item_link">Dashboard</a>
+                        </div>
                    <div class="logout">
                      <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
                      <a href ="" class="header_item_link"><%=user.user_fname%></a>
@@ -45,24 +50,7 @@
             </div>
                     <div class="cart">
                 <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
-                <a href ="/product/cart" class="header_item_link">Cart</a>
-                <form action="/product/cart-add-bag" class="min-cart" aria-hidden="false"  method="post" >
-                    <div class="min-cart_inner">
-                        <div class="min-cart_content" >
-                            <div class="min-cart_item_list" id="cart">
-                                
-                            </div>
-                        </div>
-                        <div class="min-cart_recap">
-                        <input type="hidden" id="userId" name="userId" value="<%=user.user_id%>">
-                         <input type="hidden" id="productIds" name="productIds" value="">
-                        <button type="submit" class="viewcart">viewcart</button>
-                        <button type="submit" class="checkout">checkout</button>
-                            
-                        </div>
-                    </div>
-                </form>
-              
+                <a href ="/product/cart" class="header_item_link">Cart</a>            
             </div>
 
             </div>
