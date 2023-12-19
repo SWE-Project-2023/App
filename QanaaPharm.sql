@@ -75,13 +75,14 @@ CREATE TABLE `item_images` (
 --
 -- Table structure for table `orders`
 --
+SET SQL_MODE = "ALLOW_INVALID_DATES";
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_quantity` int(3) NOT NULL,
-  `order_date` date NOT NULL DEFAULT current_timestamp(),
+  `order_date` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   `order_status` tinyint(1) NOT NULL DEFAULT 0,
   `item_price` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

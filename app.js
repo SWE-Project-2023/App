@@ -3,6 +3,7 @@ import express from "express";
 import session from "express-session";
 import path from "path";
 import mysql from "mysql2";
+import sqlSettings from "./../sql.json"
 const port = 3010; // Specify the port you want to use
 
 // Configure session middleware
@@ -31,14 +32,7 @@ app.use(express.static("public", { maxAge: "7d" }));
 app.listen(port, "127.0.0.1", () => {
   console.log(`Server is running on http://127.0.0.1:${port}`);
 });
-
-const connection = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "qanaa",
-  port: 3306,
-});
+const connection = mysql.createPool(sqlSettings);
 connection.getConnection((err) => {
   if (err) {
     console.error("Error connecting to MySQL: " + err.stack);
