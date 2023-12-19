@@ -79,14 +79,20 @@ SET SQL_MODE = "ALLOW_INVALID_DATES";
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `order_quantity` int(3) NOT NULL,
   `order_date` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
   `order_status` tinyint(1) NOT NULL DEFAULT 0,
-  `item_price` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `order_items` (
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_quantity` int(3) NOT NULL,
+  PRIMARY KEY (`order_id`,`item_id`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Dumping data for table `orders`
 --
