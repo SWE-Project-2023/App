@@ -8,7 +8,6 @@ function addToBag(event) {
   // Set the aria-hidden attribute to false for the form in the header
   // const addToBagForm = $('.min-cart');
   // addToBagForm.attr('aria-hidden', 'false');
-
   // Use Ajax to send a request to the server to add the item to the cart
   $.ajax({
       url: '/product/cart/add', // Replace with your server endpoint for adding to the cart
@@ -36,10 +35,21 @@ function addToBag(event) {
   });
 }
 
+
 // Load cart state from local storage
 function loadCartState() {
   const storedCartState = localStorage.getItem('cartState');
+  if(!userId){
+    console.log("LLL")
+  }
   return storedCartState ? JSON.parse(storedCartState) : [];
+}
+function clearCartState() {
+  console.log("Clearing cart state.");
+  localStorage.removeItem('cartState');
+
+  // Optionally, you can also remove existing cart items from the UI
+  $('#cart').empty();
 }
 
 // Render the cart based on the loaded state
@@ -80,12 +90,27 @@ function updatePrice(quantity, priceElement) {
 }
 
 // Load cart state from local storage on page load
-$(document).ready(function () {
-  const cartState = loadCartState();
-  renderCartFromState(cartState);
-  console.log("ji")
-});
+// $(document).ready(function () {
+//   const cartState = loadCartState();
+//   renderCartFromState(cartState);
+//   console.log("ji")
+// });
 
+$(document).ready(function () {
+  // Check if the user is empty and clear the cart state
+  const userId = $('#userId').val();
+  console.log("jji")
+
+  if (userId === undefined || userId === null || userId.trim() === "") {
+    console.log("User ID is empty. Clearing cart state.");
+    clearCartState();
+  } else {
+    // If the user is not empty, load and render the cart state
+    const cartState = loadCartState();
+    renderCartFromState(cartState);
+    console.log("Cart loaded.");
+  }
+});
 function createCartItemDiv(response) {
   // ... (your existing code for creating cart item div)
   const itemName = response.item_title;
@@ -124,7 +149,7 @@ function createCartItemDiv(response) {
       const productPriceSpan = document.createElement('span');
       productPriceSpan.classList.add('product-price');
       productPriceSpan.dataset.price = itemPrice;
-      productPriceSpan.textContent = `EGY ${itemPrice}`;
+      productPriceSpan.textContent = ` ${itemPrice}`;
   
       // Append elements to their respective containers
       cartProductInfo.appendChild(productNameLink);
@@ -206,9 +231,9 @@ function saveCartState() {
       const item_id = $(this).data('item-id');
       const quantity = $(this).find('.quantity_val').val();
       const item_title=$(this).find(".product-name").text();
-      const price =$(this).find(".product-price").text();
+      const item_price =$(this).find(".product-price").text();
       // Add more details as needed
-      cartState.push({ item_id, quantity,item_title,price});
+      cartState.push({ item_id, quantity,item_title,item_price});
   });
   console.log("cartStateee"+cartState)
   localStorage.setItem('cartState', JSON.stringify(cartState));
