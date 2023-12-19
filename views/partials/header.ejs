@@ -34,25 +34,25 @@
                 <a href ="/auth/signup" class="header_item_link">Account</a>
             </div>
                 <% } else { 
-                    if (user._isAdmin)%>
+                    if (user.user_isAdmin) {%>
                         <div class="dashboard-button">
                             <a href="/admin" class="header_icon"><i class='bx bxs-dashboard' ></i></a>
                             <a href ="/admin" class="header_item_link">Dashboard</a>
                         </div>
+                    <% } %>
                    <div class="logout">
                      <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
                      <a href ="" class="header_item_link"><%=user.user_fname%></a>
                     </div>
-                <% } %>
                 <div class="wishlist">
-                <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
-                <a href ="" class="header_item_link">Wishlist</a>
-            </div>
-                    <div class="cart">
-                <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
-                <a href ="/product/cart" class="header_item_link">Cart</a>            
-            </div>
-
+                    <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
+                    <a href ="" class="header_item_link">Wishlist</a>
+                </div>
+                <div class="cart">
+                    <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
+                    <a href ="/product/cart" class="header_item_link">Cart</a>            
+                </div>
+                <% } %>
             </div>
         </div>
         </div>
