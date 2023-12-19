@@ -32,21 +32,47 @@
 	gap: 5px;
 }
 
+/* Add this CSS to your existing stylesheet or create a new one */
+
 .footer-middle {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .footer-branch {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	width: 50%;
-	height: 15vh;
+    margin: 15px;
+    text-align: center;
+}
+
+.footer-branch img {
+    width: 50px; /* Adjust the size of the location image as needed */
+}
+
+.footer-branch p {
+    margin: 8px 0;
+}
+
+/* Add some additional styling to the anchor tag */
+.footer-middle a {
+    text-decoration: none;
+    color: white; /* Adjust the color as needed */
+}
+
+
+
+
+
+/* Optional: Style the social media icons */
+.footer-socials a {
+    margin-right: 10px;
+}
+
+.footer-socials img {
+    width: 30px; /* Adjust the size of the social media icons as needed */
+
 }
 
 .footer hr {

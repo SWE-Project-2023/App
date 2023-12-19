@@ -80,7 +80,18 @@ var notifications = [];
     console.error(error.message);
     next(error); // Pass the error to the next middleware
   }
-}
+};
+const fetchLocationsMiddleware = async (req, res, next) => {
+  try {
+    const locations = await execute.getLocations();
+    res.locals.locations = locations; // Make categories available to templates
+    next();
+  } catch (error) {
+    console.error(error.message);
+    next(error); // Pass the error to the next middleware
+  }
+};
+app.use(fetchLocationsMiddleware);
 app.use(fetchCategoriesMiddleware);
 app.use(fetchNotificationsMiddleware);
 // Import route handlers

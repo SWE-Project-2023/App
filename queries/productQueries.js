@@ -151,7 +151,16 @@ const execute = {
     item_price,
     item_offers
   ) => {
-    console.log(item_title, item_cat, item_brand, item_details, item_quantity, item_price, item_offers, item_id);
+    console.log(
+      item_title,
+      item_cat,
+      item_brand,
+      item_details,
+      item_quantity,
+      item_price,
+      item_offers,
+      item_id
+    );
     const sql = `UPDATE item SET item_title = ?, item_cat = ?, item_brand = ?, item_details = ?, item_quantity = ?, item_price = ?, item_offers = ? WHERE item_id = ?`;
     const params = [
       item_title,
@@ -182,9 +191,9 @@ const execute = {
       throw error;
     }
   },
-  displayitem : async (productId) => {
-      // SQL query to fetch the product details from the database based on the product ID
-      const sql = `
+  displayitem: async (productId) => {
+    // SQL query to fetch the product details from the database based on the product ID
+    const sql = `
       SELECT item.*, GROUP_CONCAT(item_images.image_path) AS image_path
       FROM item
       LEFT JOIN item_images ON item.item_id = item_images.item_id
@@ -197,12 +206,11 @@ const execute = {
       console.error(error.message);
       throw error;
     }
-    
   },
-  getbyCategory :async (category) =>{
+  getbyCategory: async (category) => {
     // SQL query to fetch items by category
     const sql = `SELECT * FROM item WHERE item_cat = ?`;
-      
+
     try {
       const [results] = await query(sql, [category]);
       return results;
@@ -211,10 +219,11 @@ const execute = {
       throw error;
     }
   },
- addtoCart: async (itemId, userId) => {
-  // Check if the item already exists in the user's cart
-  const checkIfExistsQuery = 'SELECT * FROM cart WHERE user_id = ? AND item_id = ?';
-  const sql = `
+  addtoCart: async (itemId, userId) => {
+    // Check if the item already exists in the user's cart
+    const checkIfExistsQuery =
+      "SELECT * FROM cart WHERE user_id = ? AND item_id = ?";
+    const sql = `
   SELECT c.user_id, c.item_id, i.item_title,
   i.item_brand, i.item_cat, i.item_details,
    c.quantity, i.item_price, i.item_offers
@@ -222,37 +231,38 @@ const execute = {
   JOIN item i ON c.item_id = i.item_id
   WHERE c.user_id = ? AND c.item_id = ?;
 `;
-  try {
-    const [existingCartItem] = await query(checkIfExistsQuery, [userId, itemId]);
+    try {
+      const [existingCartItem] = await query(checkIfExistsQuery, [
+        userId,
+        itemId,
+      ]);
 
-    if (existingCartItem.length>0) {
+      if (existingCartItem.length > 0) {
+        // If the item already exists, update the quantity
+        const updateQuantityQuery =
+          "UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND item_id = ?";
+        await query(updateQuantityQuery, [userId, itemId]);
 
+        // Return information about the updated item
+        const [updatedItem] = await query(sql, [userId, itemId]);
+        return updatedItem;
+      } else {
+        // If the item doesn't exist, insert a new row
+        const insertQuery =
+          "INSERT INTO cart (user_id, item_id, quantity) VALUES (?, ?, 1)";
+        await query(insertQuery, [userId, itemId]);
 
-      // If the item already exists, update the quantity
-      const updateQuantityQuery = 'UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND item_id = ?';
-      await query(updateQuantityQuery, [userId, itemId]);
-      
-      // Return information about the updated item
-      const [updatedItem] = await query(sql,[userId,itemId]);
-      return updatedItem;
-    } else {
-  
-
-      // If the item doesn't exist, insert a new row
-      const insertQuery = 'INSERT INTO cart (user_id, item_id, quantity) VALUES (?, ?, 1)';
-      await query(insertQuery, [userId, itemId]);
-
-      // Return information about the inserted item
-      const [insertedItem] = await query(sql, [userId,itemId]);
-      return insertedItem;
+        // Return information about the inserted item
+        const [insertedItem] = await query(sql, [userId, itemId]);
+        return insertedItem;
+      }
+    } catch (error) {
+      console.error(error.message);
+      throw error;
     }
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
+  },
 
-  additem: async (productIds) =>{
+  additem: async (productIds) => {
     const sql = `
     SELECT c.user_id, c.item_id,c.quantity, i.item_title,
     i.item_brand,
@@ -266,15 +276,15 @@ const execute = {
     WHERE c.user_id = ?;
   `;
     try {
-      const [results]= await query(sql, [productIds]);
-    return results;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-getCart:async(userId)=>{
-  const sql = `
+      const [results] = await query(sql, [productIds]);
+      return results;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  getCart: async (userId) => {
+    const sql = `
   SELECT c.user_id, c.item_id, c.quantity, i.item_title,
     i.item_brand, i.item_cat, i.item_details,
     i.item_quantity, i.item_price, i.item_offers,
@@ -285,164 +295,171 @@ getCart:async(userId)=>{
   WHERE c.user_id = ?
   GROUP BY c.item_id;
 `;
-try {
-  const [results]= await query(sql, [userId]);
-return results;
-} catch (error) {
-console.error(error.message);
-throw error;
-}
-},
-deleteitem:async(userId,productId)=>{
-  const sql = `DELETE FROM cart WHERE user_id = ? AND item_id = ?`;
-  try {
-    const [results]= await query(sql, [userId,productId]);
-    console.log("deleteeed")
-  return results;
-  } catch (error) {
-  console.error(error.message);
-  throw error;
-  }
-},
- getImagesByProductId: async (productId) => {
-  const sql = `SELECT image_path FROM item_images WHERE item_id = ?`;
-  try {
-    const [rows] = await query(sql, [productId]);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-deleteImageByPath: async (imagePath) => {
-  const sql = `DELETE FROM item_images WHERE image_path = ?`;
-  try {
-    const [rows] = await query(sql, [imagePath]);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-deleteProduct: async (productId) => {
-  const sql = `DELETE FROM item WHERE item_id = ?`;
-  try {
-    const [rows] = await query(sql, [productId]);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-salesTodayQuery: async () => {
-  const sql = `
-    SELECT SUM(item.item_price * order_items.item_quantity) AS totalSalesToday
-    FROM order_items
-    JOIN item ON order_items.item_id = item.item_id
-    JOIN orders ON order_items.order_id = orders.order_id
-    WHERE order_date >= NOW() - INTERVAL 24 HOUR
-  `;
-  try {
-    const [rows] = await query(sql);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
-    return [
-      {
-        totalSalesToday: 0
-      }
-    ]
-  }
-},
 
-salesThisMonthQuery: async () => {
-  const sql = `
-    SELECT SUM(item.item_price * order_items.item_quantity) AS totalSalesThisMonth
-    FROM order_items
-    JOIN item ON order_items.item_id = item.item_id
-    JOIN orders ON order_items.order_id = orders.order_id
-    WHERE order_date >= NOW() - INTERVAL 24 HOUR
+    try {
+      const [results] = await query(sql, [userId]);
+      return results;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  deleteitem: async (userId, productId) => {
+    const sql = `DELETE FROM cart WHERE user_id = ? AND item_id = ?`;
+    try {
+      const [results] = await query(sql, [userId, productId]);
+      console.log("deleteeed");
+      return results;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  getImagesByProductId: async (productId) => {
+    const sql = `SELECT image_path FROM item_images WHERE item_id = ?`;
+    try {
+      const [rows] = await query(sql, [productId]);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  deleteImageByPath: async (imagePath) => {
+    const sql = `DELETE FROM item_images WHERE image_path = ?`;
+    try {
+      const [rows] = await query(sql, [imagePath]);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  deleteProduct: async (productId) => {
+    const sql = `DELETE FROM item WHERE item_id = ?`;
+    try {
+      const [rows] = await query(sql, [productId]);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  salesTodayQuery: async () => {
+    const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesToday
+    FROM orders
+    WHERE DATE(order_date) = CURDATE();
+
   `;
-  try {
-    const [rows] = await query(sql);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
+    try {
+      const [rows] = await query(sql);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
       return [
         {
-        totalSalesThisMonth: 0
-      }
-    ]
-  }
-},
+          totalSalesToday: 0,
+        },
+      ];
+    }
+  },
 
-allUsers: async () => {
-  const sql = `
+
+  salesThisMonthQuery: async () => {
+    const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesThisMonth
+    FROM orders
+    WHERE MONTH(order_date) = MONTH(CURDATE()) AND YEAR(order_date) = YEAR(CURDATE());
+
+  `;
+    try {
+      const [rows] = await query(sql);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
+      return [
+        {
+          totalSalesThisMonth: 0,
+        },
+      ];
+    }
+  },
+
+  allUsers: async () => {
+    const sql = `
     SELECT COALESCE(COUNT(DISTINCT user_id), 0) AS totalUsers
     FROM orders;
   `;
-  try {
-    const [rows] = await query(sql);
-    return rows[0].totalUsers;  // Extract the value from the result
-  } catch (error) {
-    console.error(error.message)
-    return [
+    try {
+      const [rows] = await query(sql);
+      return rows[0].totalUsers; // Extract the value from the result
+    } catch (error) {
+      console.error(error.message);
+      return [
         {
-        totalUsers: 0
+          totalUsers: 0,
+        },
+      ];
+    }
+  },
+  updateCartItemQuantity: async (userId, itemId, newQuantity) => {
+    try {
+      // Corrected SQL update query
+      const updateQuery =
+        "UPDATE cart SET quantity = ? WHERE user_id = ? AND item_id = ?";
+
+      // Execute the query
+      const updateResult = await query(updateQuery, [
+        newQuantity,
+        userId,
+        itemId,
+      ]);
+
+      return updateResult;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getCategories: async () => {
+    const sql = "SELECT * FROM categories";
+    try {
+      const [rows] = await query(sql);
+      return rows;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+
+  addtoWishlist: async (userId, productId) => {
+    try {
+      // Check if the item is already in the wishlist for the user
+      const checkDuplicateSql = "SELECT * FROM wishlist WHERE item_id = ?";
+      const [duplicateCheckResult] = await query(checkDuplicateSql, [
+        productId,
+      ]);
+
+      if (duplicateCheckResult.length > 0) {
+        // Item already exists in the wishlist for the user, you can handle this as needed
+        console.log("Item already in wishlist for the user");
+        return duplicateCheckResult; // You can return the existing entry or handle it as needed
+      } else {
+        // Item is not in the wishlist, proceed with the insertion
+        const insertSql =
+          "INSERT INTO wishlist (user_id, item_id) VALUES (?, ?)";
+        console.log("Item  in wishlist for the user");
+        const insertResult = await query(insertSql, [userId, productId]);
+
+        return insertResult;
       }
-    ]
-  }
-},
-updateCartItemQuantity: async (userId, itemId, newQuantity) => {
-  try {
-    // Corrected SQL update query
-    const updateQuery = 'UPDATE cart SET quantity = ? WHERE user_id = ? AND item_id = ?';
-
-    // Execute the query
-    const updateResult = await query(updateQuery, [newQuantity, userId, itemId]);
-
-    return updateResult;
-  } catch (error) {
-    throw error;
-  }
-},
-
-getCategories: async () => {
-  const sql = 'SELECT * FROM categories';
-  try {
-    const [rows] = await query(sql);
-    return rows;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-
-addtoWishlist:async(userId,productId)=>{
-    
-  try {
-    // Check if the item is already in the wishlist for the user
-    const checkDuplicateSql = 'SELECT * FROM wishlist WHERE item_id = ?';
-    const [duplicateCheckResult] = await query(checkDuplicateSql, [ productId]);
-
-    if (duplicateCheckResult.length > 0) {
-      // Item already exists in the wishlist for the user, you can handle this as needed
-      console.log('Item already in wishlist for the user');
-      return duplicateCheckResult; // You can return the existing entry or handle it as needed
-    }else{
-
-    // Item is not in the wishlist, proceed with the insertion
-    const insertSql = 'INSERT INTO wishlist (user_id, item_id) VALUES (?, ?)';
-    console.log('Item  in wishlist for the user');
-    const insertResult = await query(insertSql, [userId, productId]);
-
-    return insertResult;}
-} catch (error) {
-  throw error;
-}
-},
-getwishlist: async (userId) => {
-  const sql = `
+    } catch (error) {
+      throw error;
+    }
+  },
+  getwishlist: async (userId) => {
+    const sql = `
     SELECT w.user_id, w.item_id, i.item_title,
       i.item_brand, i.item_cat, i.item_details,
       i.item_quantity, i.item_price, i.item_offers,
@@ -454,15 +471,19 @@ getwishlist: async (userId) => {
     GROUP BY w.item_id;
   `;
 
-  try {
-    const [results] = await query(sql, [userId]);
-    return results;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
-  }
-},
-
+    try {
+      const [results] = await query(sql, [userId]);
+      return results;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  getLocations: async () => {
+    const sql = "SELECT * FROM locations";
+    const [result, fields] = await query(sql);
+    return result;
+  },
 };
 
 export default execute;
