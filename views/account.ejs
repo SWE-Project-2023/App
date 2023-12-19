@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Product List</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+			integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link rel="stylesheet" href="../css/account.css" />
+	</head>
+
+<body>
+	<%- include('partials/header') %>
+
+	<div class="account-container">
+		<div class="account-nav">
+			<h4 class="active">Account Details</h4>
+			<h4>Orders</h4>
+			<h4>Payment Methods</h4>
+			<h4>Addresses</h4>
+		</div>
+		
+		<div class="account-details" id="accountdetails">
+			<div class="form-group">
+				<label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="<%=user.user_fname%>" class="input-field" disabled>
+            </div>
+			<div class="form-group">
+				<label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="<%=user.user_Lname%>" class="input-field" disabled>
+            </div>
+			<div class="form-group">
+				<label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="<%=user.email%>" class="input-field" disabled>
+            </div>
+		</div>
+		<div class="paymentMethods" id="paymentmethods" hidden>
+
+		</div>
+		<div class="addresses" id="addresses" hidden>
+
+		</div>
+		<div class="orders" id="orders" hidden>
+
+		</div>
+	</div>
+
+	<%- include('partials/footer') %>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const accountDetails = document.querySelector(".account-details");
+			const orders = document.querySelector(".orders");
+			const paymentMethods = document.querySelector(".paymentMethods");
+			const addresses = document.querySelector(".addresses");
+
+			const accountNav = document.querySelector(".account-nav");
+
+			const h4Elements = accountNav.querySelectorAll("h4");
+		
+			// Function to display the corresponding section and hide others
+			function displaySection(section) {
+				accountDetails.style.display = "none";
+				orders.style.display = "none";
+				paymentMethods.style.display = "none";
+				addresses.style.display = "none";
+				section.style.display = "block";
+			}
+
+			h4Elements.forEach(function (element) {
+                element.addEventListener("click", function (event) {
+                    h4Elements.forEach(function (el) {
+                        el.classList.remove("active");
+                    });
+
+                    event.target.classList.add("active");
+
+                    const sectionId = event.target.textContent.toLowerCase().replace(' ', '');
+                    
+					switch (sectionId) {
+						case "accountdetails":
+							displaySection(accountDetails);
+							break;
+						case "orders":
+							displaySection(orders);
+							break;
+						case "paymentmethods":
+							displaySection(paymentMethods);
+							break;
+						case "addresses":
+							displaySection(addresses);
+							break;
+						default:
+							break;
+					}
+                });
+            });
+		});
+
+	</script>
+	
+	
+</body>
+</html>

@@ -40,10 +40,6 @@
                             <a href ="/admin" class="header_item_link">Dashboard</a>
                         </div>
                     <% } %>
-                   <div class="logout">
-                     <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
-                     <a href ="" class="header_item_link"><%=user.user_fname%></a>
-                    </div>
                 <div class="wishlist">
                     <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
                     <a href ="" class="header_item_link">Wishlist</a>
@@ -51,6 +47,18 @@
                 <div class="cart">
                     <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
                     <a href ="/product/cart" class="header_item_link">Cart</a>            
+                </div>
+                <div class="notifs">
+                    <a href="#" class="header_icon"><i class='bx bxs-notification' ></i></a>
+                    <a href ="#" class="header_item_link">Notifictaions</a>            
+                </div>
+                <div class="Account">
+                    <a href="/account" class="header_icon"><i class='bx bxs-user' ></i></a>
+                    <a href ="/account" class="header_item_link"><%=user.user_fname%></a>            
+                </div>
+                <div class="logout">
+                    <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
+                    <a href ="" class="header_item_link">Logout</a>
                 </div>
                 <% } %>
             </div>
