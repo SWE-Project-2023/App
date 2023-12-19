@@ -154,7 +154,7 @@
               </div>
             </div>
 
-            <form action="/cart" class="cart-recap">
+            <form action="/checkout" class="cart-recap">
               <div class="cart_scroller">
                 <div class="card">
                   <div class="card__Section">
@@ -179,6 +179,7 @@
                     <div class="notices">
                       <p>Taxes and shipping calculated at checkout</p>
                     </div>
+                    <input type="hidden" name="prod-Info-checkout" value="<%=user.user_id%>">
                     <button type="submit" class="butn">SECURE CHECKOUT</button>
                   </div>
                 </div>
