@@ -79,21 +79,22 @@
     font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;
-    background: #3f3f95;
+    background: #21af9f;
+    margin-top: 20px;
     display: inline-block;
     padding: 16px 38px;
     border: 2px solid transparent;
     border-radius: 40px;
     color: #fff;
     font-weight: 400;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
+    -webkit-transition: 0.3s all;
+    transition: 0.3s all;
   }
   
   .notfound a:hover {
     background-color: #fff;
-    border-color: #3f3f95;
-    color: #3f3f95;
+    border-color: #21af9f;
+    color: #21af9f;
   }
   
   @media only screen and (max-width: 480px) {

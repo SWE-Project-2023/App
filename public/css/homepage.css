@@ -449,6 +449,7 @@ button{
 
 .category:hover {
     background-color: #177c70;
+    border-color: #21af9f;
 }
 
 .icon {
@@ -495,9 +496,11 @@ font-size: x-small; /* Adjust the font size for smaller screens */
     justify-content: center;
     width: 100%;
     transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
 }
 
 .add_to_bag_btn:hover {
-    background-color: #21af9f;
-    color: white;
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
 }
