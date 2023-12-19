@@ -439,8 +439,8 @@ height: 80px; /* Adjust the height as needed */
 box-sizing: border-box;
 padding: 10px;
 margin: 10px;
-background-color: #add8e6; 
-border: 1px solid #68a0cf; 
+background-color: #21af9f; 
+border: 1px solid #191917; 
 border-radius: 10px;
 text-align: center;
 overflow: hidden; /* Ensure the image doesn't overflow the container */
@@ -453,7 +453,7 @@ margin-bottom: 5px;
 }
 
 h2 {
-color: #333;
+color: #191917;
 margin: 0;
 font-size: small; /* Adjust the font size as needed */
 }
