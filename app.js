@@ -3,7 +3,7 @@ import express from "express";
 import session from "express-session";
 import path from "path";
 import mysql from "mysql2";
-import sqlSettings from "./../sql.json"
+import sqlSettings from "./sql.json";
 const port = 3010; // Specify the port you want to use
 
 // Configure session middleware
