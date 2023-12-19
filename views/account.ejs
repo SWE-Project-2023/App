@@ -24,15 +24,15 @@
 		<div class="account-details" id="accountdetails">
 			<div class="form-group">
 				<label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="<%=user.user_fname%>" class="input-field">
+                <input type="text" id="fname" name="fname" value="<%=user.user_fname%>" class="input-field">
             </div>
 			<div class="form-group">
 				<label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="<%=user.user_Lname%>" class="input-field">
+                <input type="text" id="lname" name="lname" value="<%=user.user_Lname%>" class="input-field">
             </div>
 			<div class="form-group">
 				<label for="address">Address</label>
-                <input type="text" id="address" name="address" placeholder="<%=user.user_address%>" class="input-field">
+                <input type="text" id="address" name="address" value="<%=user.user_address%>" class="input-field">
             </div>
 			<button type="submit" class="submit-button">Save Changes</button>
 		</div>
@@ -40,48 +40,5 @@
 
 	<%- include('partials/footer') %>
 
-	<!-- <script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const accountDetails = document.querySelector(".account-details");
-			const addresses = document.querySelector(".addresses");
-
-			const accountNav = document.querySelector(".account-nav");
-
-			const h4Elements = accountNav.querySelectorAll("h4");
-		
-			// Function to display the corresponding section and hide others
-			function displaySection(section) {
-				accountDetails.style.display = "none";
-				addresses.style.display = "none";
-				section.style.display = "block";
-			}
-
-			h4Elements.forEach(function (element) {
-                element.addEventListener("click", function (event) {
-                    h4Elements.forEach(function (el) {
-                        el.classList.remove("active");
-                    });
-
-                    event.target.classList.add("active");
-
-                    const sectionId = event.target.textContent.toLowerCase().replace(' ', '');
-                    
-					switch (sectionId) {
-						case "accountdetails":
-							displaySection(accountDetails);
-							break;
-						case "addresses":
-							displaySection(addresses);
-							break;
-						default:
-							break;
-					}
-                });
-            });
-		});
-
-	</script> -->
-	
-	
 </body>
 </html>
