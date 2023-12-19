@@ -17,7 +17,16 @@
 		<div class="col-75">
 			<div class="container">
 				<form action="/checkout/initiatePayment" method="post">
+					<label for="fname"><i class="fa fa-user"></i> First Name</label>
+							<input type="text" id="fname" name="firstname" value="" disabled>
+							<label for="lname"><i class="fa fa-user"></i> Last Name</label>
+							<input type="text" id="lname" name="lastname" value="" disabled>
+							<label for="email"><i class="fa fa-envelope"></i> Email</label>
+							<input type="text" id="email" name="email" value="" disabled>
+							<label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+							<input type="text" id="adr" name="address" value="">
 					<div class="row">
+						
 						<div class="col-50">
 							<div class="cash-option">
 								<input type="radio" id="cash-radio" name="payment-method" value="cash">
@@ -26,15 +35,7 @@
 								</label>
 							</div>
 							<div id="cash-details" class="payment-details" style="display: none;">
-								<label for="fname"><i class="fa fa-user"></i> First Name</label>
-								<input type="text" id="fname" name="firstname" value="" disabled>
-								<label for="lname"><i class="fa fa-user"></i> Last Name</label>
-								<input type="text" id="lname" name="lastname" value="" disabled>
-								<label for="email"><i class="fa fa-envelope"></i> Email</label>
-								<input type="text" id="email" name="email" value="" disabled>
-								<label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-								<input type="text" id="adr" name="address" value="">
-								<input type="submit" value="Continue To Checkout" class="btn">
+								<input type="submit" value="Place Order" class="btn">
 							</div>
 						</div>
 
