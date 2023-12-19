@@ -341,7 +341,11 @@ salesTodayQuery: async () => {
     return rows;
   } catch (error) {
     console.error(error.message);
-    throw error;
+    return [
+      {
+        totalSalesToday: 0
+      }
+    ]
   }
 },
 
@@ -356,7 +360,11 @@ salesThisMonthQuery: async () => {
     return rows;
   } catch (error) {
     console.error(error.message);
-    throw error;
+      return [
+        {
+        totalSalesThisMonth: 0
+      }
+    ]
   }
 },
 
@@ -369,8 +377,12 @@ allUsers: async () => {
     const [rows] = await query(sql);
     return rows[0].totalUsers;  // Extract the value from the result
   } catch (error) {
-    console.error(error.message);
-    throw error;
+    console.error(error.message)
+    return [
+        {
+        totalUsers: 0
+      }
+    ]
   }
 },
 updateCartItemQuantity: async (userId, itemId, newQuantity) => {

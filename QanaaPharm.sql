@@ -230,10 +230,11 @@ INSERT INTO `categories` (`category_name`) VALUES
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 CREATE TABLE `order_items` (
+  `order_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `item_quantity` int(3) NOT NULL,
-  PRIMARY KEY (`order_id`,`item_id`),
+  PRIMARY KEY (`order_item_id`),
   KEY `item_id` (`item_id`),
   CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE,
   CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE CASCADE

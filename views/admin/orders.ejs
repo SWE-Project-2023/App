@@ -10,8 +10,7 @@
         <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>Item ID</th>
-            <th>Quantity</th>
+            <th>Item(s)</th>
             <th>Sum</th>
             <th>Status</th>
             <th></th>
@@ -23,10 +22,17 @@
             <td><%= order.order_id %></td>
             <td><%= order.order_date.toDateString() %></td>
             <td>
-                <%= order.item_id %>
+                <% order.order_items.forEach(item => { %>
+                    <span class="badge bg-secondary"><%= item.item_quantity %>x <%= item.item.item_title %></span>
+                <% }) %>
+
             </td>
-            <td><%= order.order_quantity %></td>
-            <td><%= order.item_price.toFixed(2) %></td>
+            <td><%
+                let sum = 0;
+                order.order_items.forEach(item => {
+                    sum += item.item_quantity * item.item.item_price;
+                })
+                %>$<%= sum.toFixed(2) %></td>
             <td>
                 <span class="badge bg-<%= order.order_status == 0 ? "warning" : "success" %>">
                     <%= order.order_status == 0 ? "Pending" : "Completed" %>

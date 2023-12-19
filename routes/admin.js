@@ -18,25 +18,22 @@ const upload = multer({ storage });
 
 
 
-router.use((req, res, next) => {
-  if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
-    next();
-  } else {
-    res.render("404", {
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-  }
-});
+// router.use((req, res, next) => {
+//   if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
+//     next();
+//   } else {
+//     res.render("404", {
+//       user: req.session.user === undefined ? "" : req.session.user,
+//     });
+//   }
+// });
 
 router.get("/", async function (req, res, next) {
   
   try {
     let salesToday = await productQueries.salesTodayQuery();
-    let salesThisMonth = await productQueries.salesThisMonthQuery();
-    let allCustomers = await productQueries.allUsers();
-    console.log(salesToday);
-    console.log(salesThisMonth);
-    console.log(allCustomers);
+    let salesThisMonth = await productQueries.salesThisMonthQuery() ?? 0;
+    let allCustomers = await productQueries.allUsers() ?? 0;
     // Render the dashboard template and pass the data
     res.render("admin/dashboard.ejs", {
       user: req.session.user === undefined ? "" : req.session.user,
