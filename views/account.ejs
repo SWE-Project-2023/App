@@ -19,45 +19,30 @@
 	<%- include('partials/header') %>
 
 	<div class="account-container">
-		<div class="account-nav">
-			<h4 class="active">Account Details</h4>
-			<h4>Orders</h4>
-			<h4>Payment Methods</h4>
-			<h4>Addresses</h4>
-		</div>
+		<h2>Account Details</h2>
 		
 		<div class="account-details" id="accountdetails">
 			<div class="form-group">
 				<label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="<%=user.user_fname%>" class="input-field" disabled>
+                <input type="text" id="fname" name="fname" placeholder="<%=user.user_fname%>" class="input-field">
             </div>
 			<div class="form-group">
 				<label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="<%=user.user_Lname%>" class="input-field" disabled>
+                <input type="text" id="lname" name="lname" placeholder="<%=user.user_Lname%>" class="input-field">
             </div>
 			<div class="form-group">
-				<label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="<%=user.email%>" class="input-field" disabled>
+				<label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="<%=user.user_address%>" class="input-field">
             </div>
-		</div>
-		<div class="paymentMethods" id="paymentmethods" hidden>
-
-		</div>
-		<div class="addresses" id="addresses" hidden>
-
-		</div>
-		<div class="orders" id="orders" hidden>
-
+			<button type="submit" class="submit-button">Save Changes</button>
 		</div>
 	</div>
 
 	<%- include('partials/footer') %>
 
-	<script>
+	<!-- <script>
 		document.addEventListener("DOMContentLoaded", function() {
 			const accountDetails = document.querySelector(".account-details");
-			const orders = document.querySelector(".orders");
-			const paymentMethods = document.querySelector(".paymentMethods");
 			const addresses = document.querySelector(".addresses");
 
 			const accountNav = document.querySelector(".account-nav");
@@ -67,8 +52,6 @@
 			// Function to display the corresponding section and hide others
 			function displaySection(section) {
 				accountDetails.style.display = "none";
-				orders.style.display = "none";
-				paymentMethods.style.display = "none";
 				addresses.style.display = "none";
 				section.style.display = "block";
 			}
@@ -87,12 +70,6 @@
 						case "accountdetails":
 							displaySection(accountDetails);
 							break;
-						case "orders":
-							displaySection(orders);
-							break;
-						case "paymentmethods":
-							displaySection(paymentMethods);
-							break;
 						case "addresses":
 							displaySection(addresses);
 							break;
@@ -103,7 +80,7 @@
             });
 		});
 
-	</script>
+	</script> -->
 	
 	
 </body>
