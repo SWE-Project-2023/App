@@ -159,22 +159,29 @@ img{
 }
 .add_to_bag_btn {
   display: block;
-    background: #e1e3e4;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    position: relative;
-    padding: 0 10px;
-    line-height: 42px;
-    border-radius: 2px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 16px;
-    cursor: pointer;
-    justify-content: center;
-    width: 100%;
-  
+  background: #e1e3e4;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  position: relative;
+  padding: 0 10px;
+  line-height: 42px;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
 }
+
+.add_to_bag_btn:hover {
+  background: #21af9f;
+  color: #fff;
+}
+
 @media screen and (min-width:641px){
   .container{
     padding: 0 40px;
@@ -309,7 +316,7 @@ img{
 }
 
 .product-form button {
-  background-color: #3F3F95; /* Match the button color with your theme */
+  background-color: #21af9f; /* Match the button color with your theme */
   color: #fff;
   padding: 10px 15px;
   border: none;

@@ -432,18 +432,23 @@ button{
 }
 
 .category {
-float: left;
-width: 10%; /* Adjust the width as needed */
-max-width: 150px; /* Set a maximum width if necessary */
-height: 80px; /* Adjust the height as needed */
-box-sizing: border-box;
-padding: 10px;
-margin: 10px;
-background-color: #21af9f; 
-border: 1px solid #191917; 
-border-radius: 10px;
-text-align: center;
-overflow: hidden; /* Ensure the image doesn't overflow the container */
+    float: left;
+    width: 10%; /* Adjust the width as needed */
+    max-width: 150px; /* Set a maximum width if necessary */
+    height: 80px; /* Adjust the height as needed */
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px;
+    background-color: #21af9f; 
+    border: 1px solid #191917; 
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden; /* Ensure the image doesn't overflow the container */
+    transition: all 0.3s ease-in-out;
+}
+
+.category:hover {
+    background-color: #177c70;
 }
 
 .icon {
@@ -453,7 +458,7 @@ margin-bottom: 5px;
 }
 
 h2 {
-color: #191917;
+color: white;
 margin: 0;
 font-size: small; /* Adjust the font size as needed */
 }
@@ -475,19 +480,24 @@ font-size: x-small; /* Adjust the font size for smaller screens */
 }
 .add_to_bag_btn {
     display: block;
-      background: #e1e3e4;
-      text-transform: uppercase;
-      font-size: 12px;
-      font-weight: 700;
-      position: relative;
-      padding: 0 10px;
-      line-height: 42px;
-      border-radius: 2px;
-      text-align: center;
-      font-weight: 500;
-      font-size: 16px;
-      cursor: pointer;
-      justify-content: center;
-      width: 100%;
-    
-  }
+    background: #e1e3e4;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    position: relative;
+    padding: 0 10px;
+    line-height: 42px;
+    border-radius: 2px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    justify-content: center;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.add_to_bag_btn:hover {
+    background-color: #21af9f;
+    color: white;
+}
