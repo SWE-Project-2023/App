@@ -20,7 +20,7 @@
             <div class="inner_navI">
                 <div class="phonecont">
                     <i class='bx bx-phone'></i>
-                    <p>012345678</p>
+                    <p>01234567890</p>
                 </div>
                 <div class="emailcont">
                     <i class='bx bx-envelope' ></i>
@@ -40,10 +40,6 @@
                             <a href ="/admin" class="header_item_link">Dashboard</a>
                         </div>
                     <% } %>
-                   <div class="logout">
-                     <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
-                     <a href ="" class="header_item_link"><%=user.user_fname%></a>
-                    </div>
                 <div class="wishlist">
                     <a href="" class="header_icon"><i class='bx bx-heart'></i></a>
                     <a href ="" class="header_item_link">Wishlist</a>
@@ -51,6 +47,18 @@
                 <div class="cart">
                     <a href="/product/cart" class="header_icon"><i class='bx bx-cart-alt' ></i></a>
                     <a href ="/product/cart" class="header_item_link">Cart</a>            
+                </div>
+                <div class="notifs">
+                    <a href="#" class="header_icon"><i class='bx bxs-notification' ></i></a>
+                    <a href ="#" class="header_item_link">Notifictaions</a>            
+                </div>
+                <div class="Account">
+                    <a href="/account" class="header_icon"><i class='bx bxs-user' ></i></a>
+                    <a href ="/account" class="header_item_link"><%=user.user_fname%></a>            
+                </div>
+                <div class="logout">
+                    <a href="/logout" class="header_icon"><i class='bx bx-exit' ></i></a>
+                    <a href ="" class="header_item_link">Logout</a>
                 </div>
                 <% } %>
             </div>
@@ -74,10 +82,10 @@
             <ul class="nav-links">
                 <i class='bx bx-x navCloseBtn'></i>
                 <li><a href="/">Home</a></li>
-                <li><a href="#">Services</a></li>
                 <li><a href="/product/list">Products</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact Us</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Categories</a>
                     <div class="dropdown-content">
@@ -90,6 +98,7 @@
                         <% } %>
                     </div>
                 </li>
+
               </ul>
         </div>
         </div>

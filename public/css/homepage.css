@@ -448,9 +448,11 @@ button{
     cursor: pointer;
 }
 
+
 .category-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
 }
 
 .category-image {
@@ -505,9 +507,11 @@ h2 {
     justify-content: center;
     width: 100%;
     transition: all 0.3s ease-in-out;
+    border: 2px solid transparent;
 }
 
 .add_to_bag_btn:hover {
-    background-color: #21af9f;
-    color: white;
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
 }

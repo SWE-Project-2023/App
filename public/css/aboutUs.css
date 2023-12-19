@@ -1,0 +1,48 @@
+.about-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+	text-align: center;
+	margin: 2%;
+	height: 60vh;
+}
+
+.about-background img {
+	width: 100vw;
+	height: auto;
+	position: absolute;
+	top: 20%;
+	left: 0;
+	opacity: 0.4;
+	z-index: -1;
+	transform: scaleX(-1);
+}
+
+.about-text {
+	font-family: 'Maven Pro', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 50px;
+	margin-top: 15%;
+	/* color: #21af9f; */
+	color: #1a1a18;
+}
+
+.about-text h1 a {
+	color: #21af9f;
+	font-weight: 800;
+	transition: all 0.2s ease-in-out;
+}
+
+.about-text h1 a:hover {
+	color: #177c70;
+}
+
+.about-description {
+	text-align: left;
+	font-size: 18px;
+}

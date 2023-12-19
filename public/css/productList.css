@@ -159,11 +159,13 @@ img{
 }
 .add_to_bag_btn {
   display: block;
-  background: #e1e3e4;
+  background: #21af9f;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 700;
+  color: white;
   position: relative;
+  border: 2px solid transparent;
   padding: 0 10px;
   line-height: 42px;
   border-radius: 2px;
@@ -178,8 +180,9 @@ img{
 }
 
 .add_to_bag_btn:hover {
-  background: #21af9f;
-  color: #fff;
+  background-color: #fff;
+  border-color: #21af9f;
+  color: #21af9f;
 }
 
 @media screen and (min-width:641px){
@@ -321,6 +324,14 @@ img{
   padding: 10px 15px;
   border: none;
   border-radius: 3px;
+  border: 2px solid transparent;
   cursor: pointer;
   font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.product-form button:hover {
+  background-color: #fff;
+  border-color: #21af9f;
+  color: #21af9f;
 }

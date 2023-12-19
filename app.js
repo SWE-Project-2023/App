@@ -1,10 +1,12 @@
-// Import required modules
+const port = 3010;
 import express from "express";
 import session from "express-session";
-import path from "path";
 import mysql from "mysql2";
 import execute from "./queries/productQueries.js";
 const port = 3010; // Specify the port you want to use
+import fs from "fs";
+const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
+
 
 // Configure session middleware
 // app.use(
@@ -29,17 +31,21 @@ app.set("view engine", "ejs");
 app.use(express.static("public", { maxAge: "7d" }));
 // ... (the rest of your code)
 
-app.listen(port, "127.0.0.1", () => {
-  console.log(`Server is running on http://127.0.0.1:${port}`);
-});
 
-const connection = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "qanaa",
-  port: 3306,
-});
+if (port === 443) {
+  const key = fs.readFileSync("/etc/letsencrypt/live/qanaa.tech/privkey.pem");
+  const cert = fs.readFileSync("/etc/letsencrypt/live/qanaa.tech/fullchain.pem");
+  const server = https.createServer({ key, cert }, app);
+  server.listen(port, "0.0.0.0", () => {
+    console.log('Running HTTPS Server on port ' + port);
+  })
+} else {
+  app.listen(port, "127.0.0.1", () => {
+    console.log(`Server is running on http://127.0.0.1:${port}`);
+  });
+}
+
+const connection = mysql.createPool(sqlSettings);
 connection.getConnection((err) => {
   if (err) {
     console.error("Error connecting to MySQL: " + err.stack);
@@ -71,6 +77,9 @@ import productRouter from "./routes/products.js";
 import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
 import checkoutRouter from "./routes/checkout.js";
+import aboutRouter from "./routes/about.js";
+import contactRouter from "./routes/contact.js";
+import accountRouter from "./routes/account.js";
 
 // Register route handlers
 app.use("/", indexRouter);
@@ -78,6 +87,9 @@ app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/checkout", checkoutRouter);
+app.use("/about", aboutRouter);
+app.use("/contact", contactRouter);
+app.use("/account", accountRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();

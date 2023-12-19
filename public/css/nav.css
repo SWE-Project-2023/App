@@ -4,10 +4,10 @@
 }
 
 *{
-    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Maven Pro', sans-serif;
 }
 
 a{
@@ -16,7 +16,8 @@ a{
 }
 
 nav {
-  background-color: var(--primary-color); 
+  background-color: var(--primary-color);
+  font-family: 'Roboto', sans-serif;
 }
 
 .navcontainer{

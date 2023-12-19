@@ -1,11 +1,8 @@
 import mysql from "mysql2/promise";
-const connection = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "qanaa",
-  port: 3306,
-});
+import fs from "fs";
+const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
+
+const connection = mysql.createPool(sqlSettings);
 const query = (sql, params) => connection.execute(sql, params);
 const execute = {
   searchItems: async (options) => {

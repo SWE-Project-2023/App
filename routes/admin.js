@@ -2,6 +2,7 @@
 const router = express.Router();
 import productController from "../controllers/productController.js";
 import userController from "../controllers/userController.js";
+import orderController from "../controllers/orderController.js";
 import express from "express";
 import multer from "multer";
 import productQueries from "../queries/productQueries.js";
@@ -84,6 +85,16 @@ router.get("/products", async function (req, res, next) {
     res.render("admin/products.ejs", {
       user: req.session.user === undefined ? "" : req.session.user,
       products,
+    });
+  }
+});
+router.get("/orders", async function (req, res, next) {
+  var orders = await orderController.getOrders()
+  console.log(orders)
+  {
+    res.render("admin/orders.ejs", {
+      user: req.session.user === undefined ? "" : req.session.user,
+      orders,
     });
   }
 });
