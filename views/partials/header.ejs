@@ -49,8 +49,8 @@
                     <a href ="/product/cart" class="header_item_link">Cart</a>            
                 </div>
                 <div class="notifs">
-                    <a href="#" class="header_icon"><i class='bx bxs-notification' ></i></a>
-                    <a href ="#" class="header_item_link">Notifictaions</a>            
+                    <a class="header_icon"><i class='bx bxs-notification' ></i></a>
+                    <a class="header_item_link">Notifictaions</a>            
                 </div>
                 <div class="Account">
                     <a href="/account" class="header_icon"><i class='bx bxs-user' ></i></a>
@@ -100,11 +100,55 @@
                 </li>
 
               </ul>
+            </div>
         </div>
+
+        <div class="notifs-overlay">
+            <a>Your order is ready</a>
+            <hr>
+            <a>Discount on all your favorite diapers</a>
+            <hr>
+            <a>Get 50% off pampers</a>
+            <hr>
+            <a>You're a big ol' baby</a>
+            <hr>
+            <a>Peepeepoopoo</a>
+            <hr>
+            <a>Be a man, get the brand new Pharmabeer now</a>
+            <hr>
+            <a>Ich muss jetzt Bier trinken</a>
+            <hr>
+            <a>Yeah, I speak German bish</a>
+            <hr>
         </div>
-        
     </nav>
    
    <script src="/js/header.js"></script>
+   <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const notifDiv = document.querySelector(".notifs");
+            const overlay = document.querySelector(".notifs-overlay");
+
+            notifDiv.addEventListener("click", function () {
+                overlay.style.display = "flex";
+            });
+
+            const anchorElements = document.querySelectorAll(".notifs a");
+            anchorElements.forEach(function (anchor) {
+            anchor.addEventListener("click", function (event) {
+                event.stopPropagation(); // Prevents the click from bubbling up to the parent
+                overlay.style.display = "flex";
+            });
+            });
+
+            // Hide the overlay when clicking outside of it
+            document.addEventListener("click", function (event) {
+                if (!overlay.contains(event.target) && event.target !== notifDiv) {
+                overlay.style.display = "none";
+                }
+            });
+        });
+
+   </script>
 </body>
 </html>
