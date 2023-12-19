@@ -14,38 +14,27 @@
 
 		<hr id="footer-top-line">
 
+		
 		<div class="footer-middle">
-			<div class="footer-branch">
-				<a href="">
-					<img src="/images/location.png" alt="location">
-					<p>Heliopolis Branch</p>
-				</a>
-				<p>24 Street, Hegaz Square</p>
-			</div>
-
-			<div class="footer-branch">
-				<a href="">
-					<img src="/images/location.png" alt="location">
-					<p>Heliopolis Branch</p>
-				</a>
-				<p>24 Street, Hegaz Square, Ddakfjiek Wopdokajf, KDJDS</p>
-			</div>
-
-			<div class="footer-branch">
-				<a href="">
-					<img src="/images/location.png" alt="location">
-					<p>Heliopolis Branch</p>
-				</a>
-				<p>24 Street, Hegaz Square, DKJFD</p>
-			</div>
-
-			<div class="footer-branch">
-				<a href="">
-					<img src="/images/location.png" alt="location">
-					<p>Heliopolis Branch</p>
-				</a>
-				<p>24 Street, Hegaz Square, Sdkfjap, KDJF</p>
-			</div>
+			
+			
+			<% if (locations && locations.length > 0) { %>
+				<% locations.forEach(location => { %>
+					<a = href="<%= location.google_maps_url %>">
+						<div class="footer-branch">
+						
+							<img src="/images/location.png" alt="location">
+							<p><%= location.branch_name %></p>
+						
+						<p><%= location.address %></p>
+					</div>
+					</a>
+					
+				<% }); %>
+			<% } else { %>
+				<p>No Locations Yet</p>
+			<% } %>
+			
 		</div>
 
 		<hr id="footer-bottom-line">
