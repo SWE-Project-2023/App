@@ -1,3 +1,15 @@
+
+function showModal() {
+  var modal = document.getElementById("successModal");
+  modal.style.display = "block";
+}
+
+// Function to close the modal
+function closeModal() {
+  var modal = document.getElementById("successModal");
+  modal.style.display = "none";
+}
+
 function addToBag(event) {
   event.preventDefault();
 
@@ -26,7 +38,7 @@ function addToBag(event) {
         createCartItemDiv(response);
       }
 
-      console.log("Item added to bag:", response);
+      showModal();
     },
     error: function (error) {
       console.error("Error adding to bag:", error);
