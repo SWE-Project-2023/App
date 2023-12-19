@@ -3,7 +3,6 @@ import express from "express";
 import session from "express-session";
 import mysql from "mysql2";
 import execute from "./queries/productQueries.js";
-const port = 3010; // Specify the port you want to use
 import fs from "fs";
 const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
 
