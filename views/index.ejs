@@ -123,11 +123,20 @@
 												<span class="price_item">EGP <%=product.item_price%></span>
 											</div>
 										</div>
+										<% if (user === "") { %>
+											
+												<button class="add_to_bag_btn">
+												  Add to Bag
+												</button>
+											  
+										<% } else { %>
+
 										<form onsubmit="addToBag(event)" data-product-id="<%= product.item_id %>" data-user-id = "<%=user.user_id%>">
 											<button type="submit" class="add_to_bag_btn">
 											  Add to Bag
 											</button>
 										  </form>
+										<% } %>
 									</div>
 								</div>
 								<%})%>

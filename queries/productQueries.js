@@ -365,6 +365,19 @@ allUsers: async () => {
     throw error;
   }
 },
+updateCartItemQuantity: async (userId, itemId, newQuantity) => {
+  try {
+    // Corrected SQL update query
+    const updateQuery = 'UPDATE cart SET quantity = ? WHERE user_id = ? AND item_id = ?';
+
+    // Execute the query
+    const updateResult = await query(updateQuery, [newQuantity, userId, itemId]);
+
+    return updateResult;
+  } catch (error) {
+    throw error;
+  }
+},
 
 
 

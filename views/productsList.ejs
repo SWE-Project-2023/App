@@ -90,6 +90,10 @@
                           </div>
                         </div>
 
+                        <% if (user === "") { %>
+                        <button class="add_to_bag_btn">Add to Bag</button>
+                        <% } else { %>
+
                         <form
                           onsubmit="addToBag(event)"
                           data-product-id="<%= product.item_id %>"
@@ -99,6 +103,7 @@
                             Add to Bag
                           </button>
                         </form>
+                        <% } %>
                       </div>
                     </div>
                   </div>
