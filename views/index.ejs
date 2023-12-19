@@ -71,47 +71,47 @@
 					<div class="products_list">
 						<div class="inner_list" id="inner_List">
 							<div class="product_slider" id="productSlider">
-								<% products.forEach(product => {%>
-
-								
-								<div class="product_Item">
-									<div class="product_img">
-									<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_img">
-										<div class="ratio">
-											<img src="/images/<%=product.item_image%>" alt="<%=product.item_image%>">
-										</div>
-									</a>
-									<div class="links">
-										<a href="" class="wishlist_icon"><span class="material-symbols-outlined">
+								<% products.forEach(product => { %>
+									<div class="product_Item">
+									  <div class="product_img">
+										<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_img">
+										  <div class="ratio">
+											<% const images = product.image_paths ? product.image_paths.split(',') : []; %>
+											<% if (images.length > 0) { %>
+											  <img src="/images/<%= images[0] %>" alt="<%= images[0] %>">
+											<% } else { %>
+											  <img src="/images/default_image.jpg" alt="Default Image">
+											<% } %>
+										  </div>
+										</a>
+										<div class="links">
+										  <a href="" class="wishlist_icon"><span class="material-symbols-outlined">
 											favorite
-											</span></a>
-									</div>
-								</div>
-									<div class="product_items_info">
+										  </span></a>
+										</div>
+									  </div>
+									  <div class="product_items_info">
 										<div class="product_items_info_inner">
-											<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_title"><%=product.item_title%></a>
-											<div class="product_item_price">
-												<span class="price_item">EGP <%=product.item_price%></span>
-											</div>
+										  <a href="/product/itempage?id=<%= product.item_id %>" class="product_item_title"><%= product.item_title %></a>
+										  <div class="product_item_price">
+											<span class="price_item">EGP <%= product.item_price %></span>
+										  </div>
 										</div>
 										<% if (user === "") { %>
-											
-												<button class="add_to_bag_btn">
-												  Add to Bag
-												</button>
-											  
+										  <button class="add_to_bag_btn">
+											Add to Bag
+										  </button>
 										<% } else { %>
-
-										<form onsubmit="addToBag(event)" data-product-id="<%= product.item_id %>" data-user-id = "<%=user.user_id%>">
+										  <form onsubmit="addToBag(event)" data-product-id="<%= product.item_id %>" data-user-id="<%= user.user_id %>">
 											<button type="submit" class="add_to_bag_btn">
 											  Add to Bag
 											</button>
 										  </form>
 										<% } %>
+									  </div>
 									</div>
-								</div>
-								<%})%>
-								
+								  <% }) %>
+								  
 							</div>
 						</div>
 						<button class="button_prev" type="button"onclick="PrevSlide()" id="prevButton" disabled><span class="material-symbols-outlined">
