@@ -2,9 +2,9 @@ const port = 3010;
 import express from "express";
 import session from "express-session";
 import mysql from "mysql2";
-import sqlSettings from "./sql.json" assert { type: "json" };
 import https from "https";
 import fs from "fs";
+const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
 
 // Configure session middleware
 // app.use(

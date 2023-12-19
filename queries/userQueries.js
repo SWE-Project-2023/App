@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise";
-import sqlSettings from "./../sql.json" assert { type: "json" };
+import fs from "fs";
+const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
 const connection = mysql.createPool(sqlSettings);
 const query = (sql, params) => connection.execute(sql, params);
 const execute = {
