@@ -1,0 +1,25 @@
+.contact-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+	text-align: center;
+	margin: 2%;
+	height: 30vh;
+	color: #1c1c1a;
+}
+
+.contact-bottom {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+	text-align: center;
+	width: 40%;
+}
+
+.contact-bottom div {
+	width: 40%;
+}
