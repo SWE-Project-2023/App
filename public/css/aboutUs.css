@@ -1,0 +1,41 @@
+.about-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+	text-align: center;
+	margin: 2%;
+	height: 60vh;
+}
+
+.about-background img {
+	width: 100vw;
+	height: auto;
+	position: absolute;
+	top: 20%;
+	left: 0;
+	opacity: 0.4;
+	z-index: -1;
+	transform: scaleX(-1);
+}
+
+.about-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 50px;
+	margin-top: 15%;
+	/* color: #21af9f; */
+	color: #1a1a18;
+}
+
+h1 span {
+	color: #21af9f;
+}
+
+.about-description {
+	text-align: left;
+	font-size: 18px;
+}
