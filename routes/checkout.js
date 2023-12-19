@@ -15,7 +15,18 @@ import checkoutController from "../controllers/checkoutController.js";
 //     res.status(500).send("Internal Server Error");
 //   }
 // });
+router.use((req, res, next) => {
 
+  if (req.session.user !== undefined) {
+    
+    next();
+
+  } else {
+
+    res.render('404');
+  
+  }
+});
 router.get('/', (req, res) => {
   console.log("Checkout request received");
   res.render('checkout', {user: req.session.user===undefined?"":req.session.user});

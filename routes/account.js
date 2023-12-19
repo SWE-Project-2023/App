@@ -2,6 +2,18 @@ import express from "express";
 import execute from "../queries/userQueries.js";
 const router = express.Router();
 
+router.use((req, res, next) => {
+
+  if (req.session.user !== undefined) {
+    
+    next();
+
+  } else {
+
+    res.render('404');
+  
+  }
+});
 router.get('/', async function(req, res, next) {
   try {
     const userId = req.session.user.user_id;
