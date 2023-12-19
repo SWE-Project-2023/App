@@ -37,57 +37,28 @@
 		</div>
 
 		<div class="container">
-			<a href="/product/productlist?category=medicine" class="category-link">
-				<div class="category">
-					<i class="fas fa-pills icon" style="font-size: 35px;"></i>
-					<h2>Medications</h2>
-				</div>
-			</a>
-		
-			<a href="#" class="category-link">
-				<div class="category">
-					<i class="fas fa-cut icon"></i>
-					<h2>Hair Care</h2>
-				</div>
-			</a>
-			<a href="#" class="category-link">
-				<div class="category">
-					<i class="fas fa-hand-holding-heart icon"></i>
-					<h2>Hand & Body</h2>
-				</div>
-			</a>
-			<a href="product/productlist?category=HealthSupplements" class="category-link">
-			<div class="category">
-				<i class="fas fa-heartbeat icon"></i>
-				<h2>Health Supplements</h2>
-			</div>
-			</a>
-			<a href="#" class="category-link">
-			<div class="category">
-				<i class="fas fa-tooth icon"></i>
-				<h2>Oral Care</h2>
-			</div>
-			</a>
-			<a href="/product/productlist?category=self-care" class="category-link">
-			<div class="category">
-				<i class="fas fa-bacteria icon"></i>
-				<h2>Skincare</h2>
-			</div>
-			</a>
-			<a href="#" class="category-link">
-			<div class="category">
-				<i class="fas fa-baby icon"></i>
-				<h2>Baby Care</h2>
-			</div>
-			</a>
-			<a href="#" class="category-link">
-			<div class="category">
-				<i class="fas fa-medkit icon"></i>
-				<h2>First Aid</h2>
-			</div>
-			</a>
-		
+			<% if (categories && categories.length > 0) { %>
+				<% categories.forEach(category => { %>
+					<a href="/product/list?category=<%= category.category_name %>">
+
+					
+					<div class="category-card">
+						<div class="category-image">
+							<!-- Replace 'category.image_url' with the actual property holding the image URL in your category object -->
+							<img src="/images/<%= category.category_name %>.webp" alt="<%= category.category_name %>">
+						</div>
+						<div class="category-content">
+							<i class="icon"></i>
+							<h2><%= category.category_name %></h2>
+						</div>
+					</div>
+				</a>
+				<% }); %>
+			<% } else { %>
+				<p>No categories available</p>
+			<% } %>
 		</div>
+		
 
 
 		<div class="featured-products-container">
@@ -107,7 +78,7 @@
 									<div class="product_img">
 									<a href="/product/itempage?id=<%= product.item_id %>" class="product_item_img">
 										<div class="ratio">
-											<img src="<%=product.item_image%>" alt="<%=product.item_image%>">
+											<img src="/images/<%=product.item_image%>" alt="<%=product.item_image%>">
 										</div>
 									</a>
 									<div class="links">

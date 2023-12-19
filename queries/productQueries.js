@@ -381,6 +381,17 @@ updateCartItemQuantity: async (userId, itemId, newQuantity) => {
   }
 },
 
+getCategories: async () => {
+  const sql = 'SELECT * FROM categories';
+  try {
+    const [rows] = await query(sql);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
 
 
 };
