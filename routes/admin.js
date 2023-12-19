@@ -4,7 +4,7 @@ import productController from "../controllers/productController.js";
 import userController from "../controllers/userController.js";
 import express from "express";
 import multer from "multer";
-
+import productQueries from "../queries/productQueries.js";
 const storage = multer.diskStorage({
   destination: "public/images",
   filename: (req, file, cb) => {
@@ -19,11 +19,27 @@ const upload = multer({ storage });
 router.post("/getProductDetails", itemsController.getProductDetails);
 
 
-router.get("/", function (req, res, next) {
-  {
-    res.render("admin/dashboard", {user: req.session.user===undefined?"":req.session.user});
+router.get("/", async function (req, res, next) {
+  try {
+    let salesToday = await productQueries.salesTodayQuery();
+    let salesThisMonth = await productQueries.salesThisMonthQuery();
+    let allCustomers = await productQueries.allUsers();
+    console.log(salesToday);
+    console.log(salesThisMonth);
+    console.log(allCustomers);
+    // Render the dashboard template and pass the data
+    res.render("admin/dashboard.ejs", {
+      user: req.session.user === undefined ? "" : req.session.user,
+      salesToday: salesToday[0].totalSalesToday,
+      salesThisMonth: salesThisMonth[0].totalSalesThisMonth,
+      allCustomers,
+    });
+  } catch (error) {
+    console.error(error.message);
+    // Handle the error appropriately (e.g., render an error page)
   }
 });
+
 router.get("/login", function (req, res, next) {
   {
     res.render("admin/login.ejs",{user: req.session.user===undefined?"":req.session.user});

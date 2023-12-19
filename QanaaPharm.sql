@@ -82,7 +82,8 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `order_quantity` int(3) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
-  `order_status` tinyint(1) NOT NULL DEFAULT 0
+  `order_status` tinyint(1) NOT NULL DEFAULT 0,
+  `item_price` INT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

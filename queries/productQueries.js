@@ -327,6 +327,51 @@ deleteProduct: async (productId) => {
     throw error;
   }
 },
+salesTodayQuery: async () => {
+  const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesToday
+    FROM orders
+    WHERE DATE(order_date) = CURDATE();
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+salesThisMonthQuery: async () => {
+  const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesThisMonth
+    FROM orders
+    WHERE MONTH(order_date) = MONTH(CURDATE()) AND YEAR(order_date) = YEAR(CURDATE());
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+allUsers: async () => {
+  const sql = `
+    SELECT COALESCE(COUNT(DISTINCT user_id), 0) AS totalUsers
+    FROM orders;
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows[0].totalUsers;  // Extract the value from the result
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+
 
 };
 
