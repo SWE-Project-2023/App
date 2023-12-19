@@ -28,6 +28,7 @@ router.use((req, res, next) => {
 });
 
 router.get("/", async function (req, res, next) {
+  var categories = await execute.getCategories();
   try {
     let salesToday = await productQueries.salesTodayQuery();
     let salesThisMonth = await productQueries.salesThisMonthQuery();
@@ -41,6 +42,7 @@ router.get("/", async function (req, res, next) {
       salesToday: salesToday[0].totalSalesToday,
       salesThisMonth: salesThisMonth[0].totalSalesThisMonth,
       allCustomers,
+      categories,
     });
   } catch (error) {
     console.error(error.message);
@@ -48,13 +50,16 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.get("/login", function (req, res, next) {
+router.get("/login", async function (req, res, next) {
+
   {
-    res.render("admin/login.ejs",{user: req.session.user===undefined?"":req.session.user});
+    var categories = await execute.getCategories();
+    res.render("admin/login.ejs",{user: req.session.user===undefined?"":req.session.user, categories});
   }
 });
 router.get("/dashboard", async function (req, res, next) {
   {
+    var categories = await execute.getCategories();
     let salesToday = await productQueries.salesTodayQuery();
     let salesThisMonth = await productQueries.salesThisMonthQuery();
     let allCustomers = await productQueries.allUsers();

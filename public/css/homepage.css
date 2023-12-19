@@ -380,6 +380,7 @@ button{
 	}
 
 .slider-container {
+    margin-top: 5px;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -425,59 +426,68 @@ button{
   }
 
   .container {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-	overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards horizontally */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.category {
-    float: left;
-    width: 10%; /* Adjust the width as needed */
-    max-width: 150px; /* Set a maximum width if necessary */
-    height: 80px; /* Adjust the height as needed */
+.category-card {
+    flex: 0 0 calc(33.33% - 20px); /* Three cards per row with margin adjustments */
     box-sizing: border-box;
-    padding: 10px;
     margin: 10px;
-    background-color: #21af9f; 
-    border: 1px solid #191917; 
+    background-color: #fff;
+    border: 1px solid #e1e3e4;
     border-radius: 10px;
     text-align: center;
-    overflow: hidden; /* Ensure the image doesn't overflow the container */
+    overflow: hidden;
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-.category:hover {
-    background-color: #177c70;
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.category-image {
+    height: 150px; /* Set the fixed height for the category image container */
+    overflow: hidden;
+}
+
+.category-image img {
+    margin-top: 20px;
+    width: 90%;
+    height: 100%;
+    object-fit: contain; /* Use 'contain' to fit the image within the container */
+}
+
+.category-content {
+    padding: 20px;
 }
 
 .icon {
-font-size: 30px; 
-color: #fff; 
-margin-bottom: 5px;
+    font-size: 30px;
+    color: #21af9f;
+    margin-bottom: 10px;
 }
 
 h2 {
-color: white;
-margin: 0;
-font-size: small; /* Adjust the font size as needed */
+    color: #333;
+    font-size: 1rem;
+    margin: 0;
 }
 
+/* Media query for smaller screens */
 @media screen and (max-width: 768px) {
-.category {
-width: 30%; /* Adjust the width for smaller screens */
-max-width: none; /* Remove maximum width for smaller screens */
-height: 60px; /* Adjust the height for smaller screens */
+    .category-card {
+        flex-basis: calc(50% - 20px); /* Two cards per row for smaller screens */
+    }
 }
 
-.icon {
-font-size: 20px; /* Adjust the icon size for smaller screens */
-}
-
-h2 {
-font-size: x-small; /* Adjust the font size for smaller screens */
-}
-}
 .add_to_bag_btn {
     display: block;
     background: #e1e3e4;

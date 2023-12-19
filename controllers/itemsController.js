@@ -53,7 +53,7 @@ itemsController.createItem = async (req, res) => {
   if (Object.keys(errors).length > 0) {
     // Return validation errors to the client
     console.log("Validation errors:", errors);
-    return res.render("addeditproduct", { errors, product: "add" });
+    return res.render("/admin/products", { errors, product: "add" });
   }
 
   // Create a MySQL connection pool

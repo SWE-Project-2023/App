@@ -3,6 +3,7 @@ import express from "express";
 import session from "express-session";
 import path from "path";
 import mysql from "mysql2";
+import execute from "./queries/productQueries.js";
 const port = 3010; // Specify the port you want to use
 
 // Configure session middleware
@@ -53,7 +54,17 @@ app.use(express.json());
 
 // Parse URL-encoded requests
 app.use(express.urlencoded({ extended: true }));
-
+const fetchCategoriesMiddleware = async (req, res, next) => {
+  try {
+    const categories = await execute.getCategories();
+    res.locals.categories = categories; // Make categories available to templates
+    next();
+  } catch (error) {
+    console.error(error.message);
+    next(error); // Pass the error to the next middleware
+  }
+};
+app.use(fetchCategoriesMiddleware);
 // Import route handlers
 import indexRouter from "./routes/index.js";
 import productRouter from "./routes/products.js";
@@ -79,6 +90,7 @@ app.use((req, res) => {
   });
 });
 
+// Middleware to fetch categories
 
 // Admin pages
 

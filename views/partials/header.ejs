@@ -78,6 +78,18 @@
                 <li><a href="/product/list">Products</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Categories</a>
+                    <div class="dropdown-content">
+                        <% if (categories && categories.length > 0) { %>
+                            <% categories.forEach(category => { %>
+                                <a href="/product/list?category=<%= category.category_name %>"><%= category.category_name %></a>
+                            <% }); %>
+                        <% } else { %>
+                            <p>No categories available</p>
+                        <% } %>
+                    </div>
+                </li>
               </ul>
         </div>
         </div>
