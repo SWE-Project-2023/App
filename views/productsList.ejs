@@ -74,7 +74,7 @@
                   <%products.forEach(product=>{%>
                   <div class="featured_product">
                     <div class="featured_product_inner">
-                      <a href="/product/itempage" class="product_item_image">
+                      <a href="/product/itempage?id=<%= product.item_id %>" class="product_item_image">
                         <div class="ratio">
                           <img
                             src="/images/<%=product.image_paths.split(',')[0]%>"
@@ -84,7 +84,7 @@
                       </a>
                       <div class="product_item_info">
                         <div class="product_item_info_inner">
-                          <a href="/product/itempage" class="product_title"
+                          <a href="/product/itempage?id=<%= product.item_id %>" class="product_title"
                             ><%=product.item_title%></a
                           >
                           <div class="product_item_price">
