@@ -1,7 +1,29 @@
-.wishlist {
+.wishlist-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    margin: 30px 70px;
+    height: 55vh;
+  }
+
+  .wishlist-container h1 {
+    font-size: 29px;
+    line-height: 1.43;
+    margin-bottom: 55px;
+  }
+
+  .wishlist-container .headers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px 30px;
+  }
+
+  .wishlist-container .headers p {
+    font-size: 12px;
+    font-weight: bold;
   }
 
   .wishlist-item {
@@ -54,16 +76,26 @@
   .remove-button {
     background-color: #ff5252; /* Red color */
     color: #fff;
-    border: none;
+    border: 2px solid transparent;
     margin-right: 10px;
+    transition: all 0.3s ease-in-out;
   }
 
   .quick-view-button {
-    background-color: #3498db; /* Blue color */
+    background-color: #21af9f; /* Blue color */
     color: #fff;
-    border: none;
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
   }
-  .remove-button:hover,
+
   .quick-view-button:hover {
-    background-color: #e74c3c; /* Darker red for Remove button */
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
+  }
+
+  .remove-button:hover {
+    background-color: #fff;
+    border-color: #ff5252;
+    color: #ff5252;
   }
