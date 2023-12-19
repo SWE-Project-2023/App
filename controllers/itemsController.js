@@ -377,7 +377,7 @@ itemsController.addtoCart = async(req,res) =>{
     if (req.session.user && req.session.user.user_id) {
         const userId = req.session.user.user_id;
         const results = await execute.getCart(userId) ?? 0;
-
+      console.log("results are: " + results);
         let products = [];
 
         if (results.length > 0) {
