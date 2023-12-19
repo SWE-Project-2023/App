@@ -6,6 +6,7 @@ import execute from "./queries/productQueries.js";
 import fs from "fs";
 const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
 import userController from "./controllers/userController.js";
+import https from "https";
 // Configure session middleware
 // app.use(
 //   session({
