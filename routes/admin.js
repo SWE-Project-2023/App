@@ -16,8 +16,6 @@ import itemsController from "../controllers/itemsController.js";
 
 const upload = multer({ storage });
 
-
-
 // router.use((req, res, next) => {
 //   if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
 //     next();
@@ -87,13 +85,20 @@ router.get("/products", async function (req, res, next) {
 });
 router.get("/orders", async function (req, res, next) {
   var orders = await orderController.getOrders()
-  console.log(orders)
   {
     res.render("admin/orders.ejs", {
       user: req.session.user === undefined ? "" : req.session.user,
       orders,
     });
   }
+});
+router.get("/orders/change_status/:id", async function (req, res, next) {
+  await orderController.changeStatus(req.params.id)
+  res.redirect("/admin/orders")
+});
+router.get("/orders/delete/:id", async function (req, res, next) {
+  await orderController.deleteOrder(req.params.id)
+  res.redirect("/admin/orders")
 });
 router.get("/users", async function (req, res, next) {
   var users = await userController.getUsers();

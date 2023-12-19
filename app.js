@@ -5,8 +5,7 @@ import mysql from "mysql2";
 import execute from "./queries/productQueries.js";
 import fs from "fs";
 const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
-
-
+import userController from "./controllers/userController.js";
 // Configure session middleware
 // app.use(
 //   session({
@@ -69,7 +68,21 @@ const fetchCategoriesMiddleware = async (req, res, next) => {
     next(error); // Pass the error to the next middleware
   }
 };
+const fetchNotificationsMiddleware = async (req, res, next) => {
+  try {
+var notifications = [];
+    if (req.session.user !== undefined) {
+      notifications = await userController.getNotifications(req.session.user.user_id);
+    }
+    res.locals.notifications = notifications; // Make categories available to templates
+    next();
+  } catch (error) {
+    console.error(error.message);
+    next(error); // Pass the error to the next middleware
+  }
+}
 app.use(fetchCategoriesMiddleware);
+app.use(fetchNotificationsMiddleware);
 // Import route handlers
 import indexRouter from "./routes/index.js";
 import productRouter from "./routes/products.js";

@@ -50,10 +50,20 @@
                         <div class="prodductinfo">
                           <div class="item_image">
                             <div class="imgcont">
-                              <img
-                                src="/images/panadol-advance-24-tablets-285579_1024x.webp"
-                                alt=""
-                              />
+                                <% const images = product.image_paths ?
+                                product.image_paths.split(',') : []; %> <% if
+                                (images.length > 0) { %>
+                                <img
+                                  src="/images/<%= images[0] %>"
+                                  alt="<%= images[0] %>"
+                                />
+                                <% } else { %>
+                                <img
+                                  src="/images/default_image.png"
+                                  alt="Default Image"
+                                />
+                                <% } %>
+                              
                             </div>
                           </div>
                           <div class="item_title">

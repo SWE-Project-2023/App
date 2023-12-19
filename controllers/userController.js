@@ -41,6 +41,10 @@ userController.getUserDetails = async (req, res) => {
   userController.toggleAdmin = async (id) => {
     return await execute.toggleAdmin(id);
   };
+  userController.getNotifications = async (id) => {
+    return await execute.getUserNotifications(id);
+  }
+
   userController.editUser = async (req, res) => {
      // Extract data from the request body
      const {

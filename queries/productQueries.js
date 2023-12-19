@@ -184,7 +184,12 @@ const execute = {
   },
   displayitem : async (productId) => {
       // SQL query to fetch the product details from the database based on the product ID
-    const sql = "SELECT * FROM item WHERE item_id = ?";
+      const sql = `
+      SELECT item.*, GROUP_CONCAT(item_images.image_path) AS image_path
+      FROM item
+      LEFT JOIN item_images ON item.item_id = item_images.item_id
+      WHERE item.item_id = ?
+    `;
     try {
       const [result] = await query(sql, [productId]);
       return result;
@@ -270,16 +275,15 @@ const execute = {
 },
 getCart:async(userId)=>{
   const sql = `
-  SELECT c.user_id, c.item_id,c.quantity, i.item_title,
-  i.item_brand,
-  i.item_cat,
-  i.item_details,
-  i.item_quantity,
-  i.item_price,
-  i.item_offers
+  SELECT c.user_id, c.item_id, c.quantity, i.item_title,
+    i.item_brand, i.item_cat, i.item_details,
+    i.item_quantity, i.item_price, i.item_offers,
+    GROUP_CONCAT(ii.image_path) AS image_paths
   FROM cart c
   JOIN item i ON c.item_id = i.item_id
-  WHERE c.user_id = ?;
+  LEFT JOIN item_images ii ON i.item_id = ii.item_id
+  WHERE c.user_id = ?
+  GROUP BY c.item_id;
 `;
 try {
   const [results]= await query(sql, [userId]);
@@ -433,37 +437,27 @@ addtoWishlist:async(userId,productId)=>{
   throw error;
 }
 },
-getwishlist:async(userId)=>{
-const sql = `
-SELECT w.user_id, w.item_id, i.item_title,
-i.item_brand,
-i.item_cat,
-i.item_details,
-i.item_quantity,
-i.item_price,
-i.item_offers
-FROM wishlist w
-JOIN item i ON w.item_id = i.item_id
-WHERE w.user_id = ?;
-`;
-try {
-const [results]= await query(sql, [userId]);
-return results;
-} catch (error) {
-console.error(error.message);
-throw error;
-}},
-deleteWishlistItem:async(userId,productId)=>{
-const sql = `DELETE FROM wishlist WHERE user_id =? AND item_id = ?`;
-try {
-  const [results]= await query(sql, [userId,productId]);
-  console.log("deleteeed");
-return results;
-} catch (error) {
-console.error(error.message);
-throw error;
-}
-}
+getwishlist: async (userId) => {
+  const sql = `
+    SELECT w.user_id, w.item_id, i.item_title,
+      i.item_brand, i.item_cat, i.item_details,
+      i.item_quantity, i.item_price, i.item_offers,
+      GROUP_CONCAT(ii.image_path) AS image_paths
+    FROM wishlist w
+    JOIN item i ON w.item_id = i.item_id
+    LEFT JOIN item_images ii ON i.item_id = ii.item_id
+    WHERE w.user_id = ?
+    GROUP BY w.item_id;
+  `;
+
+  try {
+    const [results] = await query(sql, [userId]);
+    return results;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
 
 };
 

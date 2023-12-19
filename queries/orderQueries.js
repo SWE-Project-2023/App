@@ -23,14 +23,48 @@ const execute = {
           );
         });
       });
-      console.log("order", orders);
-      console.log("order_item_0", orders[0].order_items);
       return orders;
     } catch (error) {
       console.error(error.message);
       throw error;
     }
   },
+  changeStatus: async (id) => {
+    try {
+      const sql = 'UPDATE orders SET order_status = !order_status WHERE order_id = ?';
+      const [result] = await query(sql, [id]);
+      let userId = 'SELECT user_id FROM orders WHERE order_id = ?';
+      const [user] = await query(userId, [id]);
+      const sql2 = 'SELECT order_status FROM orders WHERE order_id = ?';
+      const [result2] = await query(sql2, [id]);
+      let message = (result2[0].order_status == 0) ? `Your order #${id} is now pending` : `Your order #${id} has been completed`;
+      execute.sendUserNotification(user[0].user_id, message);
+      return result;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  deleteOrder: async (id) => {
+    try {
+      const sql = 'DELETE FROM orders WHERE order_id = ?';
+      const [result] = await query(sql, [id]);
+      return result;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  },
+  sendUserNotification: async (userId, message) => {
+    try {
+      const sql = 'INSERT INTO notifications (user_id, notification_text) VALUES (?, ?)';
+      const [result] = await query(sql, [userId, message]);
+      return result;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  }
 };
 
 export default execute;
