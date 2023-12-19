@@ -9,7 +9,7 @@ router.get("/list", itemsController.viewProducts);
 
 router.use((req, res, next) => {
 
-  if (req.session.user !== undefined) {
+  if (req.session.user !== undefined || req.session.user!=="") {
     
     next();
 
