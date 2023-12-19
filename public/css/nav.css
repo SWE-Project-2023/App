@@ -471,7 +471,7 @@ nav {
     display: none;
   }
 
-  .notifs-overlay a {
+  .notifs-overlay p {
     text-decoration: none;
     text-align: center;
     color: white;
