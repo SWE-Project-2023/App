@@ -281,3 +281,39 @@ img{
     min-height: 55px;
   }
 }
+
+
+.product-form {
+  background-color: #f8f8f8; /* Adjust the background color */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.product-form div {
+  margin-bottom: 15px;
+}
+
+.product-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.product-form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.product-form button {
+  background-color: #3F3F95; /* Match the button color with your theme */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}

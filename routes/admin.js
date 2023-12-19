@@ -16,8 +16,16 @@ import itemsController from "../controllers/itemsController.js";
 const upload = multer({ storage });
 
 
-router.post("/getProductDetails", itemsController.getProductDetails);
 
+router.use((req, res, next) => {
+  if (req.session.user !== undefined && req.session.user.user_isAdmin === 1) {
+    next();
+  } else {
+    res.render("404", {
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  }
+});
 
 router.get("/", async function (req, res, next) {
   try {
@@ -45,9 +53,15 @@ router.get("/login", function (req, res, next) {
     res.render("admin/login.ejs",{user: req.session.user===undefined?"":req.session.user});
   }
 });
-router.get("/dashboard", function (req, res, next) {
+router.get("/dashboard", async function (req, res, next) {
   {
-    res.render("admin/dashboard.ejs",{user: req.session.user===undefined?"":req.session.user});
+    let salesToday = await productQueries.salesTodayQuery();
+    let salesThisMonth = await productQueries.salesThisMonthQuery();
+    let allCustomers = await productQueries.allUsers();
+    console.log(salesToday);
+    console.log(salesThisMonth);
+    console.log(allCustomers);
+    res.render("admin/dashboard.ejs",{user: req.session.user===undefined?"":req.session.user, salesToday: salesToday[0].totalSalesToday, salesThisMonth: salesThisMonth[0].totalSalesThisMonth, allCustomers});
   }
 });
 router.get("/products", async function (req, res, next) {
@@ -94,7 +108,7 @@ router.get("/deleteProduct/:id",async function (req, res, next) {
   await itemsController.deleteProduct(req.params.id);
   res.redirect("/admin/products");
 });
-
+router.post("/getProductDetails", itemsController.getProductDetails);
 router.post("/editUser", userController.editUser);
 router.post("/createItem", upload.array("photo", 5), itemsController.createItem);
 router.post("/upload", upload.single("file"), itemsController.uploadImage);

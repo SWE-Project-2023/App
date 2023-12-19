@@ -304,7 +304,7 @@ itemsController.viewProducts = async (req, res) => {
     if (products.length > 0) {
       res.render("productsList.ejs", { user: req.session.user===undefined?"":req.session.user, products });
     } else {
-      res.status(404).render("404.ejs", { user: req.session.user===undefined?"":req.session.user });
+      res.render("productsList.ejs", { user: req.session.user===undefined?"":req.session.user,products });
     }
   } catch (error) {
     console.error(error.message);
@@ -357,7 +357,7 @@ itemsController.addtoCart = async(req,res) =>{
       const products = results;
       res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
     } else {
-      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+      res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
     }
   };
 
@@ -371,7 +371,7 @@ itemsController.addtoCart = async(req,res) =>{
         const products = results;
         res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
       } else {
-        res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user,products });
       }
     } else {
       // Render 404 if user session is not established
