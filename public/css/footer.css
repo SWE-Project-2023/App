@@ -10,7 +10,7 @@
 	background-color: var(--primary-color);
 	margin-top: 5vh;
 	height: 60vh;
-	color: var(--secondary-color);
+	color: white;
 	padding: 3% 6%;
 }
 
@@ -61,7 +61,7 @@
 .footer-branch a p {
 	font-size: 18px;
 	font-weight: bold;
-	color: var(--secondary-color);
+	color: white;
 }
 
 .footer-branch > p {
@@ -101,5 +101,5 @@
 }
 
 .footer-bottom-right p {
-	color: var(--secondary-color);
+	color: white;
 }

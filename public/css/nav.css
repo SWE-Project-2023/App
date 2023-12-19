@@ -21,7 +21,7 @@ nav {
 
 .navcontainer{
     padding: 16px 20px;
-    color: var(--secondary-color);
+    color: white;
     display: flex;
     align-items: center;
 }
@@ -53,7 +53,7 @@ nav {
     font-size: 20px;
     position: relative;
     bottom: 1px;
-    color: var(--secondary-color);
+    color: white;
 }
 
 .inner_navII i:not(:last-child){
@@ -114,7 +114,6 @@ nav {
     transition: all 0.5s ease;
     overflow: hidden;
     margin-right: 10px;
-    top: 2px;
   }
   
   .searchcon .icon{
@@ -128,7 +127,13 @@ nav {
     font-size: 21px;
     cursor: pointer;
     color: var(--primary-color);
+    transition: all 0.3s ease;
   }
+
+  .searchcon .icon .search:hover{
+    color: #177c70;
+  }
+
   .searchcon.active{
     width: 360px;
     background-color: var(--primary-color);
@@ -196,7 +201,7 @@ nav {
     display: block;
     font-size: 14px;
     font-weight: 400;
-    color: var(--secondary-color);
+    color: white;
   }
   .min-cart[aria-hidden=false]{
     border: 1px solid var(--secondary-color);
@@ -285,6 +290,10 @@ nav {
     line-height: 1;
   }
 
+  .heeader .nav-links a:hover {
+    color: #21af9f;
+  }
+
   /* responsive */
   @media screen and (max-width: 1160px) {
     .heeader {
@@ -335,9 +344,10 @@ nav {
       flex-direction: column;
       background-color: #f4f4f9;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
       z-index: 100;
     }
+
     .heeader.openNav .nav-links {
       left: 0;
     }
