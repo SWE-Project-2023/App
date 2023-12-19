@@ -14,6 +14,11 @@ const execute = {
         const [result, fields] = await query(sql);
         return result;
     },
+    getUserNotifications: async (id) => {
+        const sql = 'SELECT * FROM notifications WHERE user_id = ?';
+        const [result, fields] = await query(sql, [id]);
+        return result;
+    },
     getUserById: async (id) => {
         const sql = 'SELECT * FROM user WHERE user_id = ?';
         const [result, fields] = await query(sql, [id]);

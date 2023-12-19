@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-    <title>Document</title>
+    <title>Qanaa</title>
 </head>
 <body>
     <nav>
@@ -37,7 +37,7 @@
                     if (user.user_isAdmin) {%>
                         <div class="dashboard-button">
                             <a href="/admin" class="header_icon"><i class='bx bxs-dashboard' ></i></a>
-                            <a href ="/admin" class="header_item_link">Dashboard</a>
+                            <a href ="/admin" class="header_item_link">Admin</a>
                         </div>
                     <% } %>
                 <div class="wishlist">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="notifs">
                     <a class="header_icon"><i class='bx bxs-notification' ></i></a>
-                    <a class="header_item_link">Notifictaions</a>            
+                    <a class="header_item_link">Notifications</a>            
                 </div>
                 <div class="Account">
                     <a href="/account" class="header_icon"><i class='bx bxs-user' ></i></a>
@@ -104,22 +104,23 @@
         </div>
 
         <div class="notifs-overlay">
-            <p>Your order is ready</p>
-            <hr>
-            <p>Discount on all your favorite diapers</p>
-            <hr>
-            <p>Get 50% off pampers</p>
-            <hr>
-            <p>You're a big ol' baby</p>
-            <hr>
-            <p>Peepeepoopoo</p>
-            <hr>
-            <p>Be a man, get the brand new Pharmabeer now</p>
-            <hr>
-            <p>Ich muss jetzt Bier trinken</p>
-            <hr>
-            <p>Yeah, I speak German bish</p>
-            <hr>
+            <% if (locals.notifications) { %>
+                <% if (notifications.length > 0) { %>
+                    <% notifications.sort((a, b) => b.notification_date - a.notification_date); %>
+                    <% notifications.forEach(notification => { %>
+                        <p>
+                            <%= notification.notification_date.toUTCString() %>
+                            <br>
+                            <strong><%= notification.notification_text %></strong>
+                        <p>
+                        <hr>
+                    <% }); %>
+                <% } else { %>
+                    <p>No notifications</p>
+                <% } %>
+            <% } else { %>
+                <p>No notifications</p>
+            <% } %>
         </div>
     </nav>
    
