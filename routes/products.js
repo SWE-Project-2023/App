@@ -7,6 +7,19 @@ router.get("/itempage", itemsController.displayitem);
 
 router.get("/list", itemsController.viewProducts);
 
+router.use((req, res, next) => {
+
+  if (req.session.user !== undefined) {
+    
+    next();
+
+  } else {
+
+    res.render('404');
+  
+  }
+});
+
 router.get("/cart", itemsController.getCart);
 router.get("/wishlist", itemsController.getwishlist);
 router.post("/cart/updateQuantity", itemsController.updateCartItemQuantity);

@@ -24,7 +24,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login', loginController.login);
 
 router.post('/signup', signupController.signup);
-router.post('/changeAccount', loginController.changeAccount);
+
 router.use((req, res, next) => {
 
   if (req.session.user !== undefined) {
@@ -37,6 +37,6 @@ router.use((req, res, next) => {
   
   }
 });
-
+router.post('/changeAccount', loginController.changeAccount);
 // Export the router
 export default router;
