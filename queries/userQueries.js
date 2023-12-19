@@ -38,7 +38,55 @@ const execute = {
         const [result, fields] = await query(sql, [firstname, lastname, email, password, address]);
         return result;
     },
-    
+    getUserDetails: async (userId) => {
+        const sql = `
+          SELECT
+            u.user_id,
+            u.user_fname,
+            u.user_Lname,
+            u.email,
+            u.user_address,
+            u.user_isAdmin
+            -- Add more columns as needed
+          FROM
+            user u
+          WHERE
+            u.user_id = ?
+        `;
+        const params = [userId];
+        try {
+          const [rows] = await query(sql, params);
+          return rows;
+        } catch (error) {
+          console.error(error.message);
+          throw error;
+        }
+      },
+      updateUser: async (
+        user_id,
+        user_fname,
+        user_lname,
+        email,
+        user_address,
+      ) => {
+        const sql = `UPDATE user SET user_fname = ?, user_Lname = ?, email = ?, user_address = ? WHERE user_id = ?`;
+        const params = [
+          user_fname,
+          user_lname,
+          email,
+          user_address,
+          user_id,
+        ];
+      
+        try {
+          const [rows] = await query(sql, params);
+          return rows;
+        } catch (error) {
+          console.error(error.message);
+          throw error;
+        }
+      },
+      
 
 }
 

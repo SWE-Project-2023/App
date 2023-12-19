@@ -106,24 +106,25 @@ itemsController.getProductDetails = async (req, res) => {
   try {
     // Execute the query
     const results = await execute.getProductDetails(productId);
-
+   
     if (results.length === 0) {
       return res.status(404).json({ error: "Product not found" });
     }
-
+  
     // Format the data and send it as JSON
+    // Access the first element of the array
+    const productDetail = results[0];
+
     const productDetails = {
-      productId: results.item_id,
-      productName: results.item_title,
-      brand: results.item_brand,
-      category: results.item_cat,
-      description: results.item_details,
-      quantity: results.item_quantity,
-      price: results.item_price,
-      offers: results.item_offers,
-      images: results
-        .map((result) => result.image_path)
-        .filter((image) => image !== null),
+      productId: productDetail.item_id,
+      productName: productDetail.item_title,
+      brand: productDetail.item_brand,
+      category: productDetail.item_cat,
+      description: productDetail.item_details,
+      quantity: productDetail.item_quantity,
+      price: productDetail.item_price,
+      offers: productDetail.item_offers,
+      images: results.map((result) => result.image_path).filter((image) => image !== null),
     };
 
     res.json(productDetails);
@@ -139,9 +140,9 @@ itemsController.deleteImage = async (req, res) => {
 
     // Step 1: Define the path to the file
     // Step 2: Check if the file exists
-    if (fs.existsSync(filename)) {
+    if (fs.existsSync("public/images/" + filename)) {
       // Step 3: Delete the file
-      fs.unlink(filename, (error) => {
+      fs.unlink("public/images/" + filename, (error) => {
         if (error) {
           console.log("Error deleting file:", error);
           return res.status(500).send("Error deleting file");
@@ -183,6 +184,7 @@ itemsController.editItem = async (req, res) => {
     offers,
   } = req.body;
 
+  console.log("req.body", req.body);
   const uploadedImagePaths = JSON.parse(req.body.uploadedImagePaths);
 
   // Backend validation
@@ -287,8 +289,29 @@ itemsController.displayitem = async (req, res) => {
 
 
 };
+itemsController.viewProducts = async (req, res) => {
+  try {
+    var products = await execute.searchItems({
+      item_id: req.query.id,
+      item_title: req.query.title,
+      item_brand: req.query.brand,
+      item_cat: req.query.category,
+      item_price_min: req.query.price_min,
+      item_price_max: req.query.price_max,
+      item_qty_min: req.query.qty_min,
+      item_qty_max: req.query.qty_max,
+    });
+    if (products.length > 0) {
+      res.render("productsList.ejs", { user: req.session.user===undefined?"":req.session.user, products });
+    } else {
+      res.render("productsList.ejs", { user: req.session.user===undefined?"":req.session.user,products });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+};
 itemsController.getbyCategory = async(req,res)=>{
-
   try {
     const category = req.query.category;
     console.log(category)
@@ -297,7 +320,7 @@ itemsController.getbyCategory = async(req,res)=>{
     if (results.length > 0) {
       const products = results;
       console.log(results);
-      res.render('productList.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
+      res.render('productLists.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
     } else {
       res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
     }
@@ -334,7 +357,7 @@ itemsController.addtoCart = async(req,res) =>{
       const products = results;
       res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
     } else {
-      res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+      res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user ,products});
     }
   };
 
@@ -348,7 +371,7 @@ itemsController.addtoCart = async(req,res) =>{
         const products = results;
         res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user, products });
       } else {
-        res.status(404).render('404.ejs', { user: req.session.user === undefined ? '' : req.session.user });
+        res.render('cart.ejs', { user: req.session.user === undefined ? '' : req.session.user,products });
       }
     } else {
       // Render 404 if user session is not established
@@ -369,5 +392,51 @@ itemsController.addtoCart = async(req,res) =>{
       res.status(500).json({ success: false, message: 'Error deleting item from cart' });
   }
   };
-
+  itemsController.deleteProduct = async (id) => {
+    try {
+  
+      const productId = id;
+  
+      // Step 1: Retrieve all images associated with the product
+      const images = await execute.getImagesByProductId(productId);
+      
+      // Log the images retrieved
+      console.log('Images associated with product:', images);
+  
+      // Step 2: Delete and unlink each image
+      for (const image of images) {
+        const imagePath = image.image_path;
+  
+        if (fs.existsSync("public/images/" + imagePath)) {
+          fs.unlink("public/images/" + imagePath, (error) => {
+            if (error) {
+              console.log("Error deleting file:", error);
+              // Handle the error if necessary
+            } else {
+              console.log("File deleted successfully:", imagePath);
+            }
+          });
+        }
+  
+        // Log the image deletion from the database
+        console.log('Deleting image from the database:', imagePath);
+  
+        // Step 3: Delete the image from the database
+        await execute.deleteImageByPath(imagePath);
+      }
+  
+      // Log the product deletion from the database
+      console.log('Deleting product from the database:', productId);
+  
+      // Step 4: Delete the product from the database
+      await execute.deleteProduct(productId);
+      
+    } catch (error) {
+      // Log any errors that occur during the deletion process
+      console.error('Error deleting product:', error);
+      
+    }
+  };
+  
+  
 export default itemsController;

@@ -106,7 +106,7 @@ img{
   background: #fff;
   display: flex;
   flex-direction: column;
-  border: 1px solid palevioletred;
+  border: 1px solid rgba(156, 156, 156, 0.281);
 }
 .product_item_image{
   display: block;
@@ -230,25 +230,23 @@ img{
     display: flex;
     margin-left: -15px;
     margin-right: -15px;
-    border: 1px solid rgb(243, 10, 10);
 
   }
   .layout_section{
     flex: none;
     width: 260px;
     margin: 0 15px;
-    border: 1px solid rgb(145, 15, 15);
+    border: 1px solid rgba(156, 156, 156, 0.281);
   }
   .layout_section_sec{
     margin: 0 15px;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 0;
-    border: 1px solid black;
   }
   .collection_toolbar{
     margin-top: -12px;
-    box-shadow: 0 1px #0a98e0;
+    box-shadow: 0 1px #fff;
   }
 
 }
@@ -282,4 +280,40 @@ img{
   .product_item_price{
     min-height: 55px;
   }
+}
+
+
+.product-form {
+  background-color: #f8f8f8; /* Adjust the background color */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.product-form div {
+  margin-bottom: 15px;
+}
+
+.product-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.product-form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.product-form button {
+  background-color: #3F3F95; /* Match the button color with your theme */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
 }

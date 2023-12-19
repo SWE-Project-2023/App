@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/itempage", itemsController.displayitem);
 
-router.get("/productlist", itemsController.getbyCategory);
+router.get("/list", itemsController.viewProducts);
 
 router.get("/cart", itemsController.getCart);
 router.get("/wishlist", function (req, res, next) {

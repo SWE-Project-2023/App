@@ -2,6 +2,18 @@ Dropzone.autoDiscover = false;
 let uploadedImagePaths = [];
 $(document).ready(function async() {
   // Initialize Dropzone
+  $('.delete-product-btn').click(function () {
+    var productId = $(this).data('product-id');
+    // Set the product ID for deletion in the confirmation modal
+    $('#confirmDeleteProductBtn').data('product-id', productId);
+  });
+
+  // Handle confirmation modal delete button click
+  $('#confirmDeleteProductBtn').click(function () {
+    var productId = $(this).data('product-id');
+    // Redirect or trigger the server-side deletion logic here
+    window.location.href = '/admin/deleteProduct/' + productId;
+  });
   let myDropzone = new Dropzone("#my-dropzone", {
     // Configuration options for Dropzone
     paramName: "file", // The name that will be used to transfer the file
@@ -276,7 +288,7 @@ $(document).ready(function () {
 
             // Remove the image path from the uploadedImagePaths array
             let index = uploadedImagePaths.indexOf(
-              "public/images/" + imageName
+              imageName
             );
             if (index !== -1) {
               console.log(
@@ -371,6 +383,7 @@ $(document).ready(function () {
       method: "POST",
       data: { productId: productId },
       success: function (response) {
+        console.log("Product details retrieved successfully:", response.productId)
         // Update the edit form fields with the retrieved data
         $("#edit-product-id").val(response.productId);
         $("#edit-product-name").val(response.productName);
@@ -381,6 +394,7 @@ $(document).ready(function () {
         $("#edit-description").val(response.description);
         $("#edit-offers").val(response.offers);
         console.log("response.images", response.images);
+        
         $("#previous-images").empty();
         let previewElement = document.getElementById("edit-preview");
         response.images.forEach(function (image) {
@@ -394,6 +408,7 @@ $(document).ready(function () {
             '" style="max-width: 100px;" />' +
             '<button type = "button" class="btn btn-danger remove-button">Remove</button>';
           previewElement.appendChild(thumbnail);
+          uploadedImagePaths.push(image);
         });
       },
       error: function (error) {

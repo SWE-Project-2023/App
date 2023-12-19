@@ -11,36 +11,36 @@ const execute = {
   searchItems: async (options) => {
     let sql = "SELECT * FROM item WHERE 1"; // 1 so we can use AND for the rest of the sql
 
-    if (options.item_id) {
-      sql += ` AND item_id = ${options.item_id}`;
+    if (options?.item_id) {
+      sql += ` AND item_id = ${options?.item_id}`;
     }
 
-    if (options.item_title) {
-      sql += ` AND item_title LIKE '%${options.item_title}%'`;
+    if (options?.item_title) {
+      sql += ` AND item_title LIKE '%${options?.item_title}%'`;
     }
 
-    if (options.item_brand) {
-      sql += ` AND item_brand = '${options.item_brand}'`;
+    if (options?.item_brand) {
+      sql += ` AND item_brand = '${options?.item_brand}'`;
     }
 
-    if (options.item_cat) {
-      sql += ` AND item_cat = '${options.item_cat}'`;
+    if (options?.item_cat) {
+      sql += ` AND item_cat = '${options?.item_cat}'`;
     }
 
-    if (options.item_price_min) {
-      sql += ` AND item_price >= ${options.item_price_min}`;
+    if (options?.item_price_min) {
+      sql += ` AND item_price >= ${options?.item_price_min}`;
     }
 
-    if (options.item_price_max) {
-      sql += ` AND item_price <= ${options.item_price_max}`;
+    if (options?.item_price_max) {
+      sql += ` AND item_price <= ${options?.item_price_max}`;
     }
 
-    if (options.item_qty_min) {
-      sql += ` AND item_qty >= ${options.item_qty_min}`;
+    if (options?.item_qty_min) {
+      sql += ` AND item_qty >= ${options?.item_qty_min}`;
     }
 
-    if (options.item_qty_max) {
-      sql += ` AND item_qty <= ${options.item_qty_max}`;
+    if (options?.item_qty_max) {
+      sql += ` AND item_qty <= ${options?.item_qty_max}`;
     }
     try {
       const [rows] = await query(sql);
@@ -128,7 +128,7 @@ const execute = {
     }
   },
   deleteImage: async (imageId) => {
-    const sql = `DELETE FROM item_images WHERE image_id = ?`;
+    const sql = `DELETE FROM item_images WHERE image_path = ?`;
     const params = [imageId];
     try {
       const [rows] = await query(sql, params);
@@ -139,15 +139,16 @@ const execute = {
     }
   },
   updateItem: async (
+    item_id,
     item_title,
     item_cat,
     item_brand,
     item_details,
     item_quantity,
     item_price,
-    item_offers,
-    item_id
+    item_offers
   ) => {
+    console.log(item_title, item_cat, item_brand, item_details, item_quantity, item_price, item_offers, item_id);
     const sql = `UPDATE item SET item_title = ?, item_cat = ?, item_brand = ?, item_details = ?, item_quantity = ?, item_price = ?, item_offers = ? WHERE item_id = ?`;
     const params = [
       item_title,
@@ -295,7 +296,83 @@ deleteitem:async(userId,productId)=>{
   console.error(error.message);
   throw error;
   }
-}
+},
+ getImagesByProductId: async (productId) => {
+  const sql = `SELECT image_path FROM item_images WHERE item_id = ?`;
+  try {
+    const [rows] = await query(sql, [productId]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+deleteImageByPath: async (imagePath) => {
+  const sql = `DELETE FROM item_images WHERE image_path = ?`;
+  try {
+    const [rows] = await query(sql, [imagePath]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+deleteProduct: async (productId) => {
+  const sql = `DELETE FROM item WHERE item_id = ?`;
+  try {
+    const [rows] = await query(sql, [productId]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+salesTodayQuery: async () => {
+  const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesToday
+    FROM orders
+    WHERE DATE(order_date) = CURDATE();
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+salesThisMonthQuery: async () => {
+  const sql = `
+    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesThisMonth
+    FROM orders
+    WHERE MONTH(order_date) = MONTH(CURDATE()) AND YEAR(order_date) = YEAR(CURDATE());
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+allUsers: async () => {
+  const sql = `
+    SELECT COALESCE(COUNT(DISTINCT user_id), 0) AS totalUsers
+    FROM orders;
+  `;
+  try {
+    const [rows] = await query(sql);
+    return rows[0].totalUsers;  // Extract the value from the result
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+},
+
+
+
 };
 
 export default execute;
