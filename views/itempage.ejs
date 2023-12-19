@@ -59,14 +59,23 @@
                                                 <div class="img_1">
                                                     <div class="product_size">
                                                         <div class="ratio">
-                                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt="">
+                                                            <% const images = product.image_path ? product.image_path.split(',') : []; %>
+                                                            <% if (images.length > 0) { %>
+                                                              <img src="/images/<%= images[0] %>" alt="<%= images[0] %>">
+                                                            <% } else { %>
+                                                              <img src="/images/default_image.jpg" alt="Default Image">
+                                                            <% } %>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="img_2">
                                                     <div class="sec_product_size">
                                                         <div class="ratio">
-                                                            <img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt="">
+                                                            <% if (images.length > 1) { %>
+                                                                <img src="/images/<%= images[1] %>" alt="<%= images[1] %>">
+                                                              <% } else { %>
+                                                                <img src="/images/default_image.jpg" alt="Default Image">
+                                                              <% } %>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -79,9 +88,13 @@
                                     <div class="scroller">
                                         <div class="inner_scroller">
                                             <div class="items_img">
-                                                <a href="#" class="item" onclick="changeImage(0)"><img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-193628.webp" alt=""></a>
-                                                <a href="#" class="item" onclick="changeImage(1)"><img src="/images/eucerin-hyaluron-filler-moisture-booster-serum-30ml-578653_1024x.webp" alt=""></a>
-                                            </div>
+                                                <% const image = product.image_path ? product.image_path.split(',') : []; %>
+                                                <% for (let i = 0; i < image.length; i++) { %>
+                                                  <a href="#" class="item" onclick="changeImage(<%=i%>)">
+                                                    <img src="/images/<%= image[i] %>" alt="<%= image[i] %>">
+                                                  </a>
+                                                <% } %>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
