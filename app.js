@@ -55,6 +55,7 @@ import authRouter from "./routes/auth.js";
 import adminRouter from "./routes/admin.js";
 import checkoutRouter from "./routes/checkout.js";
 import aboutRouter from "./routes/about.js";
+import contactRouter from "./routes/contact.js";
 
 // Register route handlers
 app.use("/", indexRouter);
@@ -63,6 +64,7 @@ app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/checkout", checkoutRouter);
 app.use("/about", aboutRouter);
+app.use("/contact", contactRouter);
 // Handle logout
 app.get("/logout", (req, res) => {
   req.session.destroy();
