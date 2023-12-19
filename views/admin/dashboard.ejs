@@ -9,7 +9,7 @@
       <div class="card text-white bg-primary mb-3">
         <div class="card-body">
           <h5 class="card-title">Sales Today</h5>
-          <p class="card-text">$120</p>
+          <p class="card-text">$<%= salesToday %></p>
         </div>
       </div>
     </div>
@@ -17,15 +17,15 @@
       <div class="card text-white bg-success mb-3">
         <div class="card-body">
           <h5 class="card-title">Sales This Month</h5>
-          <p class="card-text">$3,500</p>
+          <p class="card-text">$<%= salesThisMonth %></p>
         </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="card text-white bg-warning mb-3">
         <div class="card-body">
-          <h5 class="card-title">New Customers</h5>
-          <p class="card-text">12</p>
+          <h5 class="card-title">Customers Count</h5>
+          <p class="card-text"><%= allCustomers %></p>
         </div>
       </div>
     </div>
