@@ -233,7 +233,8 @@ CREATE TABLE locations (
     address VARCHAR(255),
     google_maps_url VARCHAR(255)
 );
-
+INSERT INTO locations (branch_name, address, google_maps_url) 
+VALUES ('Nasr City', 'Al Manteqah Al Oula, Nasr City, Cairo Governorate 4450115', 'https://maps.app.goo.gl/gmTuJGybmFszvsUg9');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
