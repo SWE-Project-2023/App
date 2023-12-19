@@ -27,7 +27,7 @@ router.post('/signup', signupController.signup);
 
 router.use((req, res, next) => {
 
-  if (req.session.user !== undefined) {
+  if (req.session.user !== undefined || req.session.user!=="") {
     
     next();
 
