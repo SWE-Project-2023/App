@@ -74,24 +74,33 @@ a{
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-field:active, .input-field:focus {
+    border: 1px solid #21af9f;
+    outline: none;
 }
 
 /* Style the submit button */
 .submit-button {
-    background-color: #698ecf;
+    background-color: #21af9f;
     color: #fff;
     padding: 10px 15px;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 5px;
     cursor: pointer;
     width: 100%; /* Make the button the same length as the container */
     margin-top: 20px; /* Add spacing between the button and the inputs */
     text-align:center;
     font-size: 16px;
+    transition: all 0.3s ease-in-out;
 }
 
 .submit-button:hover {
-    background-color: #466caf;
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
 }
 
 
@@ -137,7 +146,7 @@ a{
 }
 .forgetpas {
     text-decoration: none; /* Remove the default underline */
-    color: #007bff; /* Link color */
+    color: #21af9f; /* Link color */
     display: block; /* Block level element */
     text-align: center; /* Center the text */
     margin-top: 10px; /* Add spacing between the link and the inputs */
@@ -146,7 +155,7 @@ a{
 /* Style for the "New customer? Create your account" link */
 .create {
     text-decoration: none; /* Remove the default underline */
-    color: #007bff; /* Link color */
+    color: #21af9f; /* Link color */
     display: block; /* Block level element */
     text-align: center; /* Center the text */
     margin-top: 15px; /* Add spacing between the link and the inputs */
@@ -162,7 +171,7 @@ a{
     font-size: 13px;
 }
 .link{
-    color: #0056b3;
+    color: #21af9f;
     transition: color .2s ease-in-out;
 }
 .link:hover{
@@ -220,7 +229,6 @@ a{
     font-size: 20px;
     font-weight: bold;
 }
-.sub-header-login{
-    border: 1px solid #354259;
+.sub-header-login {
     padding: 50px;
 }

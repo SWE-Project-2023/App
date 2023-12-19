@@ -64,7 +64,9 @@ label {
 }
 
 .btn:hover {
-  background-color: #1f1f49;
+  background-color: #fff;
+  border-color: #21af9f;
+  color: #21af9f;
 }
 
 span.price {
