@@ -330,6 +330,10 @@ nav {
   display: inline-block;
 }
 
+.notifs:hover {
+  cursor: pointer;
+}
+
   /* responsive */
   @media screen and (max-width: 1160px) {
     .heeader {
