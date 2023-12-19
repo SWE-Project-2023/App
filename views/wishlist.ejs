@@ -29,7 +29,7 @@
           </div>
           <div>
               <button class="remove-button" data-product-id="<%=product.item_id%>"><i class="fas fa-trash"></i> Remove</button>
-              <button class="quick-view-button" onclick="quickView(this)"><i class="fas fa-search"></i> Quick View</button>
+              <a href="/product/itempage?id=<%= product.item_id %>"><button class="quick-view-button"><i class="fas fa-search"></i>View</button></a>
             </div>
         </div>
       <%})%>

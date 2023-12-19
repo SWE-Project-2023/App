@@ -76,16 +76,26 @@
   .remove-button {
     background-color: #ff5252; /* Red color */
     color: #fff;
-    border: none;
+    border: 2px solid transparent;
     margin-right: 10px;
+    transition: all 0.3s ease-in-out;
   }
 
   .quick-view-button {
-    background-color: #3498db; /* Blue color */
+    background-color: #21af9f; /* Blue color */
     color: #fff;
-    border: none;
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
   }
-  .remove-button:hover,
+
   .quick-view-button:hover {
-    background-color: #e74c3c; /* Darker red for Remove button */
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
+  }
+
+  .remove-button:hover {
+    background-color: #fff;
+    border-color: #ff5252;
+    color: #ff5252;
   }
