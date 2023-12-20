@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
 a{
@@ -38,7 +37,7 @@ button{
    
 }
 .page-tag .tag{
-    color:#3F3F95;
+    color:#21af9f;
     transition: color .2s ease-in-out;
 }
 .page-tag .tag a{
@@ -221,7 +220,7 @@ display: table-row;
     line-height: 1;
 }
 .costprod .price span{
-    color: #3F3F95;
+    color: #21af9f;
     font-size: 25px;
 }
 
@@ -284,7 +283,7 @@ display: table-row;
 .product_btn{
     text-transform: uppercase;
     top: 7px;
-    background: #3F3F95;
+    background: #21af9f;
     color: #fff;
     position: relative;
     display: inline-block;
@@ -293,16 +292,22 @@ display: table-row;
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
-    transition:  .25s ease-in-out,color .25s ease-in-out;
 }
+
+.btn_addtocart:hover, .product_btn:hover {
+    background-color: #fff;
+    border-color: #21af9f;
+    color: #21af9f;
+}
+
 .product_catageory{
     position: relative;
     margin: -11px 0 5px;
 }
 .producttitle{
     font-size: 14px;
-    font-weight: 500;
-    color: #4527a0;
+    font-weight: 21af9f;
+    color: #21af9f;
     letter-spacing: .1px;
     text-transform: capitalize;
 }
@@ -310,7 +315,7 @@ display: table-row;
     text-decoration: underline;
 }
 .producttitle:focus{
-    color: #2089b2;
+    color: #177c70;
 }
 .product_extra_info{
     display: flex;
@@ -374,7 +379,7 @@ display: table-row;
     cursor: pointer;
     transition: color .2s ease-in-out;
     float: none;
-    background: #3F3F95;
+    background: #21af9f;
     color: white;
     text-transform: uppercase;
 }
@@ -614,7 +619,16 @@ line-height: 1.5;
         flex: none;
         width: calc(50% - 18px);
         margin: 9px;
+        border: 2px solid transparent;
+        transition: all .2s ease-in-out;
     }
+
+    .buy:hover {
+        background-color: #fff;
+        border-color: #21af9f;
+        color: #21af9f;
+    }
+    
     .inner_catageory{
         margin-bottom: -2px;
     }
@@ -644,9 +658,10 @@ line-height: 1.5;
 .desktop_only {
     display: none;
 }
-.buy{
+.buy {
     margin-top: 20px;
 }
+
 .product_Item{
     width:46%;
 }
