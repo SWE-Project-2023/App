@@ -31,4 +31,7 @@ router.post('/paymentCallback', (req, res) => {
   // Return appropriate response
 });[]
 
+router.post("/",checkoutController.checkout);
+
+
 export default router;
