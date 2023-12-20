@@ -14,10 +14,8 @@ checkoutController.toPaymob = async (req, res) => {
     console.log(itemid,userid,item_quantity)
     
    await execute.placeorder(itemid,userid,item_quantity);
-    const toPaymobOrder = await createOrder();
     
-    // Redirect user to Paymob's payment page with orderId
-    res.redirect(`https://paymob.com/link-to-payment-page/${toPaymobOrder}`);
+    res.redirect('/checkout');
    
   } catch (error) {
     console.log(error)
