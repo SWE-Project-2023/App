@@ -347,10 +347,11 @@ const execute = {
   },
   salesTodayQuery: async () => {
     const sql = `
-    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesToday
-    FROM orders
-    WHERE DATE(order_date) = CURDATE();
-
+    SELECT SUM(item.item_price * order_items.item_quantity) AS totalSalesToday
+    FROM order_items
+    JOIN item ON order_items.item_id = item.item_id
+    JOIN orders ON order_items.order_id = orders.order_id
+    WHERE order_date >= NOW() - INTERVAL 24 HOUR
   `;
     try {
       const [rows] = await query(sql);
@@ -368,9 +369,11 @@ const execute = {
 
   salesThisMonthQuery: async () => {
     const sql = `
-    SELECT COALESCE(SUM(item_price * order_quantity), 0) AS totalSalesThisMonth
-    FROM orders
-    WHERE MONTH(order_date) = MONTH(CURDATE()) AND YEAR(order_date) = YEAR(CURDATE());
+    SELECT SUM(item.item_price * order_items.item_quantity) AS totalSalesThisMonth
+    FROM order_items
+    JOIN item ON order_items.item_id = item.item_id
+    JOIN orders ON order_items.order_id = orders.order_id
+    WHERE order_date >= NOW() - INTERVAL 30 DAY
 
   `;
     try {
