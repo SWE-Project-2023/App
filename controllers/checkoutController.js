@@ -15,7 +15,7 @@ checkoutController.toPaymob = async (req, res) => {
     
    await execute.placeorder(itemid,userid,item_quantity);
     
-    res.redirect('/checkout');
+    res.redirect('../');
    
   } catch (error) {
     console.log(error)
