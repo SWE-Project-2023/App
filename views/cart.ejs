@@ -154,7 +154,7 @@
               </div>
             </div>
 
-            <form action="/checkout" class="cart-recap">
+            <form  method="post" action="/checkout" class="cart-recap">
               <div class="cart_scroller">
                 <div class="card">
                   <div class="card__Section">
@@ -179,7 +179,8 @@
                     <div class="notices">
                       <p>Taxes and shipping calculated at checkout</p>
                     </div>
-                    <input type="hidden" name="prod-Info-checkout" value="<%=user.user_id%>">
+                    <input type="hidden" name="prod_Info_checkout" value="<%=user.user_id%>">
+                    <input type="hidden" name="prod_Quantity_checkout" value="<%=subtotal%>">
                     <button type="submit" class="butn">SECURE CHECKOUT</button>
                   </div>
                 </div>
@@ -194,18 +195,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/js/cart.js"></script>
     <script>
-      // Function to calculate the subtotal based on the products array
-      function calculateSubtotal(products) {
-        let subtotal = 0;
 
-        // Loop through each product and add its price multiplied by quantity to the subtotal
-        products.forEach((product) => {
-          subtotal += product.item_price * product.quantity;
-        });
-
-        // Return the formatted subtotal
-        return `EGP ${subtotal.toFixed(2)}`;
-      }
+      
     </script>
   </body>
 </html>
