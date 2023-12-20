@@ -1,7 +1,7 @@
 import mysql from "mysql2/promise";
 import fs from "fs";
 const sqlSettings = JSON.parse(fs.readFileSync("./sql.json"));
-
+import orderQueries from "../queries/orderQueries.js";
 const connection = mysql.createPool(sqlSettings);
 const query = (sql, params) => connection.execute(sql, params);
 const execute = {
@@ -37,7 +37,7 @@ const execute = {
     },
     placeorder:async(itemid,userid,item_quantity)=>{
         try{
-        const insertsql = 'INSERT INTO orders (user_id, order_date, order_status) VALUES (?, CURRENT_DATE, 0)';
+        const insertsql = 'INSERT INTO orders (user_id, order_date, order_status) VALUES (?, CURRENT_DATE, "pending")';
         const orderInsertResult = await query(insertsql, [userid]);
         const orderIdResult = await query('SELECT LAST_INSERT_ID() as order_id');
         console.log('Order ID Result:', orderIdResult);
@@ -51,6 +51,11 @@ const execute = {
         const decrementItemQuantitySql = 'UPDATE item SET item_quantity = item_quantity - 1 WHERE item_id = ?';
         await query(decrementItemQuantitySql, [ itemid]);
     
+        try {
+          await orderQueries.sendUserNotification(userid, `Your order #${orderId} has been placed successfully!`);
+        } catch (error) {
+          console.error('Error creating notification:', error);
+        }
         console.log('Order placed successfully!');
 
         }catch(error){
