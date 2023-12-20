@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 });
 
 // Handle payment initiation
-router.post('/initiatePayment', checkoutController.checkout);
+router.post('/initiatePayment', checkoutController.toPaymob);
 
 // Handle callback from Paymob after successful payment
 router.post('/paymentCallback', (req, res) => {
