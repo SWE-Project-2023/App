@@ -37,7 +37,7 @@ const execute = {
     },
     placeorder:async(itemid,userid,item_quantity)=>{
         try{
-        const insertsql = 'INSERT INTO orders (user_id, order_date, order_status) VALUES (?, CURRENT_DATE, "pending")';
+        const insertsql = 'INSERT INTO orders (user_id, order_date, order_status) VALUES (?, CURRENT_DATE, 0)';
         const orderInsertResult = await query(insertsql, [userid]);
         const orderIdResult = await query('SELECT LAST_INSERT_ID() as order_id');
         console.log('Order ID Result:', orderIdResult);
